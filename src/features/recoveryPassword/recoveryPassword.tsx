@@ -1,9 +1,9 @@
 import React from 'react';
 
-export const Profile = () => {
+export const RecoveryPassword = () => {
     return (
         <div>
-            SING IN
+            RECOVERY PASSWORD
         </div>
     );
 };

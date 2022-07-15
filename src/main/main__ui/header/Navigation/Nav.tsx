@@ -1,16 +1,17 @@
 import React from 'react';
 import {NavLink} from "react-router-dom";
-import {LOG_OUT, PROFILE, REC_PASSWORD, SING_IN, SING_UP, TEST} from "../routes/routes";
+import {LOG_OUT, PROFILE, REC_PASSWORD, SING_IN, SING_UP, TEST} from "../../routes/routes";
+import style from './Nav.module.css'
 
 export  const Nav = () => {
     return (
-        <div>
-            <NavLink to={PROFILE}>PROFILE</NavLink>
-            <NavLink to={SING_IN}>SING IN</NavLink>
-            <NavLink to={SING_UP}>SING UP</NavLink>
-            <NavLink to={REC_PASSWORD}>RECOVERY PASSWORD</NavLink>
-            <NavLink to={TEST}>TEST</NavLink>
-            <NavLink to={LOG_OUT}>LOG OUT</NavLink>
+        <div className={style.nav}>
+            <div><NavLink to={PROFILE} className={style.item}>PROFILE</NavLink></div>
+            <div><NavLink to={SING_IN} className={style.item}>SING IN</NavLink></div>
+            <div><NavLink to={SING_UP} className={style.item}>SING UP</NavLink></div>
+            <div><NavLink to={REC_PASSWORD} className={style.item}>RECOVERY PASSWORD</NavLink></div>
+            <div><NavLink to={TEST} className={style.item}>TEST</NavLink></div>
+            <div><NavLink to={LOG_OUT} className={style.item}>LOG OUT</NavLink></div>
         </div>
     );
 };

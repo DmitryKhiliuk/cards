@@ -1,9 +1,9 @@
 import React from 'react';
 
-export const SingUp = () => {
+export const Profile = () => {
     return (
         <div>
-            SING IN
+            PROFILE
         </div>
     );
 };

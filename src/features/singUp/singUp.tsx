@@ -1,9 +1,9 @@
 import React from 'react';
 
-export const SingIn = () => {
+export const SingUp = () => {
     return (
         <div>
-            SING IN
+            SING UP
         </div>
     );
 };

@@ -1,9 +1,9 @@
 import React from 'react';
 
-export const Profile = () => {
+export const LogOut = () => {
     return (
         <div>
-            SING IN
+            LOG OUT
         </div>
     );
 };
