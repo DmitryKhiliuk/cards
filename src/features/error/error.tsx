@@ -1,9 +1,9 @@
 import React from 'react';
 
-export const Test = () => {
+export const Error = () => {
     return (
         <div>
-            TEST
+
         </div>
     );
 };

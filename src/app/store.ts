@@ -1,15 +1,17 @@
 import {combineReducers, createStore} from "redux";
-import {profileReducer} from "./profile-reducer";
-import {authReducer} from "./auth-reducer";
+import {profileReducer} from "../features/profile/profile-reducer";
+import {appReducer} from "./app-reducer";
 
 export const rootReducer = combineReducers({
     profile: profileReducer,
-    auth: authReducer
+    auth: appReducer
 })
 
 export const store = createStore(rootReducer)
 
 export type AppRootStateType = ReturnType<typeof rootReducer>
+
+export type AppDispatch = typeof store.dispatch
 
 // @ts-ignore
 window.store = store;
