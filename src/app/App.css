@@ -1,7 +1,11 @@
 .App {
+    height: 100vh;
     display: flex;
     flex-direction: column;
     align-items: center;
+    background: no-repeat url(/src/utils/palet.jpg);
+    /*background: no-repeat url('https://avatars.mds.yandex.net/get-zen_doc/2453078/pub_5ffa0ed8bb14d54ffb7546a9_5ffa3578d1a90641ca0bbb5d/scale_1200');*/
+    background-size: cover;
 }
 
 
