@@ -13,32 +13,29 @@ import Button from '@mui/material/Button';
 import Tooltip from '@mui/material/Tooltip';
 import MenuItem from '@mui/material/MenuItem';
 import AdbIcon from '@mui/icons-material/Adb';
-import {SING_IN, SING_UP} from "../routes/routes";
+import {CARDS, LOG_OUT, PROFILE, REC_PASSWORD, SING_IN, SING_UP} from "../routes/routes";
 import {NavLink} from "react-router-dom";
 
 const pages = ['Sing In', 'Sing Up'];
 const settings = ['Profile', 'Cards Pack', 'Recovery Password', 'Logout'];
 const pagesRoutes = [SING_IN, SING_UP]
+const settingsRoutes = [PROFILE, CARDS, REC_PASSWORD, LOG_OUT]
 
-const ResponsiveAppBar = () => {
+const Header = () => {
     const [anchorElNav, setAnchorElNav] = React.useState<null | HTMLElement>(null);
     const [anchorElUser, setAnchorElUser] = React.useState<null | HTMLElement>(null);
     const handleOpenNavMenu = (event: React.MouseEvent<HTMLElement>) => {
-        console.log('111111')
         setAnchorElNav(event.currentTarget);
     };
     const handleOpenUserMenu = (event: React.MouseEvent<HTMLElement>) => {
-        console.log('OpenUserMenu')
         setAnchorElUser(event.currentTarget);
     };
 
     const handleCloseNavMenu = () => {
-        console.log('sing')
         setAnchorElNav(null);
     };
 
     const handleCloseUserMenu = () => {
-        console.log('CloseUserMenu')
         setAnchorElUser(null);
     };
 
@@ -62,7 +59,7 @@ const ResponsiveAppBar = () => {
                             textDecoration: 'none',
                         }}
                     >
-                        SUPER PROJECT
+                        PROJECT
                     </Typography>
 
                     <Box sx={{ flexGrow: 1, display: { xs: 'flex', md: 'none' } }}>
@@ -94,9 +91,9 @@ const ResponsiveAppBar = () => {
                                 display: { xs: 'block', md: 'none' },
                             }}
                         >
-                            {pages.map((page) => (
+                            {pages.map((page, index) => (
                                 <MenuItem key={page} onClick={handleCloseNavMenu}>
-                                    <Typography textAlign="center">{page}</Typography> {/*menu for adaptive*/}
+                                    <NavLink to={pagesRoutes[index]} style={{textDecoration: 'none', color: 'black'}} key={index}><Typography textAlign="center">{page}</Typography></NavLink> {/*menu for adaptive*/}
                                 </MenuItem>
                             ))}
                         </Menu>
@@ -118,7 +115,7 @@ const ResponsiveAppBar = () => {
                             textDecoration: 'none',
                         }}
                     >
-                        SUPER PROJECT
+                        PROJECT
                     </Typography>
                     <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' } }}>
                         {pages.map((page,index) => (
@@ -155,9 +152,9 @@ const ResponsiveAppBar = () => {
                             open={Boolean(anchorElUser)}
                             onClose={handleCloseUserMenu}
                         >
-                            {settings.map((setting) => (
+                            {settings.map((setting, index) => (
                                 <MenuItem key={setting} onClick={handleCloseUserMenu}>
-                                    <Typography textAlign="center">{setting}</Typography> {/*settings for all*/}
+                                    <NavLink to={settingsRoutes[index]} style={{textDecoration: 'none', color: 'black'}} key={index}><Typography textAlign="center">{setting}</Typography></NavLink> {/*settings for all*/}
                                 </MenuItem>
                             ))}
                         </Menu>
@@ -167,5 +164,5 @@ const ResponsiveAppBar = () => {
         </AppBar>
     );
 };
-export default ResponsiveAppBar;
+export default Header;
 

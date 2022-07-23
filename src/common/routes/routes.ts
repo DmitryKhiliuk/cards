@@ -1,4 +1,4 @@
-export const PROFILE = '/profile';
+export const PROFILE = '/';
 export const SING_IN = '/singIn';
 export const SING_UP = '/singUp';
 export const CARDS = '/cards';
