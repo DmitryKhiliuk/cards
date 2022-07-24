@@ -1,33 +1,124 @@
-import React from 'react';
-import {loginTC, ProfileType} from "../profile/profile-reducer";
+import React, {ChangeEvent} from 'react';
+import FormControl from '@mui/material/FormControl';
+import Typography from '@mui/material/Typography';
+import TextField from '@mui/material/TextField';
+import Button from '@mui/material/Button';
+import style from './SignIn.module.css';
+import FormControlLabel from '@mui/material/FormControlLabel';
+import Checkbox from '@mui/material/Checkbox';
+import Paper from '@mui/material/Paper';
+import {useForm, Controller, SubmitHandler, useFormState} from 'react-hook-form';
+import {emailValidation, passwordValidation} from "./validation";
+import {loginTC} from "./auth-reducer";
 import {useDispatch, useSelector} from "react-redux";
-import {ThunkDispatch} from "redux-thunk";
 import {AppDispatch, AppRootStateType} from "../../app/store";
-import {Action} from "redux";
-import {Navigate} from "react-router-dom";
+import { Navigate } from 'react-router-dom';
+import {PROFILE} from "../../common/routes/routes";
+
+type SingInFormType = {
+    email: string;
+    password: string;
+    rememberMe: boolean;
+}
 
 export const SingIn = () => {
+    const useAppDispatch = () => useDispatch<AppDispatch>();
+    const isLoggedIn = useSelector<AppRootStateType, boolean>((state) => state.auth.isLoggedIn)
+    const dispatch = useAppDispatch();
 
-    const dispatch = useDispatch<ThunkDispatch<AppRootStateType,unknown,Action> & AppDispatch>()
-    const isLoggedIn = useSelector<AppRootStateType>(state => state.auth.isLoggedIn)
+    const {handleSubmit, control, reset} = useForm<SingInFormType>({
+        defaultValues: {
+            email: '',
+            password: '',
+            rememberMe: false,
+        }
+    });
+    const {errors} = useFormState({
+        control
+    });
 
-    const registerData = {
-        email: "khiliukbrest@gmail.com",
-        password: "12345678",
-        rememberMe: false
+    const onSubmit:SubmitHandler<SingInFormType> = (data:SingInFormType)  => {
+        dispatch(loginTC(data));
+        reset({
+            email: '',
+            password: '',
+            rememberMe: false
+        })
+    };
+
+    console.log(isLoggedIn);
+
+    if(isLoggedIn) {
+        return <Navigate to={PROFILE}/>
     }
 
-    const onClickHandler = () => {
-        dispatch(loginTC(registerData))
-    }
-
-    if (isLoggedIn) {
-        return <Navigate to='/'/>
-    }
 
     return (
-        <div onClick={onClickHandler}>
-            SING IN
+        <div className={style.loginBlock}>
+            <Paper elevation={3} className={style.loginBlockForm}>
+                <Typography variant={'h4'}>
+                    SIGN IN
+                </Typography>
+                <form className={style.loginForm} onSubmit={handleSubmit(onSubmit)}>
+                    <FormControl style={{width: '100%'}}>
+                        <Controller
+                            control={ control }
+                            name={'email'}
+                            rules={emailValidation}
+                            render={({ field}) => (
+                                <TextField label={'Email'}
+                                           margin={'normal'}
+                                           variant="standard"
+                                           onChange = {(e: ChangeEvent<HTMLInputElement>) => field.onChange(e)}
+                                           value = {field.value}
+                                />
+                            )}
+                        />
+                        {errors.email && <span style={{color: 'red'}}>{errors.email.message}</span>}
+                        <Controller
+                            control={control}
+                            rules={passwordValidation}
+                            name={'password'}
+                            render={({ field}) => (
+                                <TextField label={'Password'}
+                                           margin={'normal'}
+                                           variant="standard"
+                                           onChange = {(e: ChangeEvent<HTMLInputElement>) => field.onChange(e)}
+                                           value = {field.value}
+                                />
+                            )}
+                        />
+                        {errors.password && <div style={{color: 'red'}}>{errors.password.message}</div>}
+                        <FormControlLabel
+                            label={'Remember me'}
+                            control={
+                            <Controller
+                                name={'rememberMe'}
+                                control={control}
+                                render={({field}) => (
+                                        <Checkbox
+                                            checked={field.value}
+                                            onChange = {(e: ChangeEvent<HTMLInputElement>) => field.onChange(e)}
+                                        />
+                                    )}
+                                 />
+                            }
+                        />
+                        <Button variant={'text'} size={'small'} className={style.btnForgotPass}>
+                            Forgot Password
+                        </Button>
+                        <Button type={'submit'} variant={'contained'} color={'primary'} style={{marginTop:'80px'}}>
+                            Login
+                        </Button>
+                        <Typography variant={'subtitle2'} component={'div'} className={style.textQuestion}>
+                            Don't have an account?
+                        </Typography>
+                        <Button variant={'text'} color={'primary'} >
+                            Sign Up
+                        </Button>
+                    </FormControl>
+                </form>
+            </Paper>
         </div>
     );
 };
