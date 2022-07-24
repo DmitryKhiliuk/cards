@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {ChangeEvent} from 'react';
 import FormControl from '@mui/material/FormControl';
 import Typography from '@mui/material/Typography';
 import TextField from '@mui/material/TextField';
@@ -7,30 +7,107 @@ import style from './SignIn.module.css';
 import FormControlLabel from '@mui/material/FormControlLabel';
 import Checkbox from '@mui/material/Checkbox';
 import Paper from '@mui/material/Paper';
+import {useForm, Controller, SubmitHandler, useFormState} from 'react-hook-form';
+import {emailValidation, passwordValidation} from "./validation";
+import {loginTC} from "./auth-reducer";
+import {useDispatch, useSelector} from "react-redux";
+import {AppDispatch, AppRootStateType} from "../../app/store";
+import { Navigate } from 'react-router-dom';
+import {PROFILE} from "../../common/routes/routes";
 
+type SingInFormType = {
+    email: string;
+    password: string;
+    rememberMe: boolean;
+}
 
 export const SingIn = () => {
+    const useAppDispatch = () => useDispatch<AppDispatch>();
+    const isLoggedIn = useSelector<AppRootStateType, boolean>((state) => state.auth.isLoggedIn)
+    const dispatch = useAppDispatch();
+
+    const {handleSubmit, control, reset} = useForm<SingInFormType>({
+        defaultValues: {
+            email: '',
+            password: '',
+            rememberMe: false,
+        }
+    });
+    const {errors} = useFormState({
+        control
+    });
+
+    const onSubmit:SubmitHandler<SingInFormType> = (data:SingInFormType)  => {
+        dispatch(loginTC(data));
+        reset({
+            email: '',
+            password: '',
+            rememberMe: false
+        })
+    };
+
+    console.log(isLoggedIn);
+
+    if(isLoggedIn) {
+        return <Navigate to={PROFILE}/>
+    }
+
+
     return (
         <div className={style.loginBlock}>
             <Paper elevation={3} className={style.loginBlockForm}>
                 <Typography variant={'h4'}>
                     SIGN IN
                 </Typography>
-                <form className={style.loginForm}>
+                <form className={style.loginForm} onSubmit={handleSubmit(onSubmit)}>
                     <FormControl style={{width: '100%'}}>
-                        <TextField label={'Email'}
-                                   margin={'normal'}
-                                   variant="standard"
+                        <Controller
+                            control={ control }
+                            name={'email'}
+                            rules={emailValidation}
+                            render={({ field}) => (
+                                <TextField label={'Email'}
+                                           margin={'normal'}
+                                           variant="standard"
+                                           onChange = {(e: ChangeEvent<HTMLInputElement>) => field.onChange(e)}
+                                           value = {field.value}
+                                />
+                            )}
                         />
-                        <TextField label={'Password'}
-                                   margin={'normal'}
-                                   variant="standard"
+                        {errors.email && <span style={{color: 'red'}}>{errors.email.message}</span>}
+                        <Controller
+                            control={control}
+                            rules={passwordValidation}
+                            name={'password'}
+                            render={({ field}) => (
+                                <TextField label={'Password'}
+                                           margin={'normal'}
+                                           variant="standard"
+                                           onChange = {(e: ChangeEvent<HTMLInputElement>) => field.onChange(e)}
+                                           value = {field.value}
+                                />
+                            )}
                         />
-                        <FormControlLabel label={'Remember me'} control={<Checkbox/>}/>
+                        {errors.password && <div style={{color: 'red'}}>{errors.password.message}</div>}
+                        <FormControlLabel
+                            label={'Remember me'}
+                            control={
+                            <Controller
+                                name={'rememberMe'}
+                                control={control}
+                                render={({field}) => (
+                                        <Checkbox
+                                            checked={field.value}
+                                            onChange = {(e: ChangeEvent<HTMLInputElement>) => field.onChange(e)}
+                                        />
+                                    )}
+                                 />
+                            }
+                        />
                         <Button variant={'text'} size={'small'} className={style.btnForgotPass}>
                             Forgot Password
                         </Button>
-                        <Button type={'submit'} variant={'contained'} color={'primary'} style={{marginTop:'100px'}}>
+                        <Button type={'submit'} variant={'contained'} color={'primary'} style={{marginTop:'80px'}}>
                             Login
                         </Button>
                         <Typography variant={'subtitle2'} component={'div'} className={style.textQuestion}>
