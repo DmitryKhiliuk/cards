@@ -14,6 +14,12 @@ export const profileAPI= {
     },
     login(data:LoginParamsType) {
         return instance.post<ProfileType>('auth/login', data)
+    },
+    logout() {
+        return instance.delete('auth/me')
+    },
+    updateTitle(title:string) {
+        return instance.put<ProfileType>('/auth/me', {title})
     }
 }
 

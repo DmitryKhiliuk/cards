@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 import './App.css';
 import {BrowserRouter, Navigate, Route, Routes} from "react-router-dom";
 import {SingIn} from "../features/singIn/singIn";
@@ -9,8 +9,22 @@ import {LogOut} from "../features/logOut/logOut";
 import {CARDS, ERROR, LOG_OUT, PROFILE, REC_PASSWORD, SING_IN, SING_UP} from "../common/routes/routes";
 import {CardsPack} from "../features/CardsPack/CardsPack";
 import Header from "../common/header/Header";
+import {useDispatch} from "react-redux";
+import {ThunkDispatch} from "redux-thunk";
+import {AppDispatch, AppRootStateType} from "./store";
+import {Action} from "redux";
+import {initTC} from "./app-reducer";
+
 
 function App() {
+
+    const dispatch = useDispatch<ThunkDispatch<AppRootStateType,unknown,Action> & AppDispatch>()
+     useEffect(() => {
+        dispatch(initTC())
+         // @ts-ignore
+         console.log(window.store.getState().profile.isLoggedIn)
+    },[])
+
     return (
         <BrowserRouter>
             <div className="App">

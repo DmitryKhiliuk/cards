@@ -11,32 +11,34 @@ import IconButton from "@mui/material/IconButton";
 import {AppDispatch, AppRootStateType} from "../../app/store";
 import {ThunkDispatch} from "redux-thunk";
 import {useDispatch, useSelector} from "react-redux";
-import {initTC, loginTC, ProfileType} from "./profile-reducer";
+import {logoutTC, ProfileType, updateProfileTitleTC} from "./profile-reducer";
 import {Action} from "redux";
-import {LoginParamsType} from "./profile-api";
 import Typography from "@mui/material/Typography";
+import {Navigate} from "react-router-dom";
+import {EditableSpan} from "./EditableSpan";
 
 export const Profile = () => {
 
     const dispatch = useDispatch<ThunkDispatch<AppRootStateType,unknown,Action> & AppDispatch>()
     const profile = useSelector<AppRootStateType, ProfileType>(state => state.profile)
+    const isLoggedIn = useSelector<AppRootStateType>(state => state.auth.isLoggedIn)
 
-    const registerData = {
-        email: "khiliukbrest@gmail.com",
-        password: "12345678",
-        rememberMe: false
+    const onClickHandler = () => {
+        dispatch(logoutTC())
     }
-   /* useEffect(() => {
-        dispatch(initTC())
-    },[])*/
-    useEffect(() => {
-        dispatch(loginTC(registerData))
-    }, [])
+
+    const onTitleChangeHandler = (value: string) => {
+        dispatch(updateProfileTitleTC(value))
+    }
+
+    if (!isLoggedIn) {
+        return <Navigate to='/singIn'/>
+    }
 
     return (
         <Box>
             <Paper elevation={3} className={s.profile}>
-                <Typography variant={'h3'}>Profile</Typography>
+                <Typography variant={'h3'}>PROFILE</Typography>
                 <div><img src={profile.avatar} alt="user" className={s.photo}/></div>
                 <div className={s.iconPhoto}>
                     <IconButton aria-label="add" color={'primary'}>
@@ -44,16 +46,17 @@ export const Profile = () => {
                     </IconButton>
                 </div>
                 <div>
-                    <Typography variant={'h5'} className={s.name}>{profile.name}</Typography>
+                    <Typography variant={'h5'} className={s.name}>
+                        <EditableSpan value={profile.name} onChange={onTitleChangeHandler}/>
+                    </Typography>
                     <IconButton aria-label="create" color={'primary'}>
                         <CreateIcon />
                     </IconButton>
                 </div>
-                <Typography variant={'h6'} className={s.email}>{profile.email}</Typography>
-                <Button variant="contained"  startIcon={<LogoutIcon />}>
+                <Typography variant={'h6'} style={{marginBottom: '10px'}}>{profile.email}</Typography>
+                <Button variant="contained" onClick={onClickHandler}  startIcon={<LogoutIcon />}>
                     Log out
                 </Button>
-
             </Paper>     
         </Box>
     );

@@ -5,6 +5,9 @@
     text-align: center;
     position: relative;
     padding: 20px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
 
 
 }
@@ -34,6 +37,3 @@
     right: 170px
 }
 
-.email {
-    margin-bottom: 10px;
-}
