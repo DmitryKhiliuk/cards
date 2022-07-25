@@ -14,6 +14,8 @@ import {useDispatch, useSelector} from "react-redux";
 import {AppDispatch, AppRootStateType} from "../../app/store";
 import { Navigate } from 'react-router-dom';
 import {PROFILE} from "../../common/routes/routes";
+import {ThunkDispatch} from "redux-thunk";
+import {Action} from "redux";
 
 type SingInFormType = {
     email: string;
@@ -22,9 +24,8 @@ type SingInFormType = {
 }
 
 export const SingIn = () => {
-    const useAppDispatch = () => useDispatch<AppDispatch>();
     const isLoggedIn = useSelector<AppRootStateType, boolean>((state) => state.auth.isLoggedIn)
-    const dispatch = useAppDispatch();
+    const dispatch = useDispatch<ThunkDispatch<AppRootStateType,unknown,Action> & AppDispatch>()
 
     const {handleSubmit, control, reset} = useForm<SingInFormType>({
         defaultValues: {
@@ -37,8 +38,10 @@ export const SingIn = () => {
         control
     });
 
-    const onSubmit:SubmitHandler<SingInFormType> = (data:SingInFormType)  => {
+    const onSubmit:SubmitHandler<SingInFormType> = (data)  => {
+
         dispatch(loginTC(data));
+        console.log('aaaaaaaaaaaaaaaaaaaaaaa')
         reset({
             email: '',
             password: '',
@@ -46,7 +49,7 @@ export const SingIn = () => {
         })
     };
 
-    console.log(isLoggedIn);
+
 
     if(isLoggedIn) {
         return <Navigate to={PROFILE}/>
@@ -59,7 +62,7 @@ export const SingIn = () => {
                 <Typography variant={'h4'}>
                     SIGN IN
                 </Typography>
-                <form className={style.loginForm} onSubmit={handleSubmit(onSubmit)}>
+                <form className={style.loginForm} >
                     <FormControl style={{width: '100%'}}>
                         <Controller
                             control={ control }
@@ -107,7 +110,7 @@ export const SingIn = () => {
                         <Button variant={'text'} size={'small'} className={style.btnForgotPass}>
                             Forgot Password
                         </Button>
-                        <Button type={'submit'} variant={'contained'} color={'primary'} style={{marginTop:'80px'}}>
+                        <Button type={'submit'} variant={'contained'} color={'primary'} style={{marginTop:'80px'}} onClick={handleSubmit(onSubmit)}>
                             Login
                         </Button>
                         <Typography variant={'subtitle2'} component={'div'} className={style.textQuestion}>
