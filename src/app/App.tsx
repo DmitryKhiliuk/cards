@@ -1,7 +1,7 @@
 import React, {useEffect} from 'react';
 import './App.css';
 import {BrowserRouter, Navigate, Route, Routes} from "react-router-dom";
-import {SingIn} from "../features/singIn/singIn";
+import {SignIn} from "../features/singIn/signIn";
 import {SingUp} from "../features/singUp/singUp";
 import {Profile} from "../features/profile/profile";
 import {RecoveryPassword} from "../features/recoveryPassword/recoveryPassword";
@@ -31,7 +31,7 @@ function App() {
                 <Header/>
                 <Routes>
                     <Route path={PROFILE} element={<Profile/>}/>
-                    <Route path={SING_IN} element={<SingIn/>}/>
+                    <Route path={SING_IN} element={<SignIn/>}/>
                     <Route path={SING_UP} element={<SingUp/>}/>
                     <Route path={CARDS} element={<CardsPack/>}/>
                     <Route path={REC_PASSWORD} element={<RecoveryPassword/>}/>

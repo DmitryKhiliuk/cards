@@ -23,8 +23,8 @@ type SingInFormType = {
     rememberMe: boolean;
 }
 
-export const SingIn = () => {
-    const isLoggedIn = useSelector<AppRootStateType, boolean>((state) => state.auth.isLoggedIn)
+export const SignIn = () => {
+    const isLoggedIn = useSelector<AppRootStateType, boolean>((state) => state.isLoggedIn.isLoggedIn)
     const dispatch = useDispatch<ThunkDispatch<AppRootStateType,unknown,Action> & AppDispatch>()
 
     const {handleSubmit, control, reset} = useForm<SingInFormType>({

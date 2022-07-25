@@ -1,7 +1,7 @@
 import {authAPI, LoginParamsType} from "./auth-api";
 import {Dispatch} from "redux";
 
-const initialState = {
+export const initialState = {
     isLoggedIn: false
 };
 

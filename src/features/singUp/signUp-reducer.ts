@@ -1,9 +1,10 @@
-import {Dispatch} from "redux";
 import {signUpApi} from "./api-signUp";
 import {AppDispatch} from "../../app/store";
+import {handleServerAppError, handleServerNetworkError} from "../../utils/error-utils";
 
 const initialState = {
     newUser: {},
+    isReg:false,
     emailError: null as null | string,
     passwordError: null as null | string,
 
@@ -21,7 +22,7 @@ export const signUpReducer = (state: InitialStateType = initialState, action: Ac
         case "SET_NEW_USER": {
             return {
                 ...state,
-                newUser: action.payload
+                newUser: action.payload, isReg: true
             }
         }
         case "SET-EMAIL-ERROR":
@@ -42,17 +43,22 @@ export const signUpReducer = (state: InitialStateType = initialState, action: Ac
 export const setNewUserAC = (payload: InitialStateType) => ({type: 'SET_NEW_USER', payload} as const);
 export const setEmailErrorAC = (error: string | null) => ({type: "SET-EMAIL-ERROR", error} as const);
 export const setPasswordErrorAC = (error: string | null) => ({type: "SET-PASSWORD-ERROR", error} as const);
+// export const setRegistrationAC = () => ({type: "SET-REGISTRATION"} as const);
 
 export const setNewUserTC = (email: string, password: string) => (dispatch: AppDispatch) => {
     // dispatch(isFetchingAC(true))
     signUpApi.registration(email, password)
         .then(response => {
-            console.log(response.data)
+            // console.log(response.data)
             dispatch(setNewUserAC(response.data))
+
         })
-        .catch((e) => {
-            const error = e.response ? e.response.data.error : (e.message + ", more details in the console")
-            dispatch(setEmailErrorAC(error))
+        .catch((error) => {
+            const errorResponse = error.response ? error.response.data.error : (error.message + ", more details in the console")
+            console.log(errorResponse)
+            handleServerAppError(errorResponse, dispatch)
+
+            handleServerNetworkError(error, dispatch)
         })
         .finally(() => {
             // dispatch(isFetchingAC(false))
@@ -63,4 +69,5 @@ export type SetNewUserType = ReturnType<typeof setNewUserAC>;
 
 type ActionType = SetNewUserType
     | ReturnType<typeof setEmailErrorAC>
-    | ReturnType<typeof setPasswordErrorAC>;
+    | ReturnType<typeof setPasswordErrorAC>
+    // | ReturnType<typeof setRegistrationAC>;
