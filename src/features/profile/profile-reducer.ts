@@ -53,18 +53,18 @@ export const updateProfileTitleAC = (title:string) => {
     } as const
 }
 
-/*export type setIsLoggedInACType = ReturnType<typeof setIsLoggedInAC>
+export type setIsLoggedInACType = ReturnType<typeof setIsLoggedInAC>
 export const setIsLoggedInAC = (value: boolean) => {
     return {
         type: 'login/SET-IS-LOGGED-IN',
         value
     } as const
-}*/
+}
 
 
 //__________________THUNK______________________________
 
-/*export const initTC = () => {
+export const initTC = () => {
     return (dispatch:Dispatch) => {
         profileAPI.me()
             .then((res) => {
@@ -72,7 +72,7 @@ export const setIsLoggedInAC = (value: boolean) => {
             })
 
     }
-}*/
+}
 
 export const loginTC = (data: LoginParamsType) => {
     return (dispatch:Dispatch) => {

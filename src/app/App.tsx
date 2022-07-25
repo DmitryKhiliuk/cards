@@ -14,6 +14,7 @@ import {ThunkDispatch} from "redux-thunk";
 import {AppDispatch, AppRootStateType} from "./store";
 import {Action} from "redux";
 import {initTC} from "./app-reducer";
+import {Error} from '../features/error/Error'
 
 
 function App() {
@@ -36,7 +37,7 @@ function App() {
                     <Route path={CARDS} element={<CardsPack/>}/>
                     <Route path={REC_PASSWORD} element={<RecoveryPassword/>}/>
                     <Route path={LOG_OUT} element={<LogOut/>}/>
-                    <Route path={ERROR} element={<LogOut/>}/>
+                    <Route path={ERROR} element={<Error/>}/>
                     <Route path={'*'} element={<Navigate to={ERROR}/>}/>
                 </Routes>
             </div>

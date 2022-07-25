@@ -13,7 +13,7 @@ import {loginTC} from "./auth-reducer";
 import {useDispatch, useSelector} from "react-redux";
 import {AppDispatch, AppRootStateType} from "../../app/store";
 import { Navigate } from 'react-router-dom';
-import {PROFILE} from "../../common/routes/routes";
+import {PROFILE, SING_UP} from "../../common/routes/routes";
 import {ThunkDispatch} from "redux-thunk";
 import {Action} from "redux";
 
@@ -24,7 +24,7 @@ type SingInFormType = {
 }
 
 export const SingIn = () => {
-    const isLoggedIn = useSelector<AppRootStateType, boolean>((state) => state.auth.isLoggedIn)
+    const isLoggedIn = useSelector<AppRootStateType, boolean>((state) => state.isLoggedIn.isLoggedIn)
     const dispatch = useDispatch<ThunkDispatch<AppRootStateType,unknown,Action> & AppDispatch>()
 
     const {handleSubmit, control, reset} = useForm<SingInFormType>({
@@ -49,6 +49,9 @@ export const SingIn = () => {
         })
     };
 
+    const redirectToSignUp = () => {
+        return <Navigate to={SING_UP}/>
+    }
 
 
     if(isLoggedIn) {
@@ -116,7 +119,7 @@ export const SingIn = () => {
                         <Typography variant={'subtitle2'} component={'div'} className={style.textQuestion}>
                             Don't have an account?
                         </Typography>
-                        <Button variant={'text'} color={'primary'} >
+                        <Button variant={'text'} color={'primary'} onClick={redirectToSignUp}>
                             Sign Up
                         </Button>
                     </FormControl>
