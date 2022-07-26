@@ -24,7 +24,7 @@ type SingInFormType = {
 }
 
 export const SingIn = () => {
-    const isLoggedIn = useSelector<AppRootStateType, boolean>((state) => state.auth.isLoggedIn)
+    const isLoggedIn = useSelector<AppRootStateType, boolean>((state) => state.isLoggedIn.isLoggedIn)
     const dispatch = useDispatch<ThunkDispatch<AppRootStateType,unknown,Action> & AppDispatch>()
 
     const {handleSubmit, control, reset} = useForm<SingInFormType>({
@@ -41,7 +41,7 @@ export const SingIn = () => {
     const onSubmit:SubmitHandler<SingInFormType> = (data)  => {
 
         dispatch(loginTC(data));
-        console.log('aaaaaaaaaaaaaaaaaaaaaaa')
+        console.log('aaaaaaaaaaaa')
         reset({
             email: '',
             password: '',

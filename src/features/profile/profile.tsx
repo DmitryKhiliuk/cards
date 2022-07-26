@@ -21,7 +21,7 @@ export const Profile = () => {
 
     const dispatch = useDispatch<ThunkDispatch<AppRootStateType,unknown,Action> & AppDispatch>()
     const profile = useSelector<AppRootStateType, ProfileType>(state => state.profile)
-    const isLoggedIn = useSelector<AppRootStateType>(state => state.auth.isLoggedIn)
+    const isLoggedIn = useSelector<AppRootStateType>(state => state.isLoggedIn.isLoggedIn)
 
     const onClickHandler = () => {
         dispatch(logoutTC())
@@ -39,7 +39,7 @@ export const Profile = () => {
         <Box>
             <Paper elevation={3} className={s.profile}>
                 <Typography variant={'h3'}>PROFILE</Typography>
-                <div><img src={profile.avatar} alt="user" className={s.photo}/></div>
+                <div><img src={profile.avatar || userPhoto}  alt="user" className={s.photo}/></div>
                 <div className={s.iconPhoto}>
                     <IconButton aria-label="add" color={'primary'}>
                         <AddAPhotoIcon />
@@ -47,7 +47,7 @@ export const Profile = () => {
                 </div>
                 <div>
                     <Typography variant={'h5'} className={s.name}>
-                        <EditableSpan value={profile.name} onChange={onTitleChangeHandler}/>
+                        <EditableSpan value={profile.name || 'Some Name'} onChange={onTitleChangeHandler}/>
                     </Typography>
                     <IconButton aria-label="create" color={'primary'}>
                         <CreateIcon />

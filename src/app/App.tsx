@@ -21,8 +21,6 @@ function App() {
     const dispatch = useDispatch<ThunkDispatch<AppRootStateType,unknown,Action> & AppDispatch>()
      useEffect(() => {
         dispatch(initTC())
-         // @ts-ignore
-         console.log(window.store.getState().profile.isLoggedIn)
     },[])
 
     return (
