@@ -11,7 +11,7 @@ import IconButton from "@mui/material/IconButton";
 import {AppDispatch, AppRootStateType} from "../../app/store";
 import {ThunkDispatch} from "redux-thunk";
 import {useDispatch, useSelector} from "react-redux";
-import {logoutTC, ResponseProfileType, updateProfileTitleTC} from "./profile-reducer";
+import {logoutTC, ResponseProfileType, updateProfileTitleTC, updateProfileType} from "./profile-reducer";
 import {Action} from "redux";
 import Typography from "@mui/material/Typography";
 import {Navigate} from "react-router-dom";
@@ -27,8 +27,14 @@ export const Profile = () => {
         dispatch(logoutTC())
     }
 
+    let user:updateProfileType = {
+        name: null,
+        avatar: null
+    }
+
     const onTitleChangeHandler = (value: string) => {
-        dispatch(updateProfileTitleTC(value))
+        user.name = value
+        dispatch(updateProfileTitleTC(user))
     }
 
     if (!isLoggedIn) {
@@ -49,9 +55,9 @@ export const Profile = () => {
                     <Typography variant={'h5'} className={s.name}>
                         <EditableSpan value={profile.name || 'Some Name'} onChange={onTitleChangeHandler}/>
                     </Typography>
-                    <IconButton aria-label="create" color={'primary'}>
+                    {/*<IconButton aria-label="create" color={'primary'} >
                         <CreateIcon />
-                    </IconButton>
+                    </IconButton>*/}
                 </div>
                 <Typography variant={'h6'} style={{marginBottom: '10px'}}>{profile.email}</Typography>
                 <Button variant="contained" onClick={onClickHandler}  startIcon={<LogoutIcon />}>

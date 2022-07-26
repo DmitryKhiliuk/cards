@@ -1,4 +1,5 @@
 import axios from "axios";
+import {ResponseProfileType, updateProfileType} from "./profile-reducer";
 
 
 export const instance = axios.create({
@@ -18,8 +19,8 @@ export const profileAPI= {
     logout() {
         return instance.delete('auth/me')
     },
-    updateTitle(title:string) {
-        return instance.put<ResponseType>('/auth/me', {title})
+    updateTitle({name,avatar}:updateProfileType) {
+        return instance.put<ResponseProfileType>('/auth/me', {name, avatar})
     }
 }
 

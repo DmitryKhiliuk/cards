@@ -21,7 +21,10 @@ export type ResponseProfileType = {
 }
 
 
-
+export type updateProfileType = {
+    name: string | null
+    avatar: string | null | undefined
+}
 
 const initialState: ResponseProfileType = {
     _id: null,
@@ -47,7 +50,7 @@ export const profileReducer = (state: ResponseProfileType = initialState, action
         case 'PROFILE':
             return action.profile
         case 'PROFILE-NAME-UPDATE':
-            return {...state, name: action.title}
+            return {...state, name: action.payload.name}
         default:
             return state
     }
@@ -62,10 +65,13 @@ export const setProfileAC = (profile:ResponseProfileType) => {
     } as const
 }
 export type updateProfileTitleACType = ReturnType<typeof updateProfileTitleAC>
-export const updateProfileTitleAC = (title:string) => {
+export const updateProfileTitleAC = ({name, avatar}:updateProfileType) => {
     return {
         type: 'PROFILE-NAME-UPDATE',
-        title
+        payload: {
+            name,
+            avatar
+        }
     } as const
 }
 
@@ -77,11 +83,11 @@ export const logoutTC = () => {
             })
     }
 }
-export const updateProfileTitleTC = (title:string) => {
+export const updateProfileTitleTC = ({name, avatar}:updateProfileType) => {
     return (dispatch:Dispatch) => {
-        profileAPI.updateTitle(title)
+        profileAPI.updateTitle({name, avatar})
             .then((res) => {
-                dispatch(updateProfileTitleAC(res.data))
+                dispatch(updateProfileTitleAC({name, avatar}))
             })
     }
 }
