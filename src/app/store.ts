@@ -8,9 +8,9 @@ import thunk from "redux-thunk";
 
 export const rootReducer = combineReducers({
     profile: profileReducer,
-    auth: appReducer,
+    app: appReducer,
     registration:signUpReducer,
-    isLoggedIn: authReducer
+    auth: authReducer
 })
 
 //Для DEVTools  Redux

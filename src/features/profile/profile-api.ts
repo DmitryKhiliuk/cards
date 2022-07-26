@@ -1,5 +1,5 @@
 import axios from "axios";
-import {ProfileType} from "./profile-reducer";
+
 
 export const instance = axios.create({
     baseURL: process.env.REACT_APP_BACK_URL || 'http://localhost:7542/2.0/',
@@ -9,17 +9,17 @@ export const instance = axios.create({
 
 
 export const profileAPI= {
-    me() {
-        return instance.post<ProfileType>('auth/me', '')
-    },
-    login(data:LoginParamsType) {
-        return instance.post<ProfileType>('auth/login', data)
-    },
+    /*me() {
+        return instance.post<ResponseType>('auth/me', '')
+    },*/
+    /*login(data:LoginParamsType) {
+        return instance.post<ResponseType>('auth/login', data)
+    },*/
     logout() {
         return instance.delete('auth/me')
     },
     updateTitle(title:string) {
-        return instance.put<ProfileType>('/auth/me', {title})
+        return instance.put<ResponseType>('/auth/me', {title})
     }
 }
 
