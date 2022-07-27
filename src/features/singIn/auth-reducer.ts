@@ -2,6 +2,7 @@ import {authAPI, LoginParamsType} from "./auth-api";
 import {Dispatch} from "redux";
 import {profileAPI} from "../profile/profile-api";
 import {setProfileAC} from "../profile/profile-reducer";
+import {handleServerAppError} from "../../utils/error-utils";
 
 const initialState = {
     isLoggedIn: false
@@ -29,7 +30,16 @@ export const initTC = () => {
             .then((res) => {
                 dispatch(setIsLoggedInAC(true))
             })
-
+            .catch((error) => {
+                const errorResponse = error.response ? error.response.data.error : (error.message + ", more details in the console")
+                //Ошибки из ответа
+                handleServerAppError(errorResponse, dispatch)
+                //Серверные ошибки
+                // handleServerNetworkError(error, dispatch)
+            })
+            .finally(() => {
+                // dispatch(isFetchingAC(false))
+            })
     }
 }
 
@@ -40,8 +50,15 @@ export const loginTC = (data: LoginParamsType) => (dispatch: Dispatch) => {
             dispatch(setIsLoggedInAC(true))
 
         })
-        .catch(() => {
-
+        .catch((error) => {
+            const errorResponse = error.response ? error.response.data.error : (error.message + ", more details in the console")
+            //Ошибки из ответа
+            handleServerAppError(errorResponse, dispatch)
+            //Серверные ошибки
+            // handleServerNetworkError(error, dispatch)
+        })
+        .finally(() => {
+            // dispatch(isFetchingAC(false))
         })
 };
 

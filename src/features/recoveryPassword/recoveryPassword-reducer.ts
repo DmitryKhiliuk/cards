@@ -20,6 +20,7 @@ export const setRecoveryPasswordSuccessAC = (success: boolean) => ({
     type: 'RECOVERY_PASSWORD/SET_SUCCESS',
     success
 }) as const
+
 export const recoverTC = (email: string) => (dispatch: Dispatch<ActionType>) => {
     // dispatch(isFetchingAC(true))
     recoveryPasswordAPI.recoveryPassword(email)

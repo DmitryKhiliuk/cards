@@ -1,6 +1,6 @@
 import React, {useState} from 'react';
 import {useDispatch, useSelector} from "react-redux";
-import {setNewUserTC} from "./signUp-reducer";
+import {setNewUserAC, setNewUserTC} from "./signUp-reducer";
 import {useForm, Controller} from "react-hook-form";
 import {
     Button,
@@ -45,6 +45,7 @@ export const SingUp = () => {
     const methods = useForm<IFormInput>({defaultValues: defaultValues, mode: "onBlur"});
     const {handleSubmit, reset, control, getValues, formState: {errors, isValid}} = methods;
     const onSubmit = (data: IFormInput) => {
+        dispatch(setNewUserAC(false))
         dispatch(setNewUserTC(data.email, data.password))
         console.log(data)
         reset()

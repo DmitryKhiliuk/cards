@@ -12,7 +12,7 @@ export const signUpReducer = (state: InitialStateType = initialState, action: Ac
     switch (action.type) {
         case "SET_NEW_USER": {
             return {
-                ...state, isReg: true
+                ...state, isReg: action.success
             }
         }
         default:
@@ -20,14 +20,14 @@ export const signUpReducer = (state: InitialStateType = initialState, action: Ac
     }
 }
 
-export const setNewUserAC = () => ({type: 'SET_NEW_USER'} as const);
+export const setNewUserAC = (success: boolean) => ({type: 'SET_NEW_USER',success} as const);
 
 export const setNewUserTC = (email: string, password: string) => (dispatch: AppDispatch) => {
     // dispatch(isFetchingAC(true))
     signUpApi.registration(email, password)
         .then(response => {
             // console.log(response.data)
-            dispatch(setNewUserAC())
+            dispatch(setNewUserAC(true))
 
         })
         .catch((error) => {

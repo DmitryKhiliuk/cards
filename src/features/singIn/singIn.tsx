@@ -12,11 +12,12 @@ import {emailValidation, passwordValidation} from "./validation";
 import {loginTC} from "./auth-reducer";
 import {useDispatch, useSelector} from "react-redux";
 import {AppDispatch, AppRootStateType} from "../../app/store";
-import { Navigate } from 'react-router-dom';
+import {Navigate} from 'react-router-dom';
 import {PROFILE, REC_PASSWORD, SING_UP} from "../../common/routes/routes";
 import {ThunkDispatch} from "redux-thunk";
 import {Action} from "redux";
 import {useNavigate} from "react-router-dom";
+import {ErrorSnackbar} from "../../utils/ErrorSnackbar/ErrorSnackbar";
 
 type SingInFormType = {
     email: string;
@@ -26,8 +27,9 @@ type SingInFormType = {
 
 export const SingIn = () => {
     const isLoggedIn = useSelector<AppRootStateType, boolean>((state) => state.auth.isLoggedIn)
-    const dispatch = useDispatch<ThunkDispatch<AppRootStateType,unknown,Action> & AppDispatch>()
+    const dispatch = useDispatch<ThunkDispatch<AppRootStateType, unknown, Action> & AppDispatch>()
     const navigate = useNavigate()
+
     const {handleSubmit, control, reset} = useForm<SingInFormType>({
         defaultValues: {
             email: '',
@@ -39,7 +41,7 @@ export const SingIn = () => {
         control
     });
 
-    const onSubmit:SubmitHandler<SingInFormType> = (data)  => {
+    const onSubmit: SubmitHandler<SingInFormType> = (data) => {
 
         dispatch(loginTC(data));
         console.log('aaaaaaaaaaaa')
@@ -55,27 +57,28 @@ export const SingIn = () => {
     }
 
 
-    if(isLoggedIn) {
+    if (isLoggedIn) {
         return <Navigate to={PROFILE}/>
     }
     return (
         <div className={style.loginBlock}>
+            <ErrorSnackbar/>
             <Paper elevation={3} className={style.loginBlockForm}>
                 <Typography variant={'h4'}>
                     SIGN IN
                 </Typography>
-                <form className={style.loginForm} >
+                <form className={style.loginForm}>
                     <FormControl style={{width: '100%'}}>
                         <Controller
-                            control={ control }
+                            control={control}
                             name={'email'}
                             rules={emailValidation}
-                            render={({ field}) => (
+                            render={({field}) => (
                                 <TextField label={'Email'}
                                            margin={'normal'}
                                            variant="standard"
-                                           onChange = {(e: ChangeEvent<HTMLInputElement>) => field.onChange(e)}
-                                           value = {field.value}
+                                           onChange={(e: ChangeEvent<HTMLInputElement>) => field.onChange(e)}
+                                           value={field.value}
                                 />
                             )}
                         />
@@ -84,12 +87,12 @@ export const SingIn = () => {
                             control={control}
                             rules={passwordValidation}
                             name={'password'}
-                            render={({ field}) => (
+                            render={({field}) => (
                                 <TextField label={'Password'}
                                            margin={'normal'}
                                            variant="standard"
-                                           onChange = {(e: ChangeEvent<HTMLInputElement>) => field.onChange(e)}
-                                           value = {field.value}
+                                           onChange={(e: ChangeEvent<HTMLInputElement>) => field.onChange(e)}
+                                           value={field.value}
                                 />
                             )}
                         />
@@ -97,23 +100,26 @@ export const SingIn = () => {
                         <FormControlLabel
                             label={'Remember me'}
                             control={
-                            <Controller
-                                name={'rememberMe'}
-                                control={control}
-                                render={({field}) => (
+                                <Controller
+                                    name={'rememberMe'}
+                                    control={control}
+                                    render={({field}) => (
                                         <Checkbox
                                             checked={field.value}
-                                            onChange = {(e: ChangeEvent<HTMLInputElement>) => field.onChange(e)}
+                                            onChange={(e: ChangeEvent<HTMLInputElement>) => field.onChange(e)}
                                         />
                                     )}
-                                 />
+                                />
                             }
                         />
                         <Button variant={'text'} size={'small'} className={style.btnForgotPass}
-                                onClick={() => {navigate(REC_PASSWORD,{replace:true})}}>
+                                onClick={() => {
+                                    navigate(REC_PASSWORD, {replace: true})
+                                }}>
                             Forgot Password
                         </Button>
-                        <Button type={'submit'} variant={'contained'} color={'primary'} style={{marginTop:'80px'}} onClick={handleSubmit(onSubmit)}>
+                        <Button type={'submit'} variant={'contained'} color={'primary'} style={{marginTop: '80px'}}
+                                onClick={handleSubmit(onSubmit)}>
                             Login
                         </Button>
                         <Typography variant={'subtitle2'} component={'div'} className={style.textQuestion}>
