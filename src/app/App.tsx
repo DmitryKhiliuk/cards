@@ -17,11 +17,6 @@ import {ErrorPage} from "../features/error/ErrorPage";
 import {NewPassword} from "../features/newPassword/newPassword";
 import {initTC} from "./app-reducer";
 
-
-
-
-
-
 function App() {
 
     const dispatch = useDispatch<ThunkDispatch<AppRootStateType,unknown,Action> & AppDispatch>()

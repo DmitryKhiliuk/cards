@@ -74,7 +74,7 @@ export const SingUp = () => {
 
             <Paper elevation={3} className={style.loginBlockForm}>
                 <Typography variant={'h4'}>
-                    SIGN UP
+                    SING UP
                 </Typography>
                 <form className={style.loginForm}>
                     <FormControl style={{width: '100%'}}>

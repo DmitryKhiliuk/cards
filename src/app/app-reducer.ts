@@ -36,6 +36,7 @@ export const setAppInitializedAC = (value: boolean) => ({type: 'APP/SET-IS-INITI
 export type SetAppErrorActionType = ReturnType<typeof setAppErrorAC>
 export const setAppErrorAC = (error: string | null) => ({type: 'APP/SET-ERROR', error} as const)
 
+
 export const initTC = () => {
     return (dispatch: Dispatch) => {
         authAPI.me()
@@ -44,9 +45,5 @@ export const initTC = () => {
                 dispatch(setIsLoggedInAC(true))
                 dispatch(setAppInitializedAC(true))
             })
-
-
     }
-
 }
-
