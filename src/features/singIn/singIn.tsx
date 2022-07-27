@@ -13,9 +13,10 @@ import {loginTC} from "./auth-reducer";
 import {useDispatch, useSelector} from "react-redux";
 import {AppDispatch, AppRootStateType} from "../../app/store";
 import { Navigate } from 'react-router-dom';
-import {PROFILE, SING_UP} from "../../common/routes/routes";
+import {PROFILE, REC_PASSWORD, SING_UP} from "../../common/routes/routes";
 import {ThunkDispatch} from "redux-thunk";
 import {Action} from "redux";
+import {useNavigate} from "react-router-dom";
 
 type SingInFormType = {
     email: string;
@@ -26,7 +27,7 @@ type SingInFormType = {
 export const SingIn = () => {
     const isLoggedIn = useSelector<AppRootStateType, boolean>((state) => state.auth.isLoggedIn)
     const dispatch = useDispatch<ThunkDispatch<AppRootStateType,unknown,Action> & AppDispatch>()
-
+    const navigate = useNavigate()
     const {handleSubmit, control, reset} = useForm<SingInFormType>({
         defaultValues: {
             email: '',
@@ -57,8 +58,6 @@ export const SingIn = () => {
     if(isLoggedIn) {
         return <Navigate to={PROFILE}/>
     }
-
-
     return (
         <div className={style.loginBlock}>
             <Paper elevation={3} className={style.loginBlockForm}>
@@ -110,7 +109,8 @@ export const SingIn = () => {
                                  />
                             }
                         />
-                        <Button variant={'text'} size={'small'} className={style.btnForgotPass}>
+                        <Button variant={'text'} size={'small'} className={style.btnForgotPass}
+                                onClick={() => {navigate(REC_PASSWORD,{replace:true})}}>
                             Forgot Password
                         </Button>
                         <Button type={'submit'} variant={'contained'} color={'primary'} style={{marginTop:'80px'}} onClick={handleSubmit(onSubmit)}>
