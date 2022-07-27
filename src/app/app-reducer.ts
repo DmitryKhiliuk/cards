@@ -16,12 +16,14 @@ const initialState: InitialStateType = {
     isInitialized: false
 }
 
-export const appReducer = (state: InitialStateType = initialState, action: SetAppStatusActionType | setAppInitializedACType): InitialStateType => {
+export const appReducer = (state: InitialStateType = initialState, action: SetAppStatusActionType | setAppInitializedACType | SetAppErrorActionType): InitialStateType => {
     switch (action.type) {
         case 'APP/SET-STATUS':
             return {...state, status: action.status}
         case "APP/SET-IS-INITIALIZED":
             return {...state, isInitialized: action.value}
+        case 'APP/SET-ERROR':
+            return {...state, error: action.error}
         default:
             return {...state}
     }
@@ -31,9 +33,11 @@ export type SetAppStatusActionType = ReturnType<typeof setAppStatusAC>
 export const setAppStatusAC = (status: RequestStatusType) => ({type: 'APP/SET-STATUS', status} as const)
 export type setAppInitializedACType = ReturnType<typeof setAppInitializedAC>
 export const setAppInitializedAC = (value: boolean) => ({type: 'APP/SET-IS-INITIALIZED', value} as const)
+export type SetAppErrorActionType = ReturnType<typeof setAppErrorAC>
+export const setAppErrorAC = (error: string | null) => ({type: 'APP/SET-ERROR', error} as const)
 
 export const initTC = () => {
-    return (dispatch:Dispatch) => {
+    return (dispatch: Dispatch) => {
         authAPI.me()
             .then((res) => {
                 dispatch(setProfileAC(res.data))
@@ -43,4 +47,6 @@ export const initTC = () => {
 
 
     }
+
 }
+
