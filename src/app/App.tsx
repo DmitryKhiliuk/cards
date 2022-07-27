@@ -14,6 +14,7 @@ import {ThunkDispatch} from "redux-thunk";
 import {AppDispatch, AppRootStateType} from "./store";
 import {Action} from "redux";
 import {ErrorPage} from "../features/error/ErrorPage";
+import {NewPassword} from "../features/newPassword/newPassword";
 import {initTC} from "./app-reducer";
 
 
@@ -28,8 +29,6 @@ function App() {
         dispatch(initTC())
     },[])
 
-
-
     return (
         <BrowserRouter>
             <div className="App">
@@ -40,6 +39,7 @@ function App() {
                     <Route path={SING_UP} element={<SingUp/>}/>
                     <Route path={CARDS} element={<CardsPack/>}/>
                     <Route path={REC_PASSWORD} element={<RecoveryPassword/>}/>
+                    <Route path={NEW_PASSWORD} element={<NewPassword/>}/>
                     <Route path={LOG_OUT} element={<LogOut/>}/>
                     <Route path={ERROR} element={<ErrorPage/>}/>
                     <Route path={'*'} element={<Navigate to={ERROR}/>}/>
