@@ -34,7 +34,7 @@ export const NewPassword = () => {
     const {token} = useParams<{ token: string }>();
     const dispatch = useDispatch<ThunkDispatch<AppRootStateType, unknown, Action> & AppDispatch>()
     const methods = useForm<IFormInput>({defaultValues: defaultValues, mode: "onBlur"});
-    const {handleSubmit, reset, control, getValues, formState: {errors, isValid}} = methods;
+    const {handleSubmit, reset, control, formState: {isValid}} = methods;
     const onSubmit = (data: IFormInput) => {
         dispatch(newPasswordTC(data.password,token))
         // console.log(data, token)
@@ -45,7 +45,7 @@ export const NewPassword = () => {
     const handleMouseDownPassword = () => setShowPassword(!showPassword);
 
     const newPassSucces = useSelector<AppRootStateType, boolean>(state => state.newPass.success)
-         if (newPassSucces) {return <Navigate to = {SING_IN} replace={true}/>};
+         if (newPassSucces) {return <Navigate to = {SING_IN} replace={true}/>}
 
     return (
         <div className={style.loginBlock}>
@@ -64,7 +64,7 @@ export const NewPassword = () => {
                             render={({
                                          field: {onChange, value, onBlur},
                                          fieldState: {error},
-                                         formState,
+
                                      }) => (
                                 <TextField label={'Password'}
                                            helperText={error ? error.message : null}
