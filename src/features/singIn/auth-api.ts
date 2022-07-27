@@ -9,7 +9,7 @@ export const instance = axios.create({
 
 export const authAPI = {
     me() {
-        return instance.post<ResponseProfileType>('auth/me', '')
+        return instance.post<ResponseProfileType>('auth/me')
     },
 
     login(data: LoginParamsType) {

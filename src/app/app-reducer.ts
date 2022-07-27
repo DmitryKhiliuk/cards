@@ -1,6 +1,7 @@
 import {Action, Dispatch} from "redux";
 import {authAPI} from "../features/singIn/auth-api";
 import {setIsLoggedInAC} from "../features/singIn/auth-reducer";
+import {setProfileAC} from "../features/profile/profile-reducer";
 
 export type RequestStatusType = 'idle' | 'loading' | 'succeeded' | 'failed'
 export type InitialStateType = {
@@ -35,6 +36,7 @@ export const initTC = () => {
     return (dispatch:Dispatch) => {
         authAPI.me()
             .then((res) => {
+                dispatch(setProfileAC(res.data))
                 dispatch(setIsLoggedInAC(true))
                 dispatch(setAppInitializedAC(true))
             })

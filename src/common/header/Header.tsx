@@ -153,6 +153,7 @@ const Header = () => {
                         {/*___________________________________MENU______________________________________*/}
 
                         {isLoggedIn && <Box sx={{flexGrow: 0, position: 'absolute', right: 0}}>
+                            {profile.name + ' '}
                             <Tooltip title="Open settings">
                                 <IconButton onClick={handleOpenUserMenu} sx={{p: 0}}>
                                     <Avatar alt="Remy Sharp" src={profile.avatar || userPhoto}/>
