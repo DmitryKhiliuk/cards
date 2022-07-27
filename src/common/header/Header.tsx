@@ -18,6 +18,8 @@ import {useSelector} from "react-redux";
 import {AppRootStateType} from "../../app/store";
 import {ResponseProfileType} from "../../features/profile/profile-reducer";
 import userPhoto from "../../assets/img/user.png";
+import {LinearProgress} from "@material-ui/core";
+import {RequestStatusType} from "../../app/app-reducer";
 
 
 const pages = ['Sing In', 'Sing Up'];
@@ -29,6 +31,7 @@ const Header = () => {
     const [anchorElNav, setAnchorElNav] = React.useState<null | HTMLElement>(null);
     const [anchorElUser, setAnchorElUser] = React.useState<null | HTMLElement>(null);
     const profile = useSelector<AppRootStateType, ResponseProfileType>(state => state.profile)
+    const status = useSelector<AppRootStateType, RequestStatusType>((state) => state.app.status)
     const isLoggedIn = useSelector<AppRootStateType>(state => state.auth.isLoggedIn)
     const handleOpenNavMenu = (event: React.MouseEvent<HTMLElement>) => {
         setAnchorElNav(event.currentTarget);
@@ -183,6 +186,7 @@ const Header = () => {
                         </Box>}
                     </>
                 </Toolbar>
+                {status === 'loading' && <LinearProgress/>}
             </Container>
         </AppBar>
     );

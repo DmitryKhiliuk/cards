@@ -13,8 +13,10 @@ import {useDispatch} from "react-redux";
 import {ThunkDispatch} from "redux-thunk";
 import {AppDispatch, AppRootStateType} from "./store";
 import {Action} from "redux";
-import {initTC} from "../features/singIn/auth-reducer";
 import {ErrorPage} from "../features/error/ErrorPage";
+import {initTC} from "./app-reducer";
+
+
 
 
 
@@ -25,6 +27,8 @@ function App() {
      useEffect(() => {
         dispatch(initTC())
     },[])
+
+
 
     return (
         <BrowserRouter>

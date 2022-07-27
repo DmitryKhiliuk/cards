@@ -1,6 +1,6 @@
-import {Dispatch} from "redux";
 import {signUpApi} from "./api-signUp";
 import {AppDispatch} from "../../app/store";
+import {setAppStatusAC} from "../../app/app-reducer";
 
 const initialState = {
     newUser: {},
@@ -44,11 +44,13 @@ export const setEmailErrorAC = (error: string | null) => ({type: "SET-EMAIL-ERRO
 export const setPasswordErrorAC = (error: string | null) => ({type: "SET-PASSWORD-ERROR", error} as const);
 
 export const setNewUserTC = (email: string, password: string) => (dispatch: AppDispatch) => {
+    dispatch(setAppStatusAC('loading'))
     // dispatch(isFetchingAC(true))
     signUpApi.registration(email, password)
         .then(response => {
             console.log(response.data)
             dispatch(setNewUserAC(response.data))
+            dispatch(setAppStatusAC('succeeded'))
         })
         .catch((e) => {
             const error = e.response ? e.response.data.error : (e.message + ", more details in the console")

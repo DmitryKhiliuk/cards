@@ -1,6 +1,7 @@
 import {Dispatch} from "redux";
 import {LoginParamsType, profileAPI} from "./profile-api";
 import {setIsLoggedInAC} from "../singIn/auth-reducer";
+import {setAppStatusAC} from "../../app/app-reducer";
 
 
 export type ResponseProfileType = {
@@ -77,17 +78,21 @@ export const updateProfileTitleAC = ({name, avatar}:updateProfileType) => {
 
 export const logoutTC = () => {
     return (dispatch:Dispatch) => {
+        dispatch(setAppStatusAC('loading'))
         profileAPI.logout()
             .then((res) => {
                 dispatch(setIsLoggedInAC(false))
+                dispatch(setAppStatusAC('succeeded'))
             })
     }
 }
 export const updateProfileTitleTC = ({name, avatar}:updateProfileType) => {
     return (dispatch:Dispatch) => {
+        dispatch(setAppStatusAC('loading'))
         profileAPI.updateTitle({name, avatar})
             .then((res) => {
                 dispatch(updateProfileTitleAC({name, avatar}))
+                dispatch(setAppStatusAC('succeeded'))
             })
     }
 }

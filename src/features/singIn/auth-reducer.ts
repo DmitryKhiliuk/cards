@@ -2,6 +2,7 @@ import {authAPI, LoginParamsType} from "./auth-api";
 import {Dispatch} from "redux";
 import {profileAPI} from "../profile/profile-api";
 import {setProfileAC} from "../profile/profile-reducer";
+import {setAppStatusAC} from "../../app/app-reducer";
 
 const initialState = {
     isLoggedIn: false
@@ -23,22 +24,14 @@ export const setIsLoggedInAC = (value: boolean) =>
 
 
 
-export const initTC = () => {
-    return (dispatch:Dispatch) => {
-        authAPI.me()
-            .then((res) => {
-                dispatch(setIsLoggedInAC(true))
-            })
-
-    }
-}
 
 export const loginTC = (data: LoginParamsType) => (dispatch: Dispatch) => {
+    dispatch(setAppStatusAC('loading'))
     authAPI.login(data)
         .then((res) => {
             dispatch(setProfileAC(res.data))
             dispatch(setIsLoggedInAC(true))
-
+            dispatch(setAppStatusAC('succeeded'))
         })
         .catch(() => {
 
