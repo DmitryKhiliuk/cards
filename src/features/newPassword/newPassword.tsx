@@ -1,12 +1,13 @@
 import React, {useState} from 'react';
 import s from '../../app/App.module.css';
-import {
-    Button, ButtonGroup,
-    FormControl, IconButton, InputAdornment,
-    Paper,
-    TextField,
-    Typography
-} from "@material-ui/core";
+import Paper from '@mui/material/Paper';
+import FormControl from '@mui/material/FormControl';
+import Typography from '@mui/material/Typography';
+import TextField from '@mui/material/TextField';
+import Button from '@mui/material/Button';
+import ButtonGroup from "@mui/material/ButtonGroup";
+import InputAdornment from "@mui/material/InputAdornment";
+import IconButton from "@mui/material/IconButton";
 import {useDispatch, useSelector} from "react-redux";
 import {Controller, useForm} from "react-hook-form";
 import {useParams} from "react-router-dom";

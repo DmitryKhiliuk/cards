@@ -1,5 +1,5 @@
 import {Dispatch} from "redux";
-import {LoginParamsType, profileAPI} from "./profile-api";
+import {profileAPI} from "./profile-api";
 import {setAppStatusAC} from "../../app/app-reducer";
 import {setIsLoggedInAC} from "../singIn/auth-reducer";
 

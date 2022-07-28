@@ -1,6 +1,5 @@
 import {authApi, LoginParamsType} from "./auth-api";
 import {Dispatch} from "redux";
-import {profileAPI} from "../profile/profile-api";
 import {setProfileAC} from "../profile/profile-reducer";
 import {handleServerAppError} from "../../utils/error-utils";
 import {setAppStatusAC} from "../../app/app-reducer";
