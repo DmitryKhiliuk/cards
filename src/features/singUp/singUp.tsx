@@ -2,16 +2,14 @@ import React, {useState} from 'react';
 import {useDispatch, useSelector} from "react-redux";
 import {setNewUserAC, setNewUserTC} from "./signUp-reducer";
 import {useForm, Controller} from "react-hook-form";
-import {
-    Button,
-    ButtonGroup,
-    Checkbox,
-    FormControl,
-    FormControlLabel, IconButton, InputAdornment,
-    Paper,
-    TextField,
-    Typography
-} from "@material-ui/core";
+
+import FormControl from '@mui/material/FormControl';
+import Typography from '@mui/material/Typography';
+import TextField from '@mui/material/TextField';
+import Button from '@mui/material/Button';
+import Paper from '@mui/material/Paper';
+
+
 import style from "../singIn/SignIn.module.css";
 import Visibility from "@material-ui/icons/Visibility";
 import VisibilityOff from "@material-ui/icons/VisibilityOff";
@@ -21,6 +19,10 @@ import {SING_IN} from "../../common/routes/routes";
 import {ThunkDispatch} from "redux-thunk";
 import {Action} from "redux";
 import {ErrorSnackbar} from "../../utils/ErrorSnackbar/ErrorSnackbar";
+import {emailValidation, passwordValidation} from "../singIn/validation";
+import {ButtonGroup, CircularProgress, InputAdornment} from "@mui/material";
+import IconButton from "@mui/material/IconButton";
+import Box from "@mui/material/Box";
 
 
 interface IFormInput {
@@ -38,12 +40,12 @@ const defaultValues = {
 export const SingUp = () => {
     const dispatch = useDispatch<ThunkDispatch<AppRootStateType, unknown, Action> & AppDispatch>()
 
-    // const isFetching = useSelector<AppRootStateType, boolean>((state) => state.login.isFetching);
+    const status = useSelector<AppRootStateType, string>((state) => state.app.status);
     const isRegistration = useSelector<AppRootStateType, boolean>(state => state.registration.isReg)
 
 
     const methods = useForm<IFormInput>({defaultValues: defaultValues, mode: "onBlur"});
-    const {handleSubmit, reset, control, getValues, formState: {errors, isValid}} = methods;
+    const {handleSubmit, reset, control, getValues, formState: {isValid}} = methods;
     const onSubmit = (data: IFormInput) => {
         dispatch(setNewUserAC(false))
         dispatch(setNewUserTC(data.email, data.password))
@@ -62,11 +64,12 @@ export const SingUp = () => {
     if (isRegistration) {
         return <Navigate to={SING_IN}/>
     }
-    ;
-
-    // if (isFetching) {
-    //     return <div>Loading...</div>
-    // }
+    if (status === 'loading') {
+        return  ( <Box sx={{ display: 'flex'}} className={style.loginBlock}>
+            <CircularProgress  />
+        </Box>
+    );
+    }
     return (
         <div className={style.loginBlock}>
 
@@ -82,10 +85,7 @@ export const SingUp = () => {
                         <Controller
                             name={'email'}
                             control={control}
-                            rules={{
-                                required: 'Email is required!',
-                                pattern: /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
-                            }}
+                            rules={emailValidation}
                             render={({
                                          field: {onChange, value, onBlur},
                                          fieldState: {error},
@@ -109,11 +109,10 @@ export const SingUp = () => {
                         <Controller
                             name={'password'}
                             control={control}
-                            rules={{required: "Password is required!", minLength: 7}}
+                            rules={passwordValidation}
                             render={({
                                          field: {onChange, value, onBlur},
                                          fieldState: {error},
-                                         formState,
                                      }) => (
                                 <TextField label={'Password'}
                                            helperText={error ? error.message : null}
@@ -160,7 +159,6 @@ export const SingUp = () => {
                             render={({
                                          field: {onChange, value, onBlur},
                                          fieldState: {error},
-                                         formState,
                                      }) => (
                                 <TextField label={'Confirm password'}
                                            helperText={error ? error.message : null}
