@@ -1,5 +1,5 @@
 import React, {useEffect} from 'react';
-import './App.module.css';
+import s from './App.module.css'
 import {BrowserRouter, Navigate, Route, Routes} from "react-router-dom";
 import {SingIn} from "../features/singIn/singIn";
 import {SingUp} from "../features/singUp/singUp";
@@ -27,11 +27,7 @@ import {ErrorPage} from "../features/error/ErrorPage";
 import {NewPassword} from "../features/newPassword/newPassword";
 import {initTC} from "./app-reducer";
 import {CheckEmail} from "../features/CheckEmail/CheckEmail";
-
-
-
-
-
+import CircularProgress from "@mui/material/CircularProgress";
 
 function App() {
 
@@ -50,7 +46,7 @@ function App() {
 
     return (
         <BrowserRouter>
-            <div className={style.App}>
+            <div className={s.App}>
                 <Header/>
                 <Routes>
                     <Route path={PROFILE} element={<Profile/>}/>

@@ -20,6 +20,8 @@ import ButtonGroup from "@mui/material/ButtonGroup";
 import InputAdornment from "@mui/material/InputAdornment";
 import IconButton from "@mui/material/IconButton";
 import Box from "@mui/material/Box";
+import CircularProgress from "@mui/material/CircularProgress";
+import {emailValidation, passwordValidation} from "../../common/validation/validation";
 
 interface IFormInput {
     email: string
@@ -61,7 +63,7 @@ export const SingUp = () => {
         return <Navigate to={SING_IN}/>
     }
     if (status === 'loading') {
-        return  ( <Box sx={{ display: 'flex'}} className={style.loginBlock}>
+        return  ( <Box sx={{ display: 'flex'}} className={s.loginBlock}>
             <CircularProgress  />
         </Box>
     );

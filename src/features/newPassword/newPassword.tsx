@@ -20,8 +20,10 @@ import Visibility from "@material-ui/icons/Visibility";
 import VisibilityOff from "@material-ui/icons/VisibilityOff";
 import {newPasswordTC, setNewPasswordSuccessAC} from "./newPassword-reducer";
 import {Navigate} from "react-router-dom";
-import {passwordValidation} from "../singIn/validation";
+
 import Box from "@mui/material/Box";
+import CircularProgress from "@mui/material/CircularProgress";
+import {passwordValidation} from "../../common/validation/validation";
 
 interface IFormInput {
     email: string
@@ -53,7 +55,7 @@ export const NewPassword = () => {
         return <Navigate to={SING_IN} replace={true}/>
     }
     if (status === 'loading') {
-        return (<Box sx={{display: 'flex'}} className={style.loginBlock}>
+        return (<Box sx={{display: 'flex'}} className={s.loginBlock}>
                 <CircularProgress/>
             </Box>
         );

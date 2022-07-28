@@ -1,5 +1,4 @@
 import React from 'react';
-
 import style from '../singIn/SignIn.module.css';
 import Paper from '@mui/material/Paper';
 import FormControl from '@mui/material/FormControl';
@@ -17,8 +16,7 @@ import {Action} from "redux";
 import {ErrorSnackbar} from "../../utils/ErrorSnackbar/ErrorSnackbar";
 import {recoverTC, setRecoveryPasswordSuccessAC} from "./recoveryPassword-reducer";
 import s from "../../app/App.module.css";
-import {emailValidation} from "../singIn/validation";
-import Box from "@mui/material/Box";
+import {emailValidation} from "../../common/validation/validation";
 
 
 interface IFormInput {
@@ -42,18 +40,11 @@ export const RecoveryPassword = () => {
         reset()
     };
     const navigate = useNavigate()
-    const status = useSelector<AppRootStateType, string>((state) => state.app.status);
     const recoverPassSucces = useSelector<AppRootStateType, boolean>(state => state.recoveryPass.success)
     if (recoverPassSucces) {
         return <Navigate to={CHECK_EMAIL} replace={true}/>
     }
 
-    if (status === 'loading') {
-        return (<Box sx={{display: 'flex'}} className={style.loginBlock}>
-                <CircularProgress/>
-            </Box>
-        );
-    }
 
     return (
         <div className={s.block}>
