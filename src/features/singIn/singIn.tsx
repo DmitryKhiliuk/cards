@@ -24,6 +24,7 @@ import Visibility from "@mui/icons-material/Visibility";
 import VisibilityOff from "@mui/icons-material/VisibilityOff";
 import {loginTC} from "./auth-reducer";
 
+import {setRecoveryPasswordSuccessAC} from "../recoveryPassword/recoveryPassword-reducer";
 
 type SingInFormType = {
     email: string;
@@ -41,6 +42,13 @@ export const SingIn = () => {
     const handleClickShowPassword = () => setShowPassword(!showPassword);
     const handleMouseDownPassword = () => setShowPassword(!showPassword);
 
+    const fogotPassHandler=()=>{
+        dispatch(setRecoveryPasswordSuccessAC(false))
+        navigate(REC_PASSWORD, {replace: true})
+    }
+
+
+
     const {handleSubmit, control, reset} = useForm<SingInFormType>({
         defaultValues: {
             email: '',
@@ -52,6 +60,11 @@ export const SingIn = () => {
     const onSubmit: SubmitHandler<SingInFormType> = (data) => {
         dispatch(loginTC(data));
         reset()
+        reset({
+            email: '',
+            password: '',
+            rememberMe: false
+        })
     };
 
     if (isLoggedIn) {
@@ -129,9 +142,11 @@ export const SingIn = () => {
                             }
                         />
                         <Button variant={'text'} size={'small'} className={style.btnForgotPass}
-                                onClick={() => {
-                                    navigate(REC_PASSWORD, {replace: true})
-                                }}>
+                                onClick={fogotPassHandler
+                            // () => {
+                            //         navigate(REC_PASSWORD, {replace: true})
+                            //     }
+                        }>
                             Forgot Password
                         </Button>
                         <Button type={'submit'} variant={'contained'} color={'primary'} style={{marginTop: '80px'}}

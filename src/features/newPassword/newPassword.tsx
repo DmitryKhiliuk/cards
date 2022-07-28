@@ -20,6 +20,8 @@ import Visibility from "@material-ui/icons/Visibility";
 import VisibilityOff from "@material-ui/icons/VisibilityOff";
 import {newPasswordTC, setNewPasswordSuccessAC} from "./newPassword-reducer";
 import {Navigate} from "react-router-dom";
+import {passwordValidation} from "../singIn/validation";
+import Box from "@mui/material/Box";
 
 interface IFormInput {
     email: string
@@ -45,12 +47,17 @@ export const NewPassword = () => {
     const [showPassword, setShowPassword] = useState(false);
     const handleClickShowPassword = () => setShowPassword(!showPassword);
     const handleMouseDownPassword = () => setShowPassword(!showPassword);
-
+    const status = useSelector<AppRootStateType, string>((state) => state.app.status);
     const newPassSucces = useSelector<AppRootStateType, boolean>(state => state.newPass.success)
     if (newPassSucces) {
-        return <Navigate to={CHECK_EMAIL} replace={true}/>
+        return <Navigate to={SING_IN} replace={true}/>
     }
-
+    if (status === 'loading') {
+        return (<Box sx={{display: 'flex'}} className={style.loginBlock}>
+                <CircularProgress/>
+            </Box>
+        );
+    }
     return (
         <div className={s.block}>
             <ErrorSnackbar/>
@@ -64,7 +71,7 @@ export const NewPassword = () => {
                         <Controller
                             name={'password'}
                             control={control}
-                            rules={{required: "Password is required!", minLength: 7}}
+                            rules={passwordValidation}
                             render={({
                                          field: {onChange, value, onBlur},
                                          fieldState: {error},

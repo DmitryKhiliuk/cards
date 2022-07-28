@@ -26,9 +26,12 @@ import {Action} from "redux";
 import {ErrorPage} from "../features/error/ErrorPage";
 import {NewPassword} from "../features/newPassword/newPassword";
 import {initTC} from "./app-reducer";
-import {CircularProgress} from "@material-ui/core";
-import style from './App.module.css'
 import {CheckEmail} from "../features/CheckEmail/CheckEmail";
+
+
+
+
+
 
 function App() {
 
@@ -60,6 +63,7 @@ function App() {
                     <Route path={CHECK_EMAIL} element={<CheckEmail/>}/>
                     <Route path={ERROR} element={<ErrorPage/>}/>
                     <Route path={'*'} element={<Navigate to={ERROR}/>}/>
+                    <Route path={CHECK_EMAIL} element={<CheckEmail/>}/>
                 </Routes>
             </div>
         </BrowserRouter>
