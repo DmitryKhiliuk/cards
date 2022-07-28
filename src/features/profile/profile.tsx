@@ -1,4 +1,4 @@
-import React, {useEffect} from 'react';
+import React, {ChangeEvent, useEffect, useState} from 'react';
 import Box from '@mui/material/Box';
 import Paper from '@mui/material/Paper';
 import userPhoto from "../../assets/img/user.png";
@@ -16,6 +16,7 @@ import {Action} from "redux";
 import Typography from "@mui/material/Typography";
 import {Navigate} from "react-router-dom";
 import {EditableSpan} from "./EditableSpan";
+import {initTC} from "../../app/app-reducer";
 
 export const Profile = () => {
 
@@ -36,6 +37,20 @@ export const Profile = () => {
         user.name = value
         dispatch(updateProfileTitleTC(user))
     }
+    /*const [imgData, setImgData] = useState<updateProfileType>(null);
+    const setImgDataHandler = (value: string | null | undefined) => setImgData(value)*/
+    const onChangePicture = (e: ChangeEvent<HTMLInputElement>) => {
+        if (e.target.files && e.target.files[0]) {
+            const reader = new FileReader();                         // конструктор
+            reader.addEventListener('load', () => {
+                user.avatar = reader.result
+                dispatch(updateProfileTitleTC(user))
+                dispatch(initTC())
+                /*setImgDataHandler(user);*/
+            });
+            reader.readAsDataURL(e.target.files[0]); //считать данные как base64-кодированный URL.
+        }
+    };
 
     if (!isLoggedIn) {
         return <Navigate to='/singIn'/>
@@ -48,7 +63,7 @@ export const Profile = () => {
                 <div><img src={profile.avatar || userPhoto}  alt="user" className={s.photo}/></div>
                 <div className={s.iconPhoto}>
                     <IconButton color="primary" aria-label="upload picture" component="label">
-                        <input hidden accept="image/*" type="file" />
+                        <input hidden accept="image/*" type="file" onChange={onChangePicture}/>
                         <AddAPhotoIcon />
                     </IconButton>
                 </div>

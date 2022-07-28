@@ -24,7 +24,7 @@ export type ResponseProfileType = {
 
 export type updateProfileType = {
     name: string | null
-    avatar: string | null | undefined
+    avatar: string | null | undefined |  ArrayBuffer
 }
 
 const initialState: ResponseProfileType = {
