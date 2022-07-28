@@ -1,12 +1,22 @@
 import React, {useEffect} from 'react';
-import './App.css';
+import './App.module.css';
 import {BrowserRouter, Navigate, Route, Routes} from "react-router-dom";
 import {SingIn} from "../features/singIn/singIn";
 import {SingUp} from "../features/singUp/singUp";
 import {Profile} from "../features/profile/profile";
 import {RecoveryPassword} from "../features/recoveryPassword/recoveryPassword";
 import {LogOut} from "../features/logOut/logOut";
-import {CARDS, ERROR, LOG_OUT, PROFILE, REC_PASSWORD, SING_IN, SING_UP, NEW_PASSWORD} from "../common/routes/routes";
+import {
+    CARDS,
+    ERROR,
+    LOG_OUT,
+    PROFILE,
+    REC_PASSWORD,
+    SING_IN,
+    SING_UP,
+    NEW_PASSWORD,
+    CHECK_EMAIL
+} from "../common/routes/routes";
 import {CardsPack} from "../features/CardsPack/CardsPack";
 import Header from "../common/header/Header";
 import {useDispatch, useSelector} from "react-redux";
@@ -17,6 +27,8 @@ import {ErrorPage} from "../features/error/ErrorPage";
 import {NewPassword} from "../features/newPassword/newPassword";
 import {initTC} from "./app-reducer";
 import {CircularProgress} from "@material-ui/core";
+import style from './App.module.css'
+import {CheckEmail} from "../features/CheckEmail/CheckEmail";
 
 function App() {
 
@@ -35,7 +47,7 @@ function App() {
 
     return (
         <BrowserRouter>
-            <div className="App">
+            <div className={style.App}>
                 <Header/>
                 <Routes>
                     <Route path={PROFILE} element={<Profile/>}/>
@@ -45,6 +57,7 @@ function App() {
                     <Route path={REC_PASSWORD} element={<RecoveryPassword/>}/>
                     <Route path={NEW_PASSWORD} element={<NewPassword/>}/>
                     <Route path={LOG_OUT} element={<LogOut/>}/>
+                    <Route path={CHECK_EMAIL} element={<CheckEmail/>}/>
                     <Route path={ERROR} element={<ErrorPage/>}/>
                     <Route path={'*'} element={<Navigate to={ERROR}/>}/>
                 </Routes>

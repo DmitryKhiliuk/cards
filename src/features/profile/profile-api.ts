@@ -13,8 +13,8 @@ export const profileAPI= {
     /*me() {
         return instance.post<ResponseType>('auth/me', '')
     },*/
-    /*login(data:LoginParamsType) {
-        return instance.post<ResponseType>('auth/login', data)
+    /*loginApi(data:LoginParamsType) {
+        return instance.post<ResponseType>('auth/loginApi', data)
     },*/
     logout() {
         return instance.delete('auth/me')

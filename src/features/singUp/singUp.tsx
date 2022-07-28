@@ -2,7 +2,7 @@ import React, {useState} from 'react';
 import {useDispatch, useSelector} from "react-redux";
 import {setNewUserAC, setNewUserTC} from "./signUp-reducer";
 import {useForm, Controller} from "react-hook-form";
-import style from "../singIn/SignIn.module.css";
+import s from "../../app/App.module.css";
 import Visibility from "@mui/icons-material/Visibility";
 import VisibilityOff from "@mui/icons-material/VisibilityOff";
 import {AppDispatch, AppRootStateType} from "../../app/store";
@@ -66,15 +66,15 @@ export const SingUp = () => {
     //     return <div>Loading...</div>
     // }
     return (
-        <div className={style.loginBlock}>
+        <div className={s.block}>
 
             <ErrorSnackbar/>
 
-            <Paper elevation={3} className={style.loginBlockForm}>
+            <Paper elevation={3} className={s.loginBlockForm}>
                 <Typography variant={'h4'}>
-                    SIGN UP
+                    SING UP
                 </Typography>
-                <form className={style.loginForm}>
+                <form className={s.loginForm}>
                     <FormControl style={{width: '100%'}}>
                         {/*//Email*/}
                         <Controller

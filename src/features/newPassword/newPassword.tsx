@@ -1,6 +1,5 @@
 import React, {useState} from 'react';
-
-import style from '../singIn/SignIn.module.css';
+import s from '../../app/App.module.css';
 import {
     Button, ButtonGroup,
     FormControl, IconButton, InputAdornment,
@@ -20,6 +19,7 @@ import Visibility from "@material-ui/icons/Visibility";
 import VisibilityOff from "@material-ui/icons/VisibilityOff";
 import {newPasswordTC, setNewPasswordSuccessAC} from "./newPassword-reducer";
 import {Navigate} from "react-router-dom";
+
 interface IFormInput {
     email: string
     password: string
@@ -37,7 +37,7 @@ export const NewPassword = () => {
     const {handleSubmit, reset, control, formState: {isValid}} = methods;
     const onSubmit = (data: IFormInput) => {
         dispatch(setNewPasswordSuccessAC(false))
-        dispatch(newPasswordTC(data.password,token))
+        dispatch(newPasswordTC(data.password, token))
         // console.log(data, token)
         reset()
     };
@@ -46,17 +46,18 @@ export const NewPassword = () => {
     const handleMouseDownPassword = () => setShowPassword(!showPassword);
 
     const newPassSucces = useSelector<AppRootStateType, boolean>(state => state.newPass.success)
-         if (newPassSucces) {
-                return <Navigate to = {SING_IN} replace={true}/>}
+    if (newPassSucces) {
+        return <Navigate to={SING_IN} replace={true}/>
+    }
 
     return (
-        <div className={style.loginBlock}>
+        <div className={s.block}>
             <ErrorSnackbar/>
-            <Paper elevation={3} className={style.loginBlockForm}>
+            <Paper elevation={3} className={s.loginBlockForm}>
                 <Typography variant={'h4'}>
                     Create new password
                 </Typography>
-                <form className={style.loginForm}>
+                <form className={s.loginForm}>
                     <FormControl style={{width: '100%'}}>
                         {/*//Password*/}
                         <Controller

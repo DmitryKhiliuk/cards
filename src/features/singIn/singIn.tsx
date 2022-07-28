@@ -1,15 +1,16 @@
-import React, {ChangeEvent} from 'react';
+import React, {ChangeEvent, useState} from 'react';
 import FormControl from '@mui/material/FormControl';
 import Typography from '@mui/material/Typography';
 import TextField from '@mui/material/TextField';
 import Button from '@mui/material/Button';
 import style from './SignIn.module.css';
+import s from '../../app/App.module.css';
 import FormControlLabel from '@mui/material/FormControlLabel';
 import Checkbox from '@mui/material/Checkbox';
 import Paper from '@mui/material/Paper';
 import {useForm, Controller, SubmitHandler, useFormState} from 'react-hook-form';
-import {emailValidation, passwordValidation} from "./validation";
-import {loginTC} from "./auth-reducer";
+import {emailValidation, passwordValidation} from "../../common/validation/validation";
+import {loginTC} from "./login-reducer";
 import {useDispatch, useSelector} from "react-redux";
 import {AppDispatch, AppRootStateType} from "../../app/store";
 import {Navigate} from 'react-router-dom';
@@ -18,6 +19,10 @@ import {ThunkDispatch} from "redux-thunk";
 import {Action} from "redux";
 import {useNavigate} from "react-router-dom";
 import {ErrorSnackbar} from "../../utils/ErrorSnackbar/ErrorSnackbar";
+import {IconButton, InputAdornment} from "@material-ui/core";
+import Visibility from "@material-ui/icons/Visibility";
+import VisibilityOff from "@material-ui/icons/VisibilityOff";
+
 
 type SingInFormType = {
     email: string;
@@ -28,7 +33,12 @@ type SingInFormType = {
 export const SingIn = () => {
     const isLoggedIn = useSelector<AppRootStateType, boolean>((state) => state.auth.isLoggedIn)
     const dispatch = useDispatch<ThunkDispatch<AppRootStateType, unknown, Action> & AppDispatch>()
-    const navigate = useNavigate()
+    const navigate = useNavigate();
+
+    const [showPassword, setShowPassword] = useState(false);
+
+    const handleClickShowPassword = () => setShowPassword(!showPassword);
+    const handleMouseDownPassword = () => setShowPassword(!showPassword);
 
     const {handleSubmit, control, reset} = useForm<SingInFormType>({
         defaultValues: {
@@ -37,66 +47,71 @@ export const SingIn = () => {
             rememberMe: false,
         }
     });
-    const {errors} = useFormState({
-        control
-    });
 
     const onSubmit: SubmitHandler<SingInFormType> = (data) => {
-
         dispatch(loginTC(data));
-        console.log('aaaaaaaaaaaa')
-        reset({
-            email: '',
-            password: '',
-            rememberMe: false
-        })
+        reset()
     };
-
-    const redirectToSignUp = () => {
-        return <Navigate to={SING_UP}/>
-    }
-
 
     if (isLoggedIn) {
         return <Navigate to={PROFILE}/>
     }
     return (
-        <div className={style.loginBlock}>
+        <div className={s.block}>
             <ErrorSnackbar/>
-            <Paper elevation={3} className={style.loginBlockForm}>
+            <Paper elevation={3} className={s.loginBlockForm}>
                 <Typography variant={'h4'}>
                     SIGN IN
                 </Typography>
-                <form className={style.loginForm}>
+                <form className={s.loginForm}>
                     <FormControl style={{width: '100%'}}>
                         <Controller
                             control={control}
                             name={'email'}
                             rules={emailValidation}
-                            render={({field}) => (
+                            render={({field, fieldState}) => (
                                 <TextField label={'Email'}
-                                           margin={'normal'}
                                            variant="standard"
+                                           margin={'normal'}
+                                           helperText={fieldState.error ? fieldState.error.message : null}
                                            onChange={(e: ChangeEvent<HTMLInputElement>) => field.onChange(e)}
                                            value={field.value}
+                                           onBlur={field.onBlur}
+                                           error={!!fieldState.error}
+
                                 />
                             )}
                         />
-                        {errors.email && <span style={{color: 'red'}}>{errors.email.message}</span>}
                         <Controller
                             control={control}
                             rules={passwordValidation}
                             name={'password'}
-                            render={({field}) => (
+                            render={({field, fieldState}) => (
                                 <TextField label={'Password'}
-                                           margin={'normal'}
+                                           helperText={fieldState.error ? fieldState.error.message : null}
                                            variant="standard"
                                            onChange={(e: ChangeEvent<HTMLInputElement>) => field.onChange(e)}
                                            value={field.value}
+                                           onBlur={field.onBlur}
+                                           margin={'normal'}
+                                           error={!!fieldState.error}
+                                           type={showPassword ? "text" : "password"}
+                                           InputProps={{
+                                               endAdornment: (
+                                                   <InputAdornment position="end">
+                                                       <IconButton
+                                                           aria-label="toggle password visibility"
+                                                           onClick={handleClickShowPassword}
+                                                           onMouseDown={handleMouseDownPassword}
+                                                       >
+                                                           {showPassword ? <Visibility/> : <VisibilityOff/>}
+                                                       </IconButton>
+                                                   </InputAdornment>
+                                               )
+                                           }}
                                 />
                             )}
                         />
-                        {errors.password && <div style={{color: 'red'}}>{errors.password.message}</div>}
                         <FormControlLabel
                             label={'Remember me'}
                             control={
@@ -125,7 +140,10 @@ export const SingIn = () => {
                         <Typography variant={'subtitle2'} component={'div'} className={style.textQuestion}>
                             Don't have an account?
                         </Typography>
-                        <Button variant={'text'} color={'primary'} onClick={redirectToSignUp}>
+                        <Button variant={'text'} color={'primary'}
+                                onClick={() => {
+                                    navigate(SING_UP, {replace: true})
+                                }}>
                             Sign Up
                         </Button>
                     </FormControl>
