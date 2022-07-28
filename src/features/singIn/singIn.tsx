@@ -18,6 +18,7 @@ import {ThunkDispatch} from "redux-thunk";
 import {Action} from "redux";
 import {useNavigate} from "react-router-dom";
 import {ErrorSnackbar} from "../../utils/ErrorSnackbar/ErrorSnackbar";
+import {setRecoveryPasswordSuccessAC} from "../recoveryPassword/recoveryPassword-reducer";
 
 type SingInFormType = {
     email: string;
@@ -29,6 +30,13 @@ export const SingIn = () => {
     const isLoggedIn = useSelector<AppRootStateType, boolean>((state) => state.auth.isLoggedIn)
     const dispatch = useDispatch<ThunkDispatch<AppRootStateType, unknown, Action> & AppDispatch>()
     const navigate = useNavigate()
+
+    const fogotPassHandler=()=>{
+        dispatch(setRecoveryPasswordSuccessAC(false))
+        navigate(REC_PASSWORD, {replace: true})
+    }
+
+
 
     const {handleSubmit, control, reset} = useForm<SingInFormType>({
         defaultValues: {
@@ -44,7 +52,6 @@ export const SingIn = () => {
     const onSubmit: SubmitHandler<SingInFormType> = (data) => {
 
         dispatch(loginTC(data));
-        console.log('aaaaaaaaaaaa')
         reset({
             email: '',
             password: '',
@@ -113,9 +120,11 @@ export const SingIn = () => {
                             }
                         />
                         <Button variant={'text'} size={'small'} className={style.btnForgotPass}
-                                onClick={() => {
-                                    navigate(REC_PASSWORD, {replace: true})
-                                }}>
+                                onClick={fogotPassHandler
+                            // () => {
+                            //         navigate(REC_PASSWORD, {replace: true})
+                            //     }
+                        }>
                             Forgot Password
                         </Button>
                         <Button type={'submit'} variant={'contained'} color={'primary'} style={{marginTop: '80px'}}

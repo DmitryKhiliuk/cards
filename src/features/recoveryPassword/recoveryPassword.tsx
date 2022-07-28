@@ -10,7 +10,7 @@ import {useDispatch, useSelector} from "react-redux";
 import {Controller, useForm} from "react-hook-form";
 import {Navigate, useNavigate} from "react-router-dom";
 import {AppDispatch, AppRootStateType} from "../../app/store";
-import {SING_IN} from "../../common/routes/routes";
+import {CHECK_EMAIL, SING_IN} from "../../common/routes/routes";
 import {ThunkDispatch} from "redux-thunk";
 import {Action} from "redux";
 import {ErrorSnackbar} from "../../utils/ErrorSnackbar/ErrorSnackbar";
@@ -44,7 +44,7 @@ export const RecoveryPassword = () => {
     const status = useSelector<AppRootStateType, string>((state) => state.app.status);
     const recoverPassSucces = useSelector<AppRootStateType, boolean>(state => state.recoveryPass.success)
     if (recoverPassSucces) {
-        return <Navigate to={SING_IN} replace={true}/>
+        return <Navigate to={CHECK_EMAIL} replace={true}/>
     }
 
     if (status === 'loading') {
