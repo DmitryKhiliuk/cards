@@ -18,10 +18,10 @@ import {ThunkDispatch} from "redux-thunk";
 import {Action} from "redux";
 import {useNavigate} from "react-router-dom";
 import {ErrorSnackbar} from "../../utils/ErrorSnackbar/ErrorSnackbar";
-import IconButton from "@material-ui/core/IconButton";
-import InputAdornment from "@material-ui/core/InputAdornment";
-import Visibility from "@material-ui/icons/Visibility";
-import VisibilityOff from "@material-ui/icons/VisibilityOff";
+import IconButton from "@mui/material/IconButton";
+import InputAdornment from "@mui/material/InputAdornment";
+import Visibility from "@mui/icons-material/Visibility";
+import VisibilityOff from "@mui/icons-material/VisibilityOff";
 import {loginTC} from "./auth-reducer";
 
 

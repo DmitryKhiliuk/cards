@@ -16,6 +16,7 @@ import {ThunkDispatch} from "redux-thunk";
 import {Action} from "redux";
 import {ErrorSnackbar} from "../../utils/ErrorSnackbar/ErrorSnackbar";
 import {recoverTC, setRecoveryPasswordSuccessAC} from "./recoveryPassword-reducer";
+import s from "../../app/App.module.css";
 
 
 interface IFormInput {
@@ -46,13 +47,13 @@ export const RecoveryPassword = () => {
     }
 
     return (
-        <div className={style.loginBlock}>
+        <div className={s.block}>
             <ErrorSnackbar/>
-            <Paper elevation={3} className={style.loginBlockForm}>
+            <Paper elevation={3} className={s.loginBlockForm}>
                 <Typography variant={'h4'}>
                     Forgot your password?
                 </Typography>
-                <form className={style.loginForm}>
+                <form className={s.loginForm}>
                     <FormControl style={{width: '100%'}}>
                         {/*//Email*/}
                         <Controller
