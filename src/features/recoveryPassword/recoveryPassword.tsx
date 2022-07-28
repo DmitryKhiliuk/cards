@@ -1,13 +1,12 @@
 import React from 'react';
 
 import style from '../singIn/SignIn.module.css';
-import {
-    Button, ButtonGroup,
-    FormControl,
-    Paper,
-    TextField,
-    Typography
-} from "@material-ui/core";
+import Paper from '@mui/material/Paper';
+import FormControl from '@mui/material/FormControl';
+import Typography from '@mui/material/Typography';
+import TextField from '@mui/material/TextField';
+import Button from '@mui/material/Button';
+import ButtonGroup from "@mui/material/ButtonGroup";
 import {useDispatch, useSelector} from "react-redux";
 import {Controller, useForm} from "react-hook-form";
 import {Navigate, useNavigate} from "react-router-dom";

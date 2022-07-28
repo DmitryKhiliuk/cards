@@ -9,25 +9,29 @@ import {LogOut} from "../features/logOut/logOut";
 import {CARDS, ERROR, LOG_OUT, PROFILE, REC_PASSWORD, SING_IN, SING_UP, NEW_PASSWORD} from "../common/routes/routes";
 import {CardsPack} from "../features/CardsPack/CardsPack";
 import Header from "../common/header/Header";
-import {useDispatch} from "react-redux";
+import {useDispatch, useSelector} from "react-redux";
 import {ThunkDispatch} from "redux-thunk";
 import {AppDispatch, AppRootStateType} from "./store";
 import {Action} from "redux";
 import {ErrorPage} from "../features/error/ErrorPage";
 import {NewPassword} from "../features/newPassword/newPassword";
 import {initTC} from "./app-reducer";
-
-
-
-
-
+import {CircularProgress} from "@material-ui/core";
 
 function App() {
 
+    const isInitialized = useSelector<AppRootStateType, boolean>((state) => state.app.isInitialized)
     const dispatch = useDispatch<ThunkDispatch<AppRootStateType,unknown,Action> & AppDispatch>()
      useEffect(() => {
         dispatch(initTC())
     },[])
+
+    if (!isInitialized) {
+        return <div
+            style={{position: 'fixed', top: '30%', textAlign: 'center', width: '100%'}}>
+            <CircularProgress/>
+        </div>
+    }
 
     return (
         <BrowserRouter>

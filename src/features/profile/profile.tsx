@@ -47,7 +47,8 @@ export const Profile = () => {
                 <Typography variant={'h3'}>PROFILE</Typography>
                 <div><img src={profile.avatar || userPhoto}  alt="user" className={s.photo}/></div>
                 <div className={s.iconPhoto}>
-                    <IconButton aria-label="add" color={'primary'}>
+                    <IconButton color="primary" aria-label="upload picture" component="label">
+                        <input hidden accept="image/*" type="file" />
                         <AddAPhotoIcon />
                     </IconButton>
                 </div>

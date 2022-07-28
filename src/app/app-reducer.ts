@@ -42,6 +42,11 @@ export const initTC = () => {
             .then((res) => {
                 dispatch(setProfileAC(res.data))
                 dispatch(setIsLoggedInAC(true))
+            })
+            .catch((e) => {
+                console.log(e)
+            })
+            .finally(() => {
                 dispatch(setAppInitializedAC(true))
             })
 

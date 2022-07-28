@@ -25,24 +25,6 @@ export const setIsLoggedInAC = (value: boolean) =>
 
 
 
-export const initTC = () => {
-    return (dispatch:Dispatch) => {
-        authAPI.me()
-            .then((res) => {
-                dispatch(setIsLoggedInAC(true))
-            })
-            .catch((error) => {
-                const errorResponse = error.response ? error.response.data.error : (error.message + ", more details in the console")
-                //Ошибки из ответа
-                handleServerAppError(errorResponse, dispatch)
-                //Серверные ошибки
-                // handleServerNetworkError(error, dispatch)
-            })
-            .finally(() => {
-                // dispatch(isFetchingAC(false))
-            })
-    }
-}
 
 export const loginTC = (data: LoginParamsType) => (dispatch: Dispatch) => {
     dispatch(setAppStatusAC('loading'))
