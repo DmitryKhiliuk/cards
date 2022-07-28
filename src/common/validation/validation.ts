@@ -1,9 +1,9 @@
-const REQUIRED_FIELD = 'Field is required'
+const REQUIRED_FIELD = 'Field is required';
 
 export const emailValidation = {
     required: REQUIRED_FIELD,
-    validate: (values: string) => {
-        if (!/^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/) {
+    validate: (value: string) => {
+        if (!/^[\w][\w-.]*@[\w-]+\.[a-z]{2,7}$/i.test(value)) {
             return 'Invalid email address';
         }
         return true;
@@ -14,7 +14,7 @@ export const passwordValidation = {
     required: REQUIRED_FIELD,
     validate: (value: string) => {
         if (value.length <= 6) {
-            return 'The password must contain more six symbols';
+            return 'Password must be more than 7 characters...';
         }
         return true;
     }

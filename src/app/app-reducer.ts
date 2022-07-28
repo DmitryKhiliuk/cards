@@ -1,7 +1,8 @@
 import {Action, Dispatch} from "redux";
-import {authAPI} from "../features/singIn/auth-api";
-import {setIsLoggedInAC} from "../features/singIn/auth-reducer";
+import {loginApi} from "../features/singIn/login-api";
+import {setIsLoggedInAC} from "../features/singIn/login-reducer";
 import {setProfileAC} from "../features/profile/profile-reducer";
+import {handleServerAppError, handleServerNetworkError} from "../utils/error-utils";
 
 export type RequestStatusType = 'idle' | 'loading' | 'succeeded' | 'failed'
 export type InitialStateType = {
@@ -29,21 +30,41 @@ export const appReducer = (state: InitialStateType = initialState, action: SetAp
     }
 }
 
-export type SetAppStatusActionType = ReturnType<typeof setAppStatusAC>
 export const setAppStatusAC = (status: RequestStatusType) => ({type: 'APP/SET-STATUS', status} as const)
-export type setAppInitializedACType = ReturnType<typeof setAppInitializedAC>
 export const setAppInitializedAC = (value: boolean) => ({type: 'APP/SET-IS-INITIALIZED', value} as const)
-export type SetAppErrorActionType = ReturnType<typeof setAppErrorAC>
 export const setAppErrorAC = (error: string | null) => ({type: 'APP/SET-ERROR', error} as const)
 
+export type SetAppStatusActionType = ReturnType<typeof setAppStatusAC>
+export type setAppInitializedACType = ReturnType<typeof setAppInitializedAC>
+export type SetAppErrorActionType = ReturnType<typeof setAppErrorAC>
 
 export const initTC = () => {
-    return (dispatch: Dispatch) => {
-        authAPI.me()
+    return (dispatch:Dispatch) => {
+        loginApi.me()
             .then((res) => {
-                dispatch(setProfileAC(res.data))
                 dispatch(setIsLoggedInAC(true))
-                dispatch(setAppInitializedAC(true))
+                dispatch(setAppStatusAC('succeeded'))
+            })
+            .catch((error) => {
+                const errorResponse = error.response ? error.response.data.error : (error.message + ", more details in the console")
+                //Ошибки из ответа
+                handleServerAppError(errorResponse, dispatch)
+                //Серверные ошибки
+                handleServerNetworkError(error, dispatch)
+            })
+            .finally(() => {
+                // dispatch(isFetchingAC(false))
             })
     }
 }
+
+// export const initTC = () => {
+//     return (dispatch: Dispatch) => {
+//         loginApi.me()
+//             .then((res) => {
+//                 dispatch(setProfileAC(res.data))
+//                 dispatch(setIsLoggedInAC(true))
+//                 dispatch(setAppInitializedAC(true))
+//             })
+//     }
+// }

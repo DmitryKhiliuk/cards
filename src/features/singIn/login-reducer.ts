@@ -1,9 +1,8 @@
-import {authAPI, LoginParamsType} from "./auth-api";
+import {loginApi, LoginParamsType} from "./login-api";
 import {Dispatch} from "redux";
-import {profileAPI} from "../profile/profile-api";
 import {setProfileAC} from "../profile/profile-reducer";
-import {handleServerAppError} from "../../utils/error-utils";
-import {setAppStatusAC} from "../../app/app-reducer";
+import {handleServerAppError, handleServerNetworkError} from "../../utils/error-utils";
+import {setAppInitializedAC, setAppStatusAC} from "../../app/app-reducer";
 
 const initialState = {
     isLoggedIn: false
@@ -11,7 +10,7 @@ const initialState = {
 
 type InitialStateType = typeof initialState
 
-export const authReducer = (state: InitialStateType = initialState, action: ActionsType): InitialStateType => {
+export const loginReducer = (state: InitialStateType = initialState, action: ActionsType): InitialStateType => {
     switch (action.type) {
         case 'SET-IS-LOGGED-IN':
             return {...state, isLoggedIn: action.value}
@@ -23,30 +22,9 @@ export const authReducer = (state: InitialStateType = initialState, action: Acti
 export const setIsLoggedInAC = (value: boolean) =>
     ({type: 'SET-IS-LOGGED-IN', value} as const);
 
-
-
-export const initTC = () => {
-    return (dispatch:Dispatch) => {
-        authAPI.me()
-            .then((res) => {
-                dispatch(setIsLoggedInAC(true))
-            })
-            .catch((error) => {
-                const errorResponse = error.response ? error.response.data.error : (error.message + ", more details in the console")
-                //Ошибки из ответа
-                handleServerAppError(errorResponse, dispatch)
-                //Серверные ошибки
-                // handleServerNetworkError(error, dispatch)
-            })
-            .finally(() => {
-                // dispatch(isFetchingAC(false))
-            })
-    }
-}
-
 export const loginTC = (data: LoginParamsType) => (dispatch: Dispatch) => {
     dispatch(setAppStatusAC('loading'))
-    authAPI.login(data)
+    loginApi.login(data)
         .then((res) => {
             dispatch(setProfileAC(res.data))
             dispatch(setIsLoggedInAC(true))
@@ -57,7 +35,7 @@ export const loginTC = (data: LoginParamsType) => (dispatch: Dispatch) => {
             //Ошибки из ответа
             handleServerAppError(errorResponse, dispatch)
             //Серверные ошибки
-            // handleServerNetworkError(error, dispatch)
+            handleServerNetworkError(error, dispatch)
         })
         .finally(() => {
             // dispatch(isFetchingAC(false))

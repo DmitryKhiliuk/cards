@@ -4,12 +4,13 @@ import Typography from '@mui/material/Typography';
 import TextField from '@mui/material/TextField';
 import Button from '@mui/material/Button';
 import style from './SignIn.module.css';
+import s from '../../app/App.module.css';
 import FormControlLabel from '@mui/material/FormControlLabel';
 import Checkbox from '@mui/material/Checkbox';
 import Paper from '@mui/material/Paper';
 import {useForm, Controller, SubmitHandler, useFormState} from 'react-hook-form';
 import {emailValidation, passwordValidation} from "../../common/validation/validation";
-import {loginTC} from "./auth-reducer";
+import {loginTC} from "./login-reducer";
 import {useDispatch, useSelector} from "react-redux";
 import {AppDispatch, AppRootStateType} from "../../app/store";
 import {Navigate} from 'react-router-dom';
@@ -39,17 +40,12 @@ export const SingIn = () => {
     const handleClickShowPassword = () => setShowPassword(!showPassword);
     const handleMouseDownPassword = () => setShowPassword(!showPassword);
 
-
-
     const {handleSubmit, control, reset} = useForm<SingInFormType>({
         defaultValues: {
             email: '',
             password: '',
             rememberMe: false,
         }
-    });
-    const {errors} = useFormState({
-        control
     });
 
     const onSubmit: SubmitHandler<SingInFormType> = (data) => {
@@ -61,13 +57,13 @@ export const SingIn = () => {
         return <Navigate to={PROFILE}/>
     }
     return (
-        <div className={style.loginBlock}>
+        <div className={s.block}>
             <ErrorSnackbar/>
-            <Paper elevation={3} className={style.loginBlockForm}>
+            <Paper elevation={3} className={s.loginBlockForm}>
                 <Typography variant={'h4'}>
                     SIGN IN
                 </Typography>
-                <form className={style.loginForm}>
+                <form className={s.loginForm}>
                     <FormControl style={{width: '100%'}}>
                         <Controller
                             control={control}
@@ -86,7 +82,6 @@ export const SingIn = () => {
                                 />
                             )}
                         />
-                        {/*{errors.email && <span style={{color: 'red'}}>{errors.email.message}</span>}*/}
                         <Controller
                             control={control}
                             rules={passwordValidation}

@@ -1,8 +1,7 @@
 import {Dispatch} from "redux";
 import {LoginParamsType, profileAPI} from "./profile-api";
-import {setIsLoggedInAC} from "../singIn/auth-reducer";
+import {setIsLoggedInAC} from "../singIn/login-reducer";
 import {setAppStatusAC} from "../../app/app-reducer";
-
 
 export type ResponseProfileType = {
     _id: string | null;
@@ -17,8 +16,8 @@ export type ResponseProfileType = {
     rememberMe: boolean | null;
     error?: string | null;
     __v: number | null;
-    token: string | null;
-    tokenDeathTime: number | null;
+    token?: string | null;
+    tokenDeathTime?: number | null;
 }
 
 
@@ -41,7 +40,7 @@ const initialState: ResponseProfileType = {
     error: null,
     __v: null,
     token: null,
-    tokenDeathTime: null
+    tokenDeathTime: null,
 };
 
 

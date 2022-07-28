@@ -12,7 +12,7 @@ import {
     TextField,
     Typography
 } from "@material-ui/core";
-import style from "../singIn/SignIn.module.css";
+import s from "../../app/App.module.css";
 import Visibility from "@material-ui/icons/Visibility";
 import VisibilityOff from "@material-ui/icons/VisibilityOff";
 import {AppDispatch, AppRootStateType} from "../../app/store";
@@ -38,7 +38,7 @@ const defaultValues = {
 export const SingUp = () => {
     const dispatch = useDispatch<ThunkDispatch<AppRootStateType, unknown, Action> & AppDispatch>()
 
-    // const isFetching = useSelector<AppRootStateType, boolean>((state) => state.login.isFetching);
+    // const isFetching = useSelector<AppRootStateType, boolean>((state) => state.loginApi.isFetching);
     const isRegistration = useSelector<AppRootStateType, boolean>(state => state.registration.isReg)
 
 
@@ -58,25 +58,24 @@ export const SingUp = () => {
     const handleClickShowConfirmPassword = () => setShowConfirmPassword(!showConfirmPassword);
     const handleMouseDownConfirmPassword = () => setShowConfirmPassword(!showConfirmPassword);
 
-    // Если всё ОК то редирект на страницу login
+    // Если всё ОК то редирект на страницу loginApi
     if (isRegistration) {
         return <Navigate to={SING_IN}/>
-    }
-    ;
+    };
 
     // if (isFetching) {
     //     return <div>Loading...</div>
     // }
     return (
-        <div className={style.loginBlock}>
+        <div className={s.block}>
 
             <ErrorSnackbar/>
 
-            <Paper elevation={3} className={style.loginBlockForm}>
+            <Paper elevation={3} className={s.loginBlockForm}>
                 <Typography variant={'h4'}>
                     SING UP
                 </Typography>
-                <form className={style.loginForm}>
+                <form className={s.loginForm}>
                     <FormControl style={{width: '100%'}}>
                         {/*//Email*/}
                         <Controller
@@ -142,8 +141,6 @@ export const SingUp = () => {
                                 />
                             )}
                         />
-
-
                         {/*//Confirm password*/}
                         <Controller
                             name={'confirmPassword'}
