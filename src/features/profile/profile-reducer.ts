@@ -1,7 +1,7 @@
 import {Dispatch} from "redux";
 import {LoginParamsType, profileAPI} from "./profile-api";
-import {setIsLoggedInAC} from "../singIn/login-reducer";
 import {setAppStatusAC} from "../../app/app-reducer";
+import {setIsLoggedInAC} from "../singIn/auth-reducer";
 
 export type ResponseProfileType = {
     _id: string | null;

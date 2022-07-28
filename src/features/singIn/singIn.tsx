@@ -10,7 +10,6 @@ import Checkbox from '@mui/material/Checkbox';
 import Paper from '@mui/material/Paper';
 import {useForm, Controller, SubmitHandler, useFormState} from 'react-hook-form';
 import {emailValidation, passwordValidation} from "../../common/validation/validation";
-import {loginTC} from "./login-reducer";
 import {useDispatch, useSelector} from "react-redux";
 import {AppDispatch, AppRootStateType} from "../../app/store";
 import {Navigate} from 'react-router-dom';
@@ -19,9 +18,11 @@ import {ThunkDispatch} from "redux-thunk";
 import {Action} from "redux";
 import {useNavigate} from "react-router-dom";
 import {ErrorSnackbar} from "../../utils/ErrorSnackbar/ErrorSnackbar";
-import {IconButton, InputAdornment} from "@material-ui/core";
+import IconButton from "@material-ui/core/IconButton";
+import InputAdornment from "@material-ui/core/InputAdornment";
 import Visibility from "@material-ui/icons/Visibility";
 import VisibilityOff from "@material-ui/icons/VisibilityOff";
+import {loginTC} from "./auth-reducer";
 
 
 type SingInFormType = {

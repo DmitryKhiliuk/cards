@@ -3,17 +3,17 @@ import {profileReducer} from "../features/profile/profile-reducer";
 import {appReducer} from "./app-reducer";
 import {signUpReducer} from "../features/singUp/signUp-reducer";
 import thunkMiddleware from 'redux-thunk'
-import {loginReducer} from "../features/singIn/login-reducer";
 import thunk from "redux-thunk";
 // import {passwordRecoverReducer} from "../features/recoveryPassword/recoveryPassword-reducer";
 import {resetPasswordReducer} from "../features/newPassword/newPassword-reducer";
 import {passwordRecoverReducer} from "../features/recoveryPassword/recoveryPassword-reducer";
+import {authReducer} from "../features/singIn/auth-reducer";
 
 export const rootReducer = combineReducers({
     profile: profileReducer,
     app: appReducer,
     registration:signUpReducer,
-    auth: loginReducer,
+    auth: authReducer,
     recoveryPass:passwordRecoverReducer,
     newPass:resetPasswordReducer,
 })

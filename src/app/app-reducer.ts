@@ -1,5 +1,5 @@
 import {Action, Dispatch} from "redux";
-import {authAPI} from "../features/singIn/auth-api";
+import {authApi} from "../features/singIn/auth-api";
 import {setIsLoggedInAC} from "../features/singIn/auth-reducer";
 import {setProfileAC} from "../features/profile/profile-reducer";
 
@@ -39,7 +39,7 @@ export type SetAppErrorActionType = ReturnType<typeof setAppErrorAC>
 
 export const initTC = () => {
     return (dispatch: Dispatch) => {
-        authAPI.me()
+        authApi.me()
             .then((res) => {
                 dispatch(setProfileAC(res.data))
                 dispatch(setIsLoggedInAC(true))

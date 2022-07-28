@@ -11,7 +11,7 @@ import {useDispatch, useSelector} from "react-redux";
 import {Controller, useForm} from "react-hook-form";
 import {useParams} from "react-router-dom";
 import {AppDispatch, AppRootStateType} from "../../app/store";
-import {SING_IN} from "../../common/routes/routes";
+import {CHECK_EMAIL, SING_IN} from "../../common/routes/routes";
 import {ThunkDispatch} from "redux-thunk";
 import {Action} from "redux";
 import {ErrorSnackbar} from "../../utils/ErrorSnackbar/ErrorSnackbar";
@@ -47,7 +47,7 @@ export const NewPassword = () => {
 
     const newPassSucces = useSelector<AppRootStateType, boolean>(state => state.newPass.success)
     if (newPassSucces) {
-        return <Navigate to={SING_IN} replace={true}/>
+        return <Navigate to={CHECK_EMAIL} replace={true}/>
     }
 
     return (

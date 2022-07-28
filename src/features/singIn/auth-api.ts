@@ -1,7 +1,7 @@
 import {ResponseProfileType} from "../profile/profile-reducer";
 import {instance} from "../../common/instance/instance";
 
-export const loginApi = {
+export const authApi = {
     me() {
         return instance.post<ResponseProfileType>('auth/me')
     },
