@@ -1,10 +1,6 @@
 import axios from "axios";
+import {instance} from "../../common/instance/instance";
 
-const instance = axios.create({
-    withCredentials: true,
-    // baseURL: process.env.REACT_APP_BACK_URL || 'http://localhost:7542/2.0/',
-    baseURL:'https://neko-back.herokuapp.com/2.0',
-})
 
 const from = "test-front-admin <ai73a@yandex.by>";
 const message = `<div style="background-color: lime; padding: 15px">
