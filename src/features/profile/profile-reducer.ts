@@ -22,8 +22,8 @@ export type ResponseProfileType = {
 
 
 export type updateProfileType = {
-    name: string | null
-    avatar: string | null | undefined |  ArrayBuffer
+    name: string |  null
+    avatar: string | null | ArrayBuffer
 }
 
 const initialState: ResponseProfileType = {
@@ -45,12 +45,15 @@ const initialState: ResponseProfileType = {
 
 
 
-export const profileReducer = (state: ResponseProfileType = initialState, action: setProfileACType | updateProfileTitleACType ):ResponseProfileType => {
+export const profileReducer = (state: ResponseProfileType = initialState, action: setProfileACType | updateProfileTitleACType | updateProfileAvatarACType ):ResponseProfileType => {
     switch (action.type){
         case 'PROFILE':
             return action.profile
         case 'PROFILE-NAME-UPDATE':
             return {...state, name: action.payload.name}
+        case 'PROFILE-AVATAR-UPDATE':
+            // @ts-ignore
+            return {...state, avatar: action.payload.avatar}
         default:
             return state
     }
@@ -74,6 +77,16 @@ export const updateProfileTitleAC = ({name, avatar}:updateProfileType) => {
         }
     } as const
 }
+export type updateProfileAvatarACType = ReturnType<typeof updateProfileAvatarAC>
+export const updateProfileAvatarAC = ({name, avatar}:updateProfileType) => {
+    return {
+        type: 'PROFILE-AVATAR-UPDATE',
+        payload: {
+            name,
+            avatar
+        }
+    } as const
+}
 
 export const logoutTC = () => {
     return (dispatch:Dispatch) => {
@@ -91,6 +104,16 @@ export const updateProfileTitleTC = ({name, avatar}:updateProfileType) => {
         profileAPI.updateTitle({name, avatar})
             .then((res) => {
                 dispatch(updateProfileTitleAC({name, avatar}))
+                dispatch(setAppStatusAC('succeeded'))
+            })
+    }
+}
+export const updateProfileAvatarTC = ({name, avatar}:updateProfileType) => {
+    return (dispatch:Dispatch) => {
+        dispatch(setAppStatusAC('loading'))
+        profileAPI.updateTitle({name, avatar})
+            .then((res) => {
+                dispatch(updateProfileAvatarAC({name, avatar}))
                 dispatch(setAppStatusAC('succeeded'))
             })
     }

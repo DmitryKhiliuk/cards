@@ -6,7 +6,7 @@ import {SVGMail} from "../../common/svg/SVGMail";
 import Typography from "@mui/material/Typography";
 import style from "../singIn/SignIn.module.css";
 import Button from "@mui/material/Button";
-import {SING_IN, SING_UP} from "../../common/routes/routes";
+import {SING_IN} from "../../common/routes/routes";
 import {useNavigate} from "react-router-dom";
 
 export const CheckEmail = () => {

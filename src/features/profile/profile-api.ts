@@ -15,7 +15,7 @@ export const profileAPI= {
         return instance.delete('auth/me')
     },
     updateTitle({name,avatar}:updateProfileType) {
-        return instance.put<ResponseProfileType>('/auth/me', {name, avatar})
+        return instance.put<ResponseProfileType, updateProfileType>('/auth/me', {name, avatar})
     }
 }
 
