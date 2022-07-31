@@ -8,6 +8,7 @@ import thunk from "redux-thunk";
 import {resetPasswordReducer} from "../features/newPassword/newPassword-reducer";
 import {passwordRecoverReducer} from "../features/recoveryPassword/recoveryPassword-reducer";
 import {authReducer} from "../features/singIn/auth-reducer";
+import {cardsPackReducer} from "../features/CardsPack/cardsPack-reducer";
 
 export const rootReducer = combineReducers({
     profile: profileReducer,
@@ -16,6 +17,7 @@ export const rootReducer = combineReducers({
     auth: authReducer,
     recoveryPass:passwordRecoverReducer,
     newPass:resetPasswordReducer,
+    cardsPack:cardsPackReducer
 })
 
 //Для DEVTools  Redux
