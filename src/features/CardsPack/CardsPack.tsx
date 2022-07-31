@@ -1,6 +1,8 @@
 import React from 'react';
 
-export const CardsPack = () => {
+
+export const CardsPacks = () => {
+
     return (
         <div>
             CARDS
