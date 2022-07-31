@@ -11,9 +11,11 @@ import CircularProgress from "@mui/material/CircularProgress";
 import {RoutesComponent} from "../common/routes/RoutesComponent";
 
 function App() {
+    console.log('app')
 
     const isInitialized = useSelector<AppRootStateType, boolean>((state) => state.app.isInitialized)
     const dispatch = useDispatch<ThunkDispatch<AppRootStateType,unknown,Action> & AppDispatch>()
+
      useEffect(() => {
         dispatch(initTC())
     },[])

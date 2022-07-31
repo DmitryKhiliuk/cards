@@ -31,6 +31,7 @@ export const setCardsPacks = (cardPacks:CardsPacksType[]) => ({type:'SET-CARD-PA
 export type SetCardsPacksActionType = ReturnType<typeof setCardsPacks>
 
 export const fetchCardsPacksTC = () => {
+    console.log('fetchCards')
     return async (dispatch: Dispatch) => {
         try {
             const response = await cardsPacksApi.getPacksList()
@@ -65,8 +66,17 @@ export const fetchCardsPacksTC = () => {
 export type CardsPacksType = {
     _id: string
     user_id: string
+    user_name: string
     name: string
+    path: string
+    private: boolean
+    rating: number
+    shots: number
+    type: string
+    __v: number
     cardsCount: number
     created: string
     updated: string
+    grade: number
+    more_id: string
 }

@@ -3,23 +3,24 @@ import {useDispatch, useSelector} from "react-redux";
 import {ThunkDispatch} from "redux-thunk";
 import {Action} from "redux";
 import {AppDispatch, AppRootStateType} from "../../../app/store";
-import {CardsPacksType, fetchCardsPacksTC} from "./cardsPacks-reducer";
-import {Pack} from "./Pack";
-import s from "../../../app/App.module.css";
+import {fetchCardsPacksTC} from "./cardsPacks-reducer";
+import s from "../CardsPacks.module.css";
+import {DataGridDemo} from "./table/Table";
 
 export const CardsPack = () => {
+    console.log('cardsPack')
 
-    const cardsPacks = useSelector<AppRootStateType, CardsPacksType[]>(state => state.cardsPacks.cardPacks)
+    // const cardsPacks = useSelector<AppRootStateType, CardsPacksType[]>(state => state.cardsPacks.cardPacks)
     const dispatch = useDispatch<ThunkDispatch<AppRootStateType, unknown, Action> & AppDispatch>()
 
     useEffect(() => {
         dispatch(fetchCardsPacksTC())
     }, [])
 
-    return <div className={s.block}>
-        {cardsPacks.map(cd => {
-        return <Pack key={cd._id} cardsPackName={cd.name}/>
-    })}
+    return <div className={s.blockCardsPacks}>
+        <DataGridDemo/>
+        {/*{cardsPacks.map(cd => {*/}
+        {/*return <Pack key={cd._id} cardsPackName={cd.name}/>*/}
     </div>
 
 };
