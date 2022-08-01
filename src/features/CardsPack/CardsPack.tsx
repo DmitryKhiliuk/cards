@@ -1,30 +1,41 @@
-import React, {useEffect} from 'react';
-import DataGridDemo from "../../common/Table/Table";
-import s from "./CardsPack.module.css"
+import React from 'react';
+import {TableList} from "./packsList/Table/tableList";
+import {PacksSearch} from "./packsSearch/packsSearch";
+import Button from '@mui/material/Button';
 import {useDispatch, useSelector} from "react-redux";
 import {ThunkDispatch} from "redux-thunk";
 import {AppDispatch, AppRootStateType} from "../../app/store";
 import {Action} from "redux";
-import {getCardsTC, PackType} from "./cardsPack-reducer";
-import DataGridProDemo from "../../common/Table/Table";
-import {GridColDef} from "@mui/x-data-grid";
-import DataTable from "../../common/Table/Table";
+import {addCardsPackTC, getPacksTC} from "./cardsPack-reducer";
+import {ResponseProfileType} from "../profile/profile-reducer";
 
 export const CardsPack = () => {
+    const dispatch = useDispatch<ThunkDispatch<AppRootStateType, unknown, Action> & AppDispatch>()
+    const userId = useSelector<AppRootStateType, string|null>(state => state.profile._id)
+    const addPack = (name: string) => {
+        dispatch(addCardsPackTC({name: name}) as any)
+    }
 
-    const dispatch = useDispatch<ThunkDispatch<AppRootStateType,unknown,Action> & AppDispatch>()
+    const onClickMyButton = () => {
+        dispatch(getPacksTC({user_id: userId}))
+    }
+    const onClickAllButton = () => {
+        dispatch(getPacksTC({user_id: ""}))
+    }
 
 
-    useEffect(() => {
-        dispatch(getCardsTC())
-    }, [])
+
 
     return (
-        <div >
+        <div style={{height: '100%', width: '100%', display: "flex", flexDirection: 'column'}}>
+            <PacksSearch/>
+<Button onClick={onClickMyButton} variant="contained" size={"small"} sx={{width: 400, margin: 5}}>My Packs</Button>
+<Button onClick={onClickAllButton} variant="contained" size={"small"} sx={{width: 400, margin: 5}}>All Packs</Button>
 
-                <DataGridDemo/>
-
+            <Button onClick={event => addPack('MaxTs')} variant="contained" size={"small"} sx={{width: 400, margin: 5}}
+            >Add new pack</Button>
+            <TableList/>
         </div>
     );
-};
+}
 

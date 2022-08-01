@@ -1,4 +1,4 @@
-import React, {ChangeEvent, useState} from 'react';
+import React, {ChangeEvent, useEffect, useState} from 'react';
 import Box from '@mui/material/Box';
 import Paper from '@mui/material/Paper';
 import userPhoto from "../../assets/img/user.png";
@@ -22,6 +22,7 @@ import Typography from "@mui/material/Typography";
 import {Navigate} from "react-router-dom";
 import {EditableSpan} from "./EditableSpan";
 import {initTC} from "../../app/app-reducer";
+
 
 export const Profile = () => {
 
