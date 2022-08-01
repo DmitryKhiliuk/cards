@@ -13,7 +13,8 @@ import {useSelector} from "react-redux";
 import {AppRootStateType} from "../../app/store";
 import {Pagination} from "@mui/material";
 import {useDemoData} from "@mui/x-data-grid-generator";
-
+import SelectVariants from "../../features/CardsPack/selectPage";
+import Button from "@mui/material/Button";
 function CustomPagination() {
     const apiRef = useGridApiContext();
     const page = useGridSelector(apiRef, gridPageSelector);
@@ -56,7 +57,7 @@ export default function DataGridDemo() {
             editable: true,
         },
         {
-            field: 'user_id',
+            field: 'user_name',
             headerName: 'Created by',
             // description: 'This column has a value getter and is not sortable.',
             // sortable: false,
@@ -74,9 +75,12 @@ export default function DataGridDemo() {
 
     const rows = cardsPack
     return (
-        <Box sx={{ height: 550, width: 1000, backgroundColor: 'white'}}>
+        <Box sx={{ height: 550, width: 1000, backgroundColor: 'white', padding: '15px',textAlign: 'center'}}>
+            <div style={{display: 'flex', justifyContent: 'space-between'}}>
+                <h2>Pack List</h2>
+                <Button variant="contained">Add Pack</Button>
+            </div>
             <DataGrid
-
                 rows={rows}
                 getRowId={(row) => row._id}
                 columns={columns}
@@ -87,8 +91,10 @@ export default function DataGridDemo() {
                 components={{
                     Pagination: CustomPagination,
                     Toolbar: GridToolbar,
+
                 }}
             />
+            <SelectVariants/>
         </Box>
     );
 }
