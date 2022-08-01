@@ -39,6 +39,7 @@ export const loginTC = (data: LoginParamsType) => (dispatch: Dispatch) => {
             handleServerAppError(errorResponse, dispatch)
 
         })
+
         .finally(() => {
 
         })
