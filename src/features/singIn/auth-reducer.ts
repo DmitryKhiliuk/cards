@@ -34,8 +34,12 @@ export const loginTC = (data: LoginParamsType) => (dispatch: Dispatch) => {
         .catch((error) => {
             const errorResponse = error.response ? error.response.data.error : (error.message + ", more details in the console")
             handleServerAppError(errorResponse, dispatch)
+
         })
 
+        .finally(() => {
+
+        })
 };
 
 type ActionsType = ReturnType<typeof setIsLoggedInAC>
