@@ -3,12 +3,9 @@ import {profileReducer} from "../features/profile/profile-reducer";
 import {appReducer} from "./app-reducer";
 import {signUpReducer} from "../features/singUp/signUp-reducer";
 import thunkMiddleware from 'redux-thunk'
-// import thunk from "redux-thunk";
-// import {passwordRecoverReducer} from "../features/recoveryPassword/recoveryPassword-reducer";
 import {resetPasswordReducer} from "../features/newPassword/newPassword-reducer";
 import {passwordRecoverReducer} from "../features/recoveryPassword/recoveryPassword-reducer";
 import {authReducer} from "../features/singIn/auth-reducer";
-// import {cardsPacksReducer} from "../features/CardsPack/PacksList/cardsPacks-reducer";
 import {packsReducer} from "../features/CardsPack/cardsPack-reducer";
 
 export const rootReducer = combineReducers({
