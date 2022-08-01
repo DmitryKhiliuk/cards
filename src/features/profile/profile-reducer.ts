@@ -2,6 +2,7 @@ import {Dispatch} from "redux";
 import {profileAPI} from "./profile-api";
 import {setAppStatusAC} from "../../app/app-reducer";
 import {setIsLoggedInAC} from "../singIn/auth-reducer";
+import {handleServerAppError} from "../../utils/error-utils";
 
 export type ResponseProfileType = {
     _id: string | null;
@@ -61,12 +62,7 @@ export const profileReducer = (state: ResponseProfileType = initialState, action
 }
 
 export type setProfileACType = ReturnType<typeof setProfileAC>
-export const setProfileAC = (profile:ResponseProfileType) => {
-    return {
-        type: 'PROFILE',
-        profile
-    } as const
-}
+export const setProfileAC = (profile:ResponseProfileType) => {return {type: 'PROFILE',profile} as const}
 export type updateProfileTitleACType = ReturnType<typeof updateProfileTitleAC>
 export const updateProfileTitleAC = ({name, avatar}:updateProfileType) => {
     return {
@@ -96,6 +92,11 @@ export const logoutTC = () => {
                 dispatch(setIsLoggedInAC(false))
                 dispatch(setAppStatusAC('succeeded'))
             })
+            .catch((error) => {
+                const errorResponse = error.response ? error.response.data.error : (error.message + ", more details in the console")
+                handleServerAppError(errorResponse, dispatch)
+                dispatch(setAppStatusAC('failed'))
+            })
     }
 }
 export const updateProfileTitleTC = ({name, avatar}:updateProfileType) => {
@@ -106,6 +107,11 @@ export const updateProfileTitleTC = ({name, avatar}:updateProfileType) => {
                 dispatch(updateProfileTitleAC({name, avatar}))
                 dispatch(setAppStatusAC('succeeded'))
             })
+            .catch((error) => {
+                const errorResponse = error.response ? error.response.data.error : (error.message + ", more details in the console")
+                handleServerAppError(errorResponse, dispatch)
+                dispatch(setAppStatusAC('failed'))
+            })
     }
 }
 export const updateProfileAvatarTC = ({name, avatar}:updateProfileType) => {
@@ -115,6 +121,11 @@ export const updateProfileAvatarTC = ({name, avatar}:updateProfileType) => {
             .then((res) => {
                 dispatch(updateProfileAvatarAC({name, avatar}))
                 dispatch(setAppStatusAC('succeeded'))
+            })
+            .catch((error) => {
+                const errorResponse = error.response ? error.response.data.error : (error.message + ", more details in the console")
+                handleServerAppError(errorResponse, dispatch)
+                dispatch(setAppStatusAC('failed'))
             })
     }
 }
