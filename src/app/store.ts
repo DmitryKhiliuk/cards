@@ -7,9 +7,9 @@ import {resetPasswordReducer} from "../features/newPassword/newPassword-reducer"
 import {passwordRecoverReducer} from "../features/recoveryPassword/recoveryPassword-reducer";
 import {authReducer} from "../features/singIn/auth-reducer";
 import {packsReducer} from "../features/CardsPack/cardsPack-reducer";
-=========
-import {cardsPackReducer} from "../features/CardsPack/cardsPack-reducer";
->>>>>>>>> Temporary merge branch 2
+
+
+
 
 export const rootReducer = combineReducers({
     profile: profileReducer,
@@ -18,7 +18,7 @@ export const rootReducer = combineReducers({
     auth: authReducer,
     recoveryPass:passwordRecoverReducer,
     newPass:resetPasswordReducer,
-    cardsPack:cardsPackReducer
+    cardsPack:packsReducer,
     packs: packsReducer,
 })
 
