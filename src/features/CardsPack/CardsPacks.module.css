@@ -1,9 +1,0 @@
-.blockCardsPacks {
-    background-color: white;
-    width: 70vw;
-    height: 100vh;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    flex-direction: column;
-}

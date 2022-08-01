@@ -37,11 +37,10 @@ export const loginTC = (data: LoginParamsType) => (dispatch: Dispatch) => {
             const errorResponse = error.response ? error.response.data.error : (error.message + ", more details in the console")
             //Ошибки из ответа
             handleServerAppError(errorResponse, dispatch)
-            //Серверные ошибки
-            // handleServerNetworkError(error, dispatch)
+
         })
         .finally(() => {
-            // dispatch(isFetchingAC(false))
+
         })
 };
 

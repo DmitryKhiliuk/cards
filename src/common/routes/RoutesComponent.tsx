@@ -9,9 +9,10 @@ import {LogOut} from "../../features/logOut/logOut";
 import {CheckEmail} from "../../features/CheckEmail/CheckEmail";
 import {ErrorPage} from "../../features/error/ErrorPage";
 import React from "react";
-import {CardsPack} from "../../features/CardsPack/PacksList/CardsPacks";
+import {CardsPack} from "../../features/CardsPack/CardsPack";
 
 export const RoutesComponent = () => {
+
     return (
         <div>
             <Routes>

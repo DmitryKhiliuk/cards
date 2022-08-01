@@ -16,7 +16,8 @@ function App() {
     const isInitialized = useSelector<AppRootStateType, boolean>((state) => state.app.isInitialized)
     const dispatch = useDispatch<ThunkDispatch<AppRootStateType,unknown,Action> & AppDispatch>()
 
-     useEffect(() => {
+// console.log('initialized: ',isInitialized)
+    useEffect(() => {
         dispatch(initTC())
     },[])
 
