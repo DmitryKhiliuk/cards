@@ -13,8 +13,6 @@ import {ErrorSnackbar} from "../../utils/ErrorSnackbar/ErrorSnackbar";
 
 export const CardsPack = () => {
     const dispatch = useDispatch<ThunkDispatch<AppRootStateType, unknown, Action> & AppDispatch>()
-    // const [packNameSearch,setPackNameSearch]=useState('')
-
     useEffect(() => {
         // dispatch(getPacksTC({packName:packNameSearch}))
         dispatch(getStartPacksTC())

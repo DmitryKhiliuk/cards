@@ -10,17 +10,18 @@ import {Delete, Edit} from "@material-ui/icons";
 type TablePropsType = {
     tableCell: string[],
     tableData: any,
+    myId: string | null,
     removeData: (id: string) => void,
     editData: (id: string) => void,
 }
 
 export const Table = (props: TablePropsType) => {
     return (
-        <TableContainer  className={style.table}>
+        <TableContainer className={style.table}>
             <TableHead className={style.tableHeader}>
                 <TableRow style={{width: '100%'}}>
                     {props.tableCell.map((cell) => {
-                        return <TableCell align="center">{cell}</TableCell>
+                        return <TableCell align="center" key={cell}>{cell}</TableCell>
                     })}
                 </TableRow>
             </TableHead>
@@ -64,13 +65,16 @@ export const Table = (props: TablePropsType) => {
                         <TableCell>
                             <Box sx={{alignItems: 'center', display: 'flex'}}>
                                 <Typography color="textPrimary" variant="body1">
-                                    {<IconButton onClick={() => props.removeData(data._id)}>
-                                        <Delete/>
-                                    </IconButton>
-                                    }
-                                    {<IconButton onClick={() => props.editData(data._id)}>
-                                        <Edit/>
-                                    </IconButton>
+                                    {props.myId === data.user_id &&
+                                        <>
+                                            <IconButton onClick={() => props.removeData(data._id)}>
+                                                <Delete/>
+                                            </IconButton>
+
+                                            <IconButton onClick={() => props.editData(data._id)}>
+                                                <Edit/>
+                                            </IconButton>
+                                        </>
                                     }
                                 </Typography>
                             </Box>
