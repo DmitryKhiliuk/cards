@@ -1,9 +1,9 @@
 import React, {useEffect, useState} from 'react';
-import {TableList} from "./PacksList/Table/tableList";
+import {TableList} from "./packsList/Table/tableList";
 import Paper from "@mui/material/Paper";
 import style from './CardsPack.module.css'
-import {HeaderCardsPack} from "./PacksList/header/HeaderCardsPack";
-import {PaginationCardsPack} from "./PacksList/footer/PaginationCardsPack";
+import {HeaderCardsPack} from "./packsList/header/HeaderCardsPack";
+import {PaginationCardsPack} from "./packsList/footer/PaginationCardsPack";
 import {getPacksTC} from "./cardsPack-reducer";
 import {useDispatch} from "react-redux";
 import {ThunkDispatch} from "redux-thunk";
