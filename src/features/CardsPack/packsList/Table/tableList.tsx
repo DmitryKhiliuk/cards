@@ -7,6 +7,7 @@ import {Action} from "redux";
 import {deleteCardsPackTC, updateCardsPackTC} from "../../cardsPack-reducer";
 import {useNavigate} from "react-router-dom";
 import {Table} from "../../../../common/table/Table";
+import {setCardsTC} from "../../../../common/table/cards-reducer";
 
 
 export const TableList = () => {
@@ -24,6 +25,10 @@ export const TableList = () => {
     const editPackCards = (idPack: string) => {
         dispatch(updateCardsPackTC({_id: idPack, name: 'MaxTsNew'}) as any)
     }
+    const callCards = (cardsPack_id:string) => {
+        dispatch(setCardsTC(cardsPack_id))
+    }
+    
     const tableCell = ['Name', 'Cards', 'LastUpdated', 'Created by', 'Actions']
     return (
         <div>
@@ -33,6 +38,7 @@ export const TableList = () => {
                 removeData={removePackCards}
                 editData={editPackCards}
                 myId={myId}
+                callCards={callCards}
             />
         </div>
     );

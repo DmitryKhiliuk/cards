@@ -3,8 +3,8 @@ import {instance} from "../../../common/instance/instance";
 
 
 export const cardsAPI = {
-    getCards(idPack: string) {
-        return instance.get<CardsResponseType, AxiosResponse<CardsResponseType>>(`cards/pack?cardsPack_id=${idPack}`)
+    getCards(options: CardsQueryParamsType) {
+        return instance.get<CardsResponseType, AxiosResponse<CardsResponseType>>(`cards/card`, {params: options})
     },
     addPCards(newCard: newCardsType) {
         return instance.post('cards/card', {card: newCard})
@@ -13,7 +13,7 @@ export const cardsAPI = {
         return instance.delete(`cards/card?id=${idCard}`)
     },
     updateCards(updateCard: updateCardsType) {
-        return instance.put('cards/pack', {cardsPack: updateCard})
+        return instance.put('cards/card', {cardsPack: updateCard})
     }
 }
 
@@ -45,9 +45,20 @@ export type CardsResponseType = {
     pageCount: number,
     cardsTotalCount: number,
     minGrade: number,
-    maxGrade: number
-    token: string,
-    tokenDeathTime: number
+    maxGrade: number,
+    sortCards: string
+
+}
+
+export type CardsQueryParamsType = {
+    cardsPack_id: string
+    cardAnswer?: string
+    cardQuestion?: string
+    min?: number
+    max?: number
+    page?: number
+    sortCards?: string
+    pageCount?: number
 }
 
 export type newCardsType = {

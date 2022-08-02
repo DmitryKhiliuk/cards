@@ -13,6 +13,7 @@ type TablePropsType = {
     myId: string | null,
     removeData: (id: string) => void,
     editData: (id: string) => void,
+    callCards: (id: string) => void
 }
 
 export const Table = (props: TablePropsType) => {
@@ -28,7 +29,7 @@ export const Table = (props: TablePropsType) => {
 
             <TableBody style={{width: '100%'}}>
                 {props.tableData.map((data: CardPacksType) => (
-                    <TableRow hover key={data._id}>
+                    <TableRow hover key={data._id} onClick={() => props.callCards(data._id)}>
                         {/*Name*/}
                         <TableCell>
                             <Box sx={{alignItems: 'center', display: 'flex'}}>
