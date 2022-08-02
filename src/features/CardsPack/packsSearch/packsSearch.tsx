@@ -14,6 +14,7 @@ import {AppDispatch, AppRootStateType} from "../../../app/store";
 import {Action} from "redux";
 import {PacksQueryParamsType} from "../api-CardsPack";
 import {Table} from "@mui/material";
+import style from "../CardsPack.module.css";
 
 
 export const PacksSearch = () => {
@@ -37,13 +38,9 @@ export const PacksSearch = () => {
     return (
         <Paper
             component="form"
-            sx={{p: '2px 4px', display: 'flex', alignItems: 'center', width: 400}}
+            sx={{p: '2px 4px', display: 'flex', alignItems: 'center', width: 400, background: '#dedede'}}
         >
-
-
-
             <InputBase
-
                 sx={{ml: 1, flex: 1}}
                 placeholder="Provide your text"
                 inputProps={{'aria-label': 'Provide your text',
