@@ -20,7 +20,7 @@ export const Table = (props: TablePropsType) => {
             <TableHead className={style.tableHeader}>
                 <TableRow style={{width: '100%'}}>
                     {props.tableCell.map((cell) => {
-                        return <TableCell align="center">{cell}</TableCell>
+                        return <TableCell align="left">{cell}</TableCell>
                     })}
                 </TableRow>
             </TableHead>
@@ -30,7 +30,7 @@ export const Table = (props: TablePropsType) => {
                     <TableRow hover key={data._id}>
                         {/*Name*/}
                         <TableCell>
-                            <Box sx={{alignItems: 'center', display: 'flex'}}>
+                            <Box sx={{alignItems: 'center', display: 'flex', width: '200px'}}>
                                 <Typography color="textPrimary" variant="body1">
                                     {data.name}
                                 </Typography>
@@ -38,7 +38,7 @@ export const Table = (props: TablePropsType) => {
                         </TableCell>
                         {/*CardsCount*/}
                         <TableCell>
-                            <Box sx={{alignItems: 'center', display: 'flex'}}>
+                            <Box sx={{alignItems: 'center', display: 'flex', width: '100px'}}>
                                 <Typography color="textPrimary" variant="body1">
                                     {data.cardsCount}
                                 </Typography>
@@ -46,7 +46,7 @@ export const Table = (props: TablePropsType) => {
                         </TableCell>
                         {/*updated*/}
                         <TableCell>
-                            <Box sx={{alignItems: 'center', display: 'flex'}}>
+                            <Box sx={{alignItems: 'center', display: 'flex', width: '200px'}}>
                                 <Typography color="textPrimary" variant="body1">
                                     {data.updated}
                                 </Typography>
@@ -54,7 +54,7 @@ export const Table = (props: TablePropsType) => {
                         </TableCell>
                         {/*user_name*/}
                         <TableCell>
-                            <Box sx={{alignItems: 'center', display: 'flex'}}>
+                            <Box sx={{ display: 'flex', width: '200px'}}>
                                 <Typography color="textPrimary" variant="body1">
                                     {data.user_name}
                                 </Typography>
@@ -62,7 +62,7 @@ export const Table = (props: TablePropsType) => {
                         </TableCell>
                         {/*Action*/}
                         <TableCell>
-                            <Box sx={{alignItems: 'center', display: 'flex'}}>
+                            <Box sx={{alignItems: 'center', display: 'flex', width: '150px'}}>
                                 <Typography color="textPrimary" variant="body1">
                                     {<IconButton onClick={() => props.removeData(data._id)}>
                                         <Delete/>
