@@ -43,6 +43,10 @@ export const TableList = () => {
     const editPackCards = (idPack:string) => {
        dispatch(updateCardsPackTC({_id:idPack,name:'MaxTsNew'}) as any)
     }
+
+    const onClickHandler = () => {
+        console.log('cards')
+    }
     return (
         <Paper>
             <div style={{height: 400, width: '100%', background: 'white'}}>
@@ -62,6 +66,7 @@ export const TableList = () => {
                             <TableRow
                                 hover
                                 key={pack._id}
+                                onClick={onClickHandler}
 
                             >
                                 {/*Name*/}
