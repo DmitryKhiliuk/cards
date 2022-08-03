@@ -5,9 +5,11 @@ import {CardPacksType} from "../../api-CardsPack";
 import {ThunkDispatch} from "redux-thunk";
 import {Action} from "redux";
 import {deleteCardsPackTC, updateCardsPackTC} from "../../cardsPack-reducer";
-import {useNavigate} from "react-router-dom";
-import {Table} from "../../../../common/table/Table";
-import {setCardsTC} from "../../../../common/table/cards-reducer";
+import {setCardsTC} from "../../cardsList/cards-reducer";
+import style from "../../../../common/table/TableList.module.css";
+import {TableContainer} from "@mui/material";
+import {TableHeadComp} from "../../../../common/table/TableHeadComp";
+import {TableBodyComp} from "../../../../common/table/TableBody";
 
 
 export const TableList = () => {
@@ -32,14 +34,32 @@ export const TableList = () => {
     const tableCell = ['Name', 'Cards', 'LastUpdated', 'Created by', 'Actions']
     return (
         <div>
-            <Table
+            <TableContainer className={style.table}>
+                <TableHeadComp tableCell={tableCell}/>
+                {packsTableData.map((item:CardPacksType) => {
+                    return <TableBodyComp key={item._id}
+                                          id={item._id}
+                                          userId={item.user_id}
+                                          itemOne={item.name}
+                                          itemTwo={item.cardsCount}
+                                          itemTree={item.updated}
+                                          itemFour={item.user_name}
+                                          myId={myId}
+                                          removeData={removePackCards}
+                                          editData={editPackCards}
+                                          callCards={callCards}/>
+                })}
+            </TableContainer>
+
+
+            {/*<Table
                 tableCell={tableCell}
                 tableData={packsTableData}
                 removeData={removePackCards}
                 editData={editPackCards}
                 myId={myId}
                 callCards={callCards}
-            />
+            />*/}
         </div>
     );
 }
