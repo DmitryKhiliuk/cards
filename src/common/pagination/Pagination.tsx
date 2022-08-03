@@ -1,5 +1,5 @@
 import React from 'react';
-import {makeStyles, createStyles} from '@material-ui/core/styles';
+import {makeStyles, createStyles} from '@material-ui/styles';
 import {Pagination} from "@mui/material";
 
 type PaginationTypes = {
@@ -18,8 +18,9 @@ const useStyles = makeStyles((theme) =>
 
 export default function PaginationRounded(props: PaginationTypes) {
     const classes = useStyles();
-
-    const count: number = Math.ceil(props.totalCount / props.pageCount)
+    let count = 1
+    let countCards = Math.ceil(props.totalCount / props.pageCount)
+    if (countCards) count = countCards
     const onChangeHandler = (event: object, page: number) => {
         props.onChangePage(page)
     }

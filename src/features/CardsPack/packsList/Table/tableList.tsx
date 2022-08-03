@@ -7,7 +7,7 @@ import {Action} from "redux";
 import {deleteCardsPackTC, updateCardsPackTC} from "../../cardsPack-reducer";
 import {cardStatusType, setCardsTC} from "../../cardsList/cards-reducer";
 import style from "../../../../common/table/TableList.module.css";
-import {TableContainer} from "@mui/material";
+import {Table, TableContainer} from "@mui/material";
 import {TableHeadComp} from "../../../../common/table/TableHeadComp";
 import {TableBodyComp} from "../../../../common/table/TableBody";
 import {Navigate} from "react-router-dom";
@@ -42,6 +42,7 @@ export const TableList = () => {
     return (
         <div>
             <TableContainer className={style.table}>
+             <Table>
                 <TableHeadComp tableCell={tableCell}/>
                 {packsTableData.map((item:CardPacksType) => {
                     return <TableBodyComp key={item._id}
@@ -56,6 +57,7 @@ export const TableList = () => {
                                           editData={editPackCards}
                                           callCards={callCards}/>
                 })}
+             </Table>
             </TableContainer>
         </div>
     );
