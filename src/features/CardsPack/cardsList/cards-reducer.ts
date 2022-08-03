@@ -21,17 +21,22 @@ const initialState = {
         sortCards: '0updated',
     },
     isFetching: false,
-    options: {pageCount: 10} as CardsQueryParamsType
+    options: {pageCount: 10} as CardsQueryParamsType,
+    cardsStatus: 'exp' as cardStatusType
 }
 
 type initialStateType = typeof initialState
 
-export const cardsReducer = (state:initialStateType = initialState, action: setCardsACType | setOptionsCardsACType):initialStateType => {
+export type cardStatusType = 'exp' | 'none' | 'cards'
+
+export const cardsReducer = (state:initialStateType = initialState, action: setCardsACType | setOptionsCardsACType | cardStatusACType):initialStateType => {
     switch (action.type) {
         case "cards/SET-CARDS":
             return {...state, cardsTableData: action.cardsTableData}
-        case "CARDS-PACK/SET-OPTIONS":
+        case "cards/SET-OPTIONS":
             return {...state, options: {...state.options, ...action.options}}
+        case "cards/CARD-STATUS":
+            return  {...state, cardsStatus: action.cardStatus}
         default:
             return state
     }
@@ -48,8 +53,16 @@ export const setCardsAC = (cardsTableData: CardsResponseType) => {
 type setOptionsCardsACType = ReturnType<typeof setOptionsCardsAC>
 export const setOptionsCardsAC = (options: PacksQueryParamsType) => {
     return {
-        type: 'CARDS-PACK/SET-OPTIONS',
+        type: 'cards/SET-OPTIONS',
         options
+    } as const
+}
+
+type cardStatusACType = ReturnType<typeof cardStatusAC>
+const cardStatusAC = (cardStatus: cardStatusType) => {
+    return {
+       type: 'cards/CARD-STATUS',
+       cardStatus
     } as const
 }
 
@@ -67,6 +80,12 @@ export const setCardsTC = (cardsPack_id: string, options?: PacksQueryParamsType)
                  pageCount,
              })
              dispatch(setCardsAC(response.data))
+             if (response.data.cards.length) {
+                 dispatch(cardStatusAC('cards'))
+             } else {
+                 dispatch(cardStatusAC('none'))
+             }
+
          } catch (error:any) {
              console.log(error)
          }

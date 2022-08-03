@@ -5,16 +5,19 @@ import {CardPacksType} from "../../api-CardsPack";
 import {ThunkDispatch} from "redux-thunk";
 import {Action} from "redux";
 import {deleteCardsPackTC, updateCardsPackTC} from "../../cardsPack-reducer";
-import {setCardsTC} from "../../cardsList/cards-reducer";
+import {cardStatusType, setCardsTC} from "../../cardsList/cards-reducer";
 import style from "../../../../common/table/TableList.module.css";
 import {TableContainer} from "@mui/material";
 import {TableHeadComp} from "../../../../common/table/TableHeadComp";
 import {TableBodyComp} from "../../../../common/table/TableBody";
+import {Navigate} from "react-router-dom";
+import {CARDSFORPACKS} from "../../../../common/routes/routes";
 
 
 export const TableList = () => {
     const dispatch = useDispatch<ThunkDispatch<AppRootStateType, unknown, Action> & AppDispatch>()
     const packsTableData = useSelector<AppRootStateType, Array<CardPacksType>>(state => state.packs.packsTableData.cardPacks)
+    const cardsStatus = useSelector<AppRootStateType, cardStatusType>(state => state.cards.cardsStatus)
     const myId = useSelector<AppRootStateType, string | null>(state => state.profile._id)
     //
     // const handleChangePage = (event: React.MouseEvent<HTMLButtonElement> | null, page: number) => {
@@ -29,6 +32,10 @@ export const TableList = () => {
     }
     const callCards = (cardsPack_id:string) => {
         dispatch(setCardsTC(cardsPack_id))
+
+    }
+    if (cardsStatus === 'cards') {
+       return <Navigate to={CARDSFORPACKS}/>
     }
     
     const tableCell = ['Name', 'Cards', 'LastUpdated', 'Created by', 'Actions']
@@ -50,16 +57,6 @@ export const TableList = () => {
                                           callCards={callCards}/>
                 })}
             </TableContainer>
-
-
-            {/*<Table
-                tableCell={tableCell}
-                tableData={packsTableData}
-                removeData={removePackCards}
-                editData={editPackCards}
-                myId={myId}
-                callCards={callCards}
-            />*/}
         </div>
     );
 }
