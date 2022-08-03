@@ -1,6 +1,7 @@
 import React from 'react';
 import style from "./TableList.module.css";
 import {TableCell, TableHead, TableRow} from "@mui/material";
+import Button from "@mui/material/Button";
 
 type TableHeadCompType = {
     tableCell: string[],

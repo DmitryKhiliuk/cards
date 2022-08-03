@@ -11,7 +11,7 @@ type TableBodyType = {
     myId: string | null,
     removeData: (id: string) => void,
     editData: (id: string) => void,
-    callCards: (id: string) => void,
+    callCards: (id: string, name?: string) => void,
     id: string,
     userId: string
     itemOne: any
