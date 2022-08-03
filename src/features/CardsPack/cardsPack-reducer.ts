@@ -14,13 +14,13 @@ const initialState = {
     packsTableData: {
         cardPacks: [],
         cardPacksTotalCount: 0,
-        maxCardsCount: 0,
+        maxCardsCount: 100,
         minCardsCount: 0,
         page: 1,
         pageCount: 0
     },
     isFetching: false,
-    options: {pageCount: 10} as PacksQueryParamsType
+    options: {pageCount: 10, min: 0, max: 100} as PacksQueryParamsType
 }
 
 export const packsReducer = (state: PacksInitialStateType = initialState, action: ActionType): PacksInitialStateType => {

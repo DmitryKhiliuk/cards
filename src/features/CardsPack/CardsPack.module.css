@@ -44,6 +44,10 @@
 }
 .sliderCardsPack {
     grid-area: slider;
+    width: 250px;
+    display: flex;
+    justify-content: start;
+    align-items: flex-end;
 }
 .btnCardsPack {
     width: 120px;

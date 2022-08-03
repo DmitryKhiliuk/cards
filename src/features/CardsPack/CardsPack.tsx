@@ -13,10 +13,13 @@ import {ErrorSnackbar} from "../../utils/ErrorSnackbar/ErrorSnackbar";
 
 export const CardsPack = () => {
     const dispatch = useDispatch<ThunkDispatch<AppRootStateType, unknown, Action> & AppDispatch>()
+    const min = useSelector<AppRootStateType, number | undefined>(state => state.cardsPack.options.min)
+    const max = useSelector<AppRootStateType, number | undefined>(state => state.cardsPack.options.max)
+    const [packNameSearch,setPackNameSearch]=useState('')
+
     useEffect(() => {
-        // dispatch(getPacksTC({packName:packNameSearch}))
-        dispatch(getStartPacksTC())
-    }, [])
+        dispatch(getPacksTC({packName:packNameSearch}))
+    }, [min, max])
 
     return (
             <div className={style.blockTable}>
