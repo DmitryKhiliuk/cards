@@ -29,12 +29,10 @@ function App() {
     }
 
     return (
-        <BrowserRouter>
             <div className={s.App}>
                 <Header/>
                 <RoutesComponent/>
             </div>
-        </BrowserRouter>
     );
 }
 
