@@ -33,11 +33,9 @@ export const TableList = () => {
     }
     const callCards = (cardsPack_id:string) => {
         dispatch(setCardsTC(cardsPack_id))
+        navigate(`/cards-for-packs/${cardsPack_id}`)
+    }
 
-    }
-    if (cardsStatus === 'cards') {
-       navigate(CARDSFORPACKS)
-    }
     
     const tableCell = ['Name', 'Cards', 'LastUpdated', 'Created by', 'Actions']
     return (

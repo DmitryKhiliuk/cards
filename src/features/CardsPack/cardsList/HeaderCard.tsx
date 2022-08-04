@@ -14,7 +14,12 @@ import {Action} from "redux";
 import {addCardTC, cardStatusAC, setCardsTC} from "./cards-reducer";
 import {getPacksTC} from "../cardsPack-reducer";
 
-export const HeaderCard = () => {
+
+type HeaderCardType = {
+    id: string | undefined
+}
+
+export const HeaderCard = (props:HeaderCardType) => {
     const dispatch = useDispatch<ThunkDispatch<AppRootStateType, unknown, Action> & AppDispatch>()
     const navigate = useNavigate();
     const packs = useSelector<AppRootStateType, Array<CardPacksType>>(state => state.packs.packsTableData.cardPacks)
@@ -23,11 +28,12 @@ export const HeaderCard = () => {
     const packUserId=useSelector<AppRootStateType, string>(state => state.cards.cardsTableData.packUserId)
     const id = cards.map(el => el.cardsPack_id)
 
-    const card = packs.find((el) => el._id === id[0])
+    const card = packs.find((el) => el._id === props.id)
 
     const addCardHandler = () => {
         // @ts-ignore
-        dispatch(addCardTC({cardsPack_id: id[0]}))
+       props.id && dispatch(addCardTC({cardsPack_id: props.id}))
+
     }
     const onClickHandler = () => {
         navigate(CARDS)

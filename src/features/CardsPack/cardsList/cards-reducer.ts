@@ -72,7 +72,7 @@ export type ActionCardsType = setCardsACType | setOptionsCardsACType | cardStatu
 export const setCardsTC = (cardsPack_id: string, options?: PacksQueryParamsType) =>
      async (dispatch: Dispatch<ActionCardsType>, getState: () => AppRootStateType) => {
          if (options) {
-             dispatch(setOptionsAC(options))
+             dispatch(setOptionsCardsAC(options))
          }
          const { sortCards, page, pageCount } = getState().cards.options;
          try {
@@ -99,7 +99,7 @@ export const addCardTC = (newCard: newCardsType) => {
         try {
             const res = await cardsAPI.addCards(newCard)
             // @ts-ignore
-            dispatch(getPacksTC())
+            dispatch(setCardsTC(res.data.cardsPack_id))
         } catch (error) {
 
         }
@@ -110,7 +110,7 @@ export const deleteCardTC = (cardsPack_id: string): ThunkType => {
     return async (dispatch) => {
         try {
             const res = await cardsAPI.deleteCards(cardsPack_id)
-            dispatch(getPacksTC())
+            dispatch(setCardsTC(res.data.cardsPack_id))
         } catch (err: any) {
             handleServerAppError(err.response.data.error, dispatch)
         }
