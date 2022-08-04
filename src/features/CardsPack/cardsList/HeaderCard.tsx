@@ -43,6 +43,9 @@ export const HeaderCard = (props:HeaderCardType) => {
     return (
         <div >
             <Button onClick={onClickHandler} variant="contained" size={"small"} startIcon={<KeyboardBackspaceIcon/>} >
+        <div className={style.headerCardsTable}>
+            <a href={CARDS} style={{textDecoration: 'none'}}><Button variant="contained" size={"small"}
+                                                                      startIcon={<KeyboardBackspaceIcon/>}>
                 BACK
             </Button>
             <div style={{display: 'flex', justifyContent: 'space-between'}}>

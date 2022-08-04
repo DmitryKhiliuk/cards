@@ -10,6 +10,7 @@ import {AppDispatch, AppRootStateType} from "../../../app/store";
 import {Action} from "redux";
 import {CardsType} from "./api-Cards";
 import {useParams} from "react-router-dom";
+import style from "../CardsPack.module.css";
 
 export const Cards = () => {
     const dispatch = useDispatch<ThunkDispatch<AppRootStateType, unknown, Action> & AppDispatch>()
@@ -27,7 +28,9 @@ export const Cards = () => {
     }, [cardsTotalCount])
     console.log(cardsTotalCount)
     return (
-        <div style={{backgroundColor: 'white', padding: '10px'}}>
+
+
+        <div className={style.blockTable}>
             <HeaderCard id={id}/>
             <CardsList/>
             <PaginationCards/>

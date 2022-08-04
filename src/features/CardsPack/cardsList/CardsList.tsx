@@ -1,5 +1,5 @@
 import React from 'react';
-import {TableContainer} from "@mui/material";
+import {Table, TableContainer} from "@mui/material";
 import style from "../../../common/table/TableList.module.css";
 import {TableHeadComp} from "../../../common/table/TableHeadComp";
 import {CardPacksType} from "../api-CardsPack";
@@ -30,20 +30,22 @@ export const CardsList = () => {
     return (
         <div>
             <TableContainer className={style.table}>
-                <TableHeadComp tableCell={tableCell}  callbackSort={sortUpdate}/>
-                {cardsTableData.map((item:CardsType) => {
-                    return <TableBodyComp key={item._id}
-                                          id={item._id}
-                                          userId={item.user_id}
-                                          itemOne={item.question}
-                                          itemTwo={item.answer}
-                                          itemTree={item.updated}
-                                          itemFour={item.grade}
-                                          myId={myId}
-                                          removeData={removeCard}
-                                          editData={editPackCards}
-                                          callCards={callCards}/>
-                })}
+                <Table>
+                    <TableHeadComp tableCell={tableCell}/>
+                    {cardsTableData.map((item:CardsType) => {
+                        return <TableBodyComp key={item._id}
+                                              id={item._id}
+                                              userId={item.user_id}
+                                              itemOne={item.question}
+                                              itemTwo={item.answer}
+                                              itemTree={item.updated}
+                                              itemFour={item.grade}
+                                              myId={myId}
+                                              removeData={removeCard}
+                                              editData={editPackCards}
+                                              callCards={callCards}/>
+                    })}
+                </Table>
             </TableContainer>
         </div>
     );
