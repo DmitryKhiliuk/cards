@@ -1,13 +1,14 @@
-import {PacksQueryParamsType} from "../api-CardsPack";
+import {packsAPI, PacksQueryParamsType} from "../api-CardsPack";
 import {
     cardsAPI,
     CardsQueryParamsType,
     CardsResponseType,
-    CardsType
+    CardsType, newCardsType
 } from "./api-Cards";
 import {Action, Dispatch} from "redux";
 import {AppRootStateType} from "../../../app/store";
-import {setOptionsAC} from "../cardsPack-reducer";
+import {getPacksTC, setOptionsAC, ThunkType} from "../cardsPack-reducer";
+import {handleServerAppError} from "../../../utils/error-utils";
 
 const initialState = {
     cardsTableData: {
@@ -29,7 +30,7 @@ type initialStateType = typeof initialState
 
 export type cardStatusType = 'exp' | 'none' | 'cards'
 
-export const cardsReducer = (state:initialStateType = initialState, action: setCardsACType | setOptionsCardsACType | cardStatusACType):initialStateType => {
+export const cardsReducer = (state:initialStateType = initialState, action: ActionCardsType):initialStateType => {
     switch (action.type) {
         case "cards/SET-CARDS":
             return {...state, cardsTableData: action.cardsTableData}
@@ -66,8 +67,10 @@ const cardStatusAC = (cardStatus: cardStatusType) => {
     } as const
 }
 
+export type ActionCardsType = setCardsACType | setOptionsCardsACType | cardStatusACType | ReturnType<typeof setOptionsAC>
+
 export const setCardsTC = (cardsPack_id: string, options?: PacksQueryParamsType) =>
-     async (dispatch: Dispatch, getState: () => AppRootStateType) => {
+     async (dispatch: Dispatch<ActionCardsType>, getState: () => AppRootStateType) => {
          if (options) {
              dispatch(setOptionsAC(options))
          }
@@ -90,3 +93,26 @@ export const setCardsTC = (cardsPack_id: string, options?: PacksQueryParamsType)
              console.log(error)
          }
      }
+
+export const addCardTC = (newCard: newCardsType) => {
+    return async (dispatch: Dispatch<ActionCardsType>) => {
+        try {
+            const res = await cardsAPI.addCards(newCard)
+            // @ts-ignore
+            dispatch(getPacksTC())
+        } catch (error) {
+
+        }
+    }
+}
+
+export const deleteCardTC = (cardsPack_id: string): ThunkType => {
+    return async (dispatch) => {
+        try {
+            const res = await cardsAPI.deleteCards(cardsPack_id)
+            dispatch(getPacksTC())
+        } catch (err: any) {
+            handleServerAppError(err.response.data.error, dispatch)
+        }
+    }
+}

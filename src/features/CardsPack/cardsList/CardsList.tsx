@@ -8,7 +8,7 @@ import {useDispatch, useSelector} from "react-redux";
 import {ThunkDispatch} from "redux-thunk";
 import {AppDispatch, AppRootStateType} from "../../../app/store";
 import {Action} from "redux";
-import {cardStatusType, setCardsTC} from "./cards-reducer";
+import {cardStatusType, deleteCardTC, setCardsTC} from "./cards-reducer";
 import {CardsType} from "./api-Cards";
 import {deleteCardsPackTC, updateCardsPackTC} from "../cardsPack-reducer";
 
@@ -17,7 +17,8 @@ export const CardsList = () => {
     const cardsTableData = useSelector<AppRootStateType, CardsType[]>(state => state.cards.cardsTableData.cards)
     const myId = useSelector<AppRootStateType, string | null>(state => state.profile._id)
     const tableCell = ['question', 'answer', 'LastUpdated', 'grade', 'Actions']
-    const removePackCards = (idPack: string) => {
+    const removeCard = (cardsPack_id: string) => {
+        dispatch(deleteCardTC(cardsPack_id) as any)
     }
     const editPackCards = (idPack: string) => {
     }
@@ -36,7 +37,7 @@ export const CardsList = () => {
                                           itemTree={item.updated}
                                           itemFour={item.grade}
                                           myId={myId}
-                                          removeData={removePackCards}
+                                          removeData={removeCard}
                                           editData={editPackCards}
                                           callCards={callCards}/>
                 })}

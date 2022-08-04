@@ -111,7 +111,7 @@ export type PacksInitialStateType = {
     options: PacksQueryParamsType
 }
 
-type ThunkType = ThunkAction<void, AppRootStateType, {}, ActionType>
+export type ThunkType = ThunkAction<void, AppRootStateType, {}, ActionType>
 
 type ActionType = ReturnType<typeof getPacksAC>
     | ReturnType<typeof setOptionsAC>

@@ -5,7 +5,7 @@ import style from './CardsPack.module.css'
 import {HeaderCardsPack} from "./packsList/header/HeaderCardsPack";
 import {PaginationCardsPack} from "./packsList/footer/PaginationCardsPack";
 import {getPacksTC, getStartPacksTC} from "./cardsPack-reducer";
-import {useDispatch} from "react-redux";
+import {useDispatch, useSelector} from "react-redux";
 import {ThunkDispatch} from "redux-thunk";
 import {AppDispatch, AppRootStateType} from "../../app/store";
 import {Action} from "redux";
