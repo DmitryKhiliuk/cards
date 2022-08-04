@@ -45,7 +45,6 @@ export const TableList = () => {
     const tableCell = ['Name', 'Cards', 'LastUpdated', 'Created by', 'Actions']
 
 
-
     return (
         <div>
             <TableContainer className={style.table}>
