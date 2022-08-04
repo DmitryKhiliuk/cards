@@ -15,12 +15,13 @@ export const HeaderCardsPack = () => {
     const userId = useSelector<AppRootStateType, string | null>(state => state.profile._id)
     const max = useSelector<AppRootStateType, number | undefined>(state => state.cardsPack.options.max)
     const min = useSelector<AppRootStateType, number | undefined>(state => state.cardsPack.options.min)
+
     const [value, setValue] = useState([min || 0, max || 100])
+    const [buttonPaks, setButtonPaks] = useState(false)
 
     const addPack = (name: string) => {
         dispatch(addCardsPackTC({name: name}) as any)
     }
-    const [buttonPaks,setButtonPaks]=useState(false)
 
     const onClickMyButton = () => {
         setButtonPaks(false)
@@ -30,7 +31,6 @@ export const HeaderCardsPack = () => {
         setButtonPaks(true)
         dispatch(getPacksTC({user_id: ""}))
     }
-
     const onChangeCallback = (event: ChangeEvent<{}>, newValue: number | number[]) => {
         if (Array.isArray(newValue)) {
             setValue(newValue)
@@ -49,16 +49,20 @@ export const HeaderCardsPack = () => {
             >Add new pack</Button>
         </div>
         <div className={style.searchCardsPack}>
-            <h3>Search</h3>
+            <h4>Search</h4>
             <PacksSearch/>
         </div>
         <div className={style.changeCardsPack}>
-            <Button onClick={onClickMyButton} variant={buttonPaks? "contained":"outlined"} className={style.btnCardsPack}>My
-                Packs</Button>
-            <Button onClick={onClickAllButton} variant={!buttonPaks? "contained":"outlined"} className={style.btnCardsPack}>All
-                Packs</Button>
+            <h4>Show packs cards</h4>
+            <div>
+                <Button onClick={onClickMyButton} variant={buttonPaks? "contained":"outlined"} className={style.btnCardsPack}>My
+                    Packs</Button>
+                <Button onClick={onClickAllButton} variant={!buttonPaks? "contained":"outlined"} className={style.btnCardsPack}>All
+                    Packs</Button>
+            </div>
         </div>
         <div className={style.sliderCardsPack}>
+            <h4 className={style.titleSliderCardsPack}>Number of cards</h4>
             <Slider
                 value={value}
                 onChange={onChangeCallback}

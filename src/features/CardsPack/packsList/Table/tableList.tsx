@@ -41,7 +41,7 @@ export const TableList = () => {
     const tableCell = ['Name', 'Cards', 'LastUpdated', 'Created by', 'Actions']
     return (
         <div>
-            <TableContainer className={style.table}>
+            <TableContainer className={style.table} style={{border: 'black'}}>
              <Table>
                 <TableHeadComp tableCell={tableCell}/>
                 {packsTableData.map((item:CardPacksType) => {

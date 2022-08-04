@@ -29,7 +29,7 @@ export const HeaderCard = () => {
     }
 
     return (
-        <div >
+        <div className={style.headerCardsTable}>
             <a href={CARDS} style={{textDecoration: 'none'}}><Button variant="contained" size={"small"}
                                                                       startIcon={<KeyboardBackspaceIcon/>}>
                 BACK

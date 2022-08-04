@@ -24,7 +24,7 @@ export const TableBodyComp = (props: TableBodyType) => {
     return (
             <TableBody style={{width: '100%'}}>
 
-                <TableRow hover key={props.id} onClick={() => props.callCards(props.id)}>
+                <TableRow hover key={props.id} onClick={() => props.callCards(props.id)} style={{height: "30px"}}>
                     {/*Name*/}
                     <TableCell>
                         <Box sx={{alignItems: 'center', display: 'flex'}}>

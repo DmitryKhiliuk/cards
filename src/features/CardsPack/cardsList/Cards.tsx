@@ -2,10 +2,11 @@ import React from 'react';
 import {CardsList} from "./CardsList";
 import {HeaderCard} from "./HeaderCard";
 import {PaginationCards} from "./PaginationCards";
+import style from "../CardsPack.module.css";
 
 export const Cards = () => {
     return (
-        <div style={{backgroundColor: 'white', padding: '10px'}}>
+        <div className={style.blockTable}>
             <HeaderCard/>
             <CardsList/>
             <PaginationCards/>
