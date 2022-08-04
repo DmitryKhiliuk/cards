@@ -10,6 +10,7 @@ import style from "../../../../common/table/TableList.module.css";
 import {Table, TableContainer} from "@mui/material";
 import {TableHeadComp} from "../../../../common/table/TableHeadComp";
 import {TableBodyComp} from "../../../../common/table/TableBody";
+import {formatDate} from "../../../../common/formatDate/formatDate";
 
 
 export const TableList = () => {
@@ -31,14 +32,7 @@ export const TableList = () => {
         dispatch(getPacksTC({sortPacks: sort}))
     }
     const tableCell = ['Name', 'Cards', 'LastUpdated', 'Created by', 'Actions']
-//Нормализация Даты обновления
-    const formatDate = (date: string): string => {
-        return new Date(date).toLocaleDateString("ru", {
-            day: "2-digit",
-            month: "2-digit",
-            year: "numeric"
-        });
-    }
+
 
 
     return (
