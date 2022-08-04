@@ -9,6 +9,7 @@ import {ThunkAction} from "redux-thunk";
 import {AppRootStateType} from "../../app/store";
 import {setProfileAC} from "../profile/profile-reducer";
 import {handleServerAppError} from "../../utils/error-utils";
+import {setAppStatusAC} from "../../app/app-reducer";
 
 const initialState = {
     packsTableData: {
@@ -41,17 +42,17 @@ export const getPacksAC = (packsTableData: PackResponseType) => ({
 export const setOptionsAC = (options: PacksQueryParamsType) => ({type: 'CARDS-PACK/SET-OPTIONS', options} as const)
 
 //TS
-export const getStartPacksTC = () => {
-    return async (dispatch: Dispatch<ActionType>, getState: () => AppRootStateType) => {
-        const packsOptions = getState().packs.options
-        try {
-            const res = await packsAPI.getPacks(packsOptions)
-            dispatch(getPacksAC(res.data))
-        } catch (err: any) {
-            handleServerAppError(err.response.data.error, dispatch)
-        }
-    }
-}
+// export const getStartPacksTC = () => {
+//     return async (dispatch: Dispatch<ActionType>, getState: () => AppRootStateType) => {
+//         const packsOptions = getState().packs.options
+//         try {
+//             const res = await packsAPI.getPacks(packsOptions)
+//             dispatch(getPacksAC(res.data))
+//         } catch (err: any) {
+//             handleServerAppError(err.response.data.error, dispatch)
+//         }
+//     }
+// }
 
 export const getPacksTC = (options?: PacksQueryParamsType) => {
 
@@ -101,10 +102,6 @@ export const updateCardsPackTC = (updatePackPayload: UpdatePackPayloadType): Thu
         }
     }
 }
-
-
-
-
 
 export type PacksInitialStateType = {
     packsTableData: PackResponseType
