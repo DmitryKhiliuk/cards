@@ -10,6 +10,7 @@ import {AppRootStateType} from "../../app/store";
 import {setProfileAC} from "../profile/profile-reducer";
 import {handleServerAppError} from "../../utils/error-utils";
 import {setAppStatusAC} from "../../app/app-reducer";
+import {cardStatusAC, cardStatusACType} from "./cardsList/cards-reducer";
 
 const initialState = {
     packsTableData: {
@@ -64,6 +65,7 @@ export const getPacksTC = (options?: PacksQueryParamsType) => {
         try {
             const res = await packsAPI.getPacks(packsOptions)
             dispatch(getPacksAC(res.data))
+            dispatch(cardStatusAC('none'))
         } catch (err: any) {
             handleServerAppError(err.response.data.error, dispatch)
         }
@@ -113,3 +115,4 @@ export type ThunkType = ThunkAction<void, AppRootStateType, {}, ActionType>
 type ActionType = ReturnType<typeof getPacksAC>
     | ReturnType<typeof setOptionsAC>
     | ReturnType<typeof setProfileAC>
+    | cardStatusACType

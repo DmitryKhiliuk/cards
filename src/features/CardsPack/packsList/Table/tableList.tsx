@@ -10,12 +10,13 @@ import style from "../../../../common/table/TableList.module.css";
 import {Table, TableContainer} from "@mui/material";
 import {TableHeadComp} from "../../../../common/table/TableHeadComp";
 import {TableBodyComp} from "../../../../common/table/TableBody";
-import {Navigate} from "react-router-dom";
+import {Navigate, useNavigate} from "react-router-dom";
 import {CARDSFORPACKS} from "../../../../common/routes/routes";
 
 
 export const TableList = () => {
     const dispatch = useDispatch<ThunkDispatch<AppRootStateType, unknown, Action> & AppDispatch>()
+    const navigate = useNavigate();
     const packsTableData = useSelector<AppRootStateType, Array<CardPacksType>>(state => state.packs.packsTableData.cardPacks)
     const cardsStatus = useSelector<AppRootStateType, cardStatusType>(state => state.cards.cardsStatus)
     const myId = useSelector<AppRootStateType, string | null>(state => state.profile._id)
@@ -35,7 +36,7 @@ export const TableList = () => {
 
     }
     if (cardsStatus === 'cards') {
-       return <Navigate to={CARDSFORPACKS}/>
+       navigate(CARDSFORPACKS)
     }
     
     const tableCell = ['Name', 'Cards', 'LastUpdated', 'Created by', 'Actions']

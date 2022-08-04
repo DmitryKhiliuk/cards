@@ -4,17 +4,19 @@ import Button from "@mui/material/Button";
 import style from "../CardsPack.module.css";
 import {PacksSearch} from "../packsSearch/packsSearch";
 import {CARDS, CARDSFORPACKS} from "../../../common/routes/routes";
-import {Navigate} from "react-router-dom";
+import {Navigate, useNavigate} from "react-router-dom";
 import {useDispatch, useSelector} from "react-redux";
 import {AppDispatch, AppRootStateType} from "../../../app/store";
 import {CardPacksType} from "../api-CardsPack";
 import {CardsType} from "./api-Cards";
 import {ThunkDispatch} from "redux-thunk";
 import {Action} from "redux";
-import {addCardTC} from "./cards-reducer";
+import {addCardTC, cardStatusAC, setCardsTC} from "./cards-reducer";
+import {getPacksTC} from "../cardsPack-reducer";
 
 export const HeaderCard = () => {
     const dispatch = useDispatch<ThunkDispatch<AppRootStateType, unknown, Action> & AppDispatch>()
+    const navigate = useNavigate();
     const packs = useSelector<AppRootStateType, Array<CardPacksType>>(state => state.packs.packsTableData.cardPacks)
     const cards=useSelector<AppRootStateType, CardsType[]>(state => state.cards.cardsTableData.cards)
     const myId = useSelector<AppRootStateType, string | null>(state => state.profile._id)
@@ -27,13 +29,16 @@ export const HeaderCard = () => {
         // @ts-ignore
         dispatch(addCardTC({cardsPack_id: id[0]}))
     }
+    const onClickHandler = () => {
+        navigate(CARDS)
+
+    }
 
     return (
         <div >
-            <a href={CARDS} style={{textDecoration: 'none'}}><Button variant="contained" size={"small"}
-                                                                      startIcon={<KeyboardBackspaceIcon/>}>
+            <Button onClick={onClickHandler} variant="contained" size={"small"} startIcon={<KeyboardBackspaceIcon/>} >
                 BACK
-            </Button></a>
+            </Button>
             <div style={{display: 'flex', justifyContent: 'space-between'}}>
                 <h2>{card && card.name}</h2>
                 {(myId === packUserId) && <Button variant="contained" onClick={addCardHandler}>Add new card</Button>}

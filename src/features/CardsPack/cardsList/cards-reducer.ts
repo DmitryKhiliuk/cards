@@ -59,8 +59,8 @@ export const setOptionsCardsAC = (options: PacksQueryParamsType) => {
     } as const
 }
 
-type cardStatusACType = ReturnType<typeof cardStatusAC>
-const cardStatusAC = (cardStatus: cardStatusType) => {
+export type cardStatusACType = ReturnType<typeof cardStatusAC>
+export const cardStatusAC = (cardStatus: cardStatusType) => {
     return {
        type: 'cards/CARD-STATUS',
        cardStatus
