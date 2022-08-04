@@ -25,13 +25,13 @@ export const CardsList = () => {
     const callCards = (cardsPack_id:string) => {
     }
     const sortUpdate = () => {
-      
+
     }
     return (
         <div>
             <TableContainer className={style.table}>
                 <Table>
-                    <TableHeadComp tableCell={tableCell}/>
+                    <TableHeadComp tableCell={tableCell} callbackSort={sortUpdate}/>
                     {cardsTableData.map((item:CardsType) => {
                         return <TableBodyComp key={item._id}
                                               id={item._id}

@@ -5,7 +5,7 @@ import {CardPacksType} from "../../api-CardsPack";
 import {ThunkDispatch} from "redux-thunk";
 import {Action} from "redux";
 import {deleteCardsPackTC, getPacksTC, updateCardsPackTC} from "../../cardsPack-reducer";
-import {setCardsTC} from "../../cardsList/cards-reducer";
+import {cardStatusType, setCardsTC} from "../../cardsList/cards-reducer";
 import style from "../../../../common/table/TableList.module.css";
 import {Table, TableContainer} from "@mui/material";
 import {TableHeadComp} from "../../../../common/table/TableHeadComp";
