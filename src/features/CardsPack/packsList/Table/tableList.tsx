@@ -17,40 +17,49 @@ export const TableList = () => {
     const dispatch = useDispatch<ThunkDispatch<AppRootStateType, unknown, Action> & AppDispatch>()
     const packsTableData = useSelector<AppRootStateType, Array<CardPacksType>>(state => state.packs.packsTableData.cardPacks)
     const myId = useSelector<AppRootStateType, string | null>(state => state.profile._id)
-       const removePackCards = (idPack: string) => {
+    const removePackCards = (idPack: string) => {
         dispatch(deleteCardsPackTC(idPack) as any)
     }
     const editPackCards = (idPack: string) => {
         dispatch(updateCardsPackTC({_id: idPack, name: 'MaxTsNew'}) as any)
     }
-    const callCards = (cardsPack_id:string) => {
+    const callCards = (cardsPack_id: string) => {
         dispatch(setCardsTC(cardsPack_id))
     }
     //Сортировка
-    const sortUpdate = (sort:string) => {
+    const sortUpdate = (sort: string) => {
         dispatch(getPacksTC({sortPacks: sort}))
     }
-
     const tableCell = ['Name', 'Cards', 'LastUpdated', 'Created by', 'Actions']
+//Нормализация Даты обновления
+    const formatDate = (date: string): string => {
+        return new Date(date).toLocaleDateString("ru", {
+            day: "2-digit",
+            month: "2-digit",
+            year: "numeric"
+        });
+    }
+
+
     return (
         <div>
             <TableContainer className={style.table}>
-             <Table>
-                <TableHeadComp tableCell={tableCell} callbackSort={sortUpdate}/>
-                {packsTableData.map((item:CardPacksType) => {
-                    return <TableBodyComp key={item._id}
-                                          id={item._id}
-                                          userId={item.user_id}
-                                          itemOne={item.name}
-                                          itemTwo={item.cardsCount}
-                                          itemTree={item.updated}
-                                          itemFour={item.user_name}
-                                          myId={myId}
-                                          removeData={removePackCards}
-                                          editData={editPackCards}
-                                          callCards={callCards}/>
-                })}
-             </Table>
+                <Table>
+                    <TableHeadComp tableCell={tableCell} callbackSort={sortUpdate}/>
+                    {packsTableData.map((item: CardPacksType) => {
+                        return <TableBodyComp key={item._id}
+                                              id={item._id}
+                                              userId={item.user_id}
+                                              itemOne={item.name}
+                                              itemTwo={item.cardsCount}
+                                              itemTree={formatDate(item.updated)}
+                                              itemFour={item.user_name}
+                                              myId={myId}
+                                              removeData={removePackCards}
+                                              editData={editPackCards}
+                                              callCards={callCards}/>
+                    })}
+                </Table>
             </TableContainer>
         </div>
     );
