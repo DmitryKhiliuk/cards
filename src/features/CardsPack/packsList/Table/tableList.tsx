@@ -30,7 +30,7 @@ export const TableList = () => {
         dispatch(updateCardsPackTC({_id: idPack, name: 'MaxTsNew'}) as any)
     }
     const callCards = (cardsPack_id:string) => {
-        dispatch(setCardsTC(cardsPack_id))
+        /*dispatch(setCardsTC(cardsPack_id))*/
         navigate(`/cards-for-packs/${cardsPack_id}`)
     }
 
