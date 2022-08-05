@@ -31,7 +31,7 @@ export const Cards = () => {
             navigate(SING_IN)
         }
         console.log(cardsTotalCount)
-    }, [cardsTotalCount])
+    }, [])
     console.log(cardsTotalCount)
 
 

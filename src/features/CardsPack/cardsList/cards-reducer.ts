@@ -6,7 +6,7 @@ import {
     CardsType, newCardsType
 } from "./api-Cards";
 import {Action, Dispatch} from "redux";
-import {AppRootStateType} from "../../../app/store";
+import {AppRootStateType, TypedDispatch} from "../../../app/store";
 import {getPacksTC, setOptionsAC, ThunkType} from "../cardsPack-reducer";
 import {handleServerAppError} from "../../../utils/error-utils";
 
@@ -95,11 +95,11 @@ export const setCardsTC = (cardsPack_id: string, options?: PacksQueryParamsType)
      }
 
 export const addCardTC = (newCard: newCardsType) => {
-    return async (dispatch: Dispatch<ActionCardsType>) => {
+    return async (dispatch: TypedDispatch) => {
         try {
             const res = await cardsAPI.addCards(newCard)
             // @ts-ignore
-            dispatch(setCardsTC(res.data.cardsPack_id))
+            dispatch(setCardsTC(res.data.newCard.cardsPack_id))
         } catch (error) {
 
         }
@@ -107,10 +107,10 @@ export const addCardTC = (newCard: newCardsType) => {
 }
 
 export const deleteCardTC = (cardsPack_id: string): ThunkType => {
-    return async (dispatch) => {
+    return async (dispatch:TypedDispatch) => {
         try {
             const res = await cardsAPI.deleteCards(cardsPack_id)
-            dispatch(setCardsTC(res.data.cardsPack_id))
+            dispatch(setCardsTC(res.data.deletedCard.cardsPack_id))
         } catch (err: any) {
             handleServerAppError(err.response.data.error, dispatch)
         }

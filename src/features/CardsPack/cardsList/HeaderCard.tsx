@@ -37,7 +37,6 @@ export const HeaderCard = (props:HeaderCardType) => {
         navigate(CARDS)
 
     }
-
     return (
 
         <div className={style.headerCardsTable}>
