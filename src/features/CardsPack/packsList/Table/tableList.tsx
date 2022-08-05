@@ -21,10 +21,7 @@ export const TableList = () => {
     const packsTableData = useSelector<AppRootStateType, Array<CardPacksType>>(state => state.packs.packsTableData.cardPacks)
     const cardsStatus = useSelector<AppRootStateType, cardStatusType>(state => state.cards.cardsStatus)
     const myId = useSelector<AppRootStateType, string | null>(state => state.profile._id)
-    //
-    // const handleChangePage = (event: React.MouseEvent<HTMLButtonElement> | null, page: number) => {
-    //     dispatch(getPacksTC({page: page}))
-    // }
+
 
     const removePackCards = (idPack: string) => {
         dispatch(deleteCardsPackTC(idPack) as any)
