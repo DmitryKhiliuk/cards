@@ -24,8 +24,8 @@ export const TableHeadComp = (props: TableHeadCompType) => {
         <TableHead className={style.tableHeader}>
             <TableRow style={{width: '100%'}}>
                 {props.tableCell.map((cell) =>
-                    cell !== 'LastUpdated' ? <TableCell align="center" key={cell}>{cell}</TableCell> :
-                        <TableCell align="center" key={cell}>{cell}
+                    cell !== 'LastUpdated' ? <TableCell align="left" width={'20%'} key={cell}>{cell}</TableCell> :
+                        <TableCell align="left" key={cell}>{cell}
                             {sortUpDown ?
                                 <IconButton onClick={handlerSortDown}>
                                     <ArrowUpward/>

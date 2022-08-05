@@ -23,7 +23,6 @@ export const HeaderCardsPack = () => {
         dispatch(addCardsPackTC({name: name}) as any)
     }
 
-
     const onClickMyButton = () => {
         setButtonPaks(buttonPaks=>!buttonPaks)
         dispatch(getPacksTC({user_id: userId}))
