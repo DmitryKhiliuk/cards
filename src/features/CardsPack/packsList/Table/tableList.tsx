@@ -14,7 +14,6 @@ import {Navigate, useNavigate} from "react-router-dom";
 import {CARDSFORPACKS} from "../../../../common/routes/routes";
 import {formatDate} from "../../../../common/formatDate/formatDate";
 
-
 export const TableList = () => {
     const dispatch = useDispatch<ThunkDispatch<AppRootStateType, unknown, Action> & AppDispatch>()
     const navigate = useNavigate();

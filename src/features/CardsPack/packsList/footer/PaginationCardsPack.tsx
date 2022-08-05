@@ -8,6 +8,7 @@ import PaginationRounded from "../../../../common/pagination/Pagination";
 import {SelectCountRow} from "../../../../common/select-count-row/SelectCountRow";
 import Typography from "@mui/material/Typography";
 import Box from "@mui/material/Box";
+import style from '../../CardsPack.module.css'
 
 export const PaginationCardsPack = () => {
     const dispatch = useDispatch<ThunkDispatch<AppRootStateType, unknown, Action> & AppDispatch>()
@@ -25,8 +26,9 @@ export const PaginationCardsPack = () => {
         dispatch(getPacksTC())
     }
 
+
     return (
-        <Box style={{display: 'flex', marginTop: '10px'}}>
+        <Box style={{display: 'flex'}}>
             <Box>
                 <PaginationRounded totalCount={cardPacksTotalCount}
                                    pageCount={pageCount}
@@ -34,7 +36,7 @@ export const PaginationCardsPack = () => {
                                    onChangePage={handleChangePage}
                 />
             </Box>
-            <Box style={{display: 'flex', justifyContent:'space-between',width:'250px'}}>
+            <Box className={style.boxPagination}>
                 <Typography variant='subtitle1'>
                     Show
                 </Typography>
