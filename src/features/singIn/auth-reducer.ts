@@ -22,24 +22,18 @@ export const authReducer = (state: InitialStateType = initialState, action: Acti
 export const setIsLoggedInAC = (value: boolean) =>
     ({type: 'SET-IS-LOGGED-IN', value} as const);
 
-export const loginTC = (data: LoginParamsType) => (dispatch: Dispatch) => {
+export const loginTC = (data: LoginParamsType) => async (dispatch: Dispatch) => {
     dispatch(setAppStatusAC('loading'))
-    authApi.login(data)
-        .then((res) => {
-            dispatch(setProfileAC(res.data))
-            dispatch(setIsLoggedInAC(true))
-            dispatch(setAppStatusAC('succeeded'))
-        })
-        .catch((error) => {
-            const errorResponse = error.response ? error.response.data.error : (error.message + ", more details in the console")
-            //Ошибки из ответа
-            handleServerAppError(errorResponse, dispatch)
-
-        })
-
-        .finally(() => {
-
-        })
+    try {
+        let res = await authApi.login(data)
+        dispatch(setProfileAC(res.data))
+        dispatch(setIsLoggedInAC(true))
+        dispatch(setAppStatusAC('succeeded'))
+    } catch(error: any) {
+        const errorResponse = error.response ? error.response.data.error : (error.message + ", more details in the console")
+        //Ошибки из ответа
+        handleServerAppError(errorResponse, dispatch)
+    }
 };
 
 type ActionsType = ReturnType<typeof setIsLoggedInAC>

@@ -21,18 +21,17 @@ export const setRecoveryPasswordSuccessAC = (recoverPassSucces: boolean) => ({
     recoverPassSucces
 }) as const
 
-export const recoverTC = (email: string) => (dispatch: AppDispatch) => {
+export const recoverTC = (email: string) => async (dispatch: AppDispatch) => {
     dispatch(setAppStatusAC('loading'))
-    recoveryPasswordAPI.recoveryPassword(email)
-        .then(res => {
-            dispatch(setRecoveryPasswordSuccessAC(true))
-            dispatch(setAppStatusAC('succeeded'))
-        })
-        .catch((error) => {
-            const errorResponse = error.response ? error.response.data.error : (error.message + ", more details in the console")
-            handleServerAppError(errorResponse, dispatch)
-            dispatch(setAppStatusAC('failed'))
-        })
+    try {
+        let res = await recoveryPasswordAPI.recoveryPassword(email)
+        dispatch(setRecoveryPasswordSuccessAC(true))
+        dispatch(setAppStatusAC('succeeded'))
+    } catch (error: any) {
+        const errorResponse = error.response ? error.response.data.error : (error.message + ", more details in the console")
+        handleServerAppError(errorResponse, dispatch)
+        dispatch(setAppStatusAC('failed'))
+    }
 
 }
 

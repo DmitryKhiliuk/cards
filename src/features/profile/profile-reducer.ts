@@ -85,47 +85,44 @@ export const updateProfileAvatarAC = ({name, avatar}:updateProfileType) => {
 }
 
 export const logoutTC = () => {
-    return (dispatch:Dispatch) => {
+    return async (dispatch:Dispatch) => {
         dispatch(setAppStatusAC('loading'))
-        profileAPI.logout()
-            .then((res) => {
-                dispatch(setIsLoggedInAC(false))
-                dispatch(setAppStatusAC('succeeded'))
-            })
-            .catch((error) => {
-                const errorResponse = error.response ? error.response.data.error : (error.message + ", more details in the console")
-                handleServerAppError(errorResponse, dispatch)
-                dispatch(setAppStatusAC('failed'))
-            })
+        try {
+            let res = await profileAPI.logout()
+            dispatch(setIsLoggedInAC(false))
+            dispatch(setAppStatusAC('succeeded'))
+        } catch(error: any) {
+            const errorResponse = error.response ? error.response.data.error : (error.message + ", more details in the console")
+            handleServerAppError(errorResponse, dispatch)
+            dispatch(setAppStatusAC('failed'))
+        }
     }
 }
 export const updateProfileTitleTC = ({name, avatar}:updateProfileType) => {
-    return (dispatch:Dispatch) => {
+    return async (dispatch:Dispatch) => {
         dispatch(setAppStatusAC('loading'))
-        profileAPI.updateTitle({name, avatar})
-            .then((res) => {
-                dispatch(updateProfileTitleAC({name, avatar}))
-                dispatch(setAppStatusAC('succeeded'))
-            })
-            .catch((error) => {
-                const errorResponse = error.response ? error.response.data.error : (error.message + ", more details in the console")
-                handleServerAppError(errorResponse, dispatch)
-                dispatch(setAppStatusAC('failed'))
-            })
+        try {
+            let res = await profileAPI.updateTitle({name, avatar})
+            dispatch(updateProfileTitleAC({name, avatar}))
+            dispatch(setAppStatusAC('succeeded'))
+        } catch(error: any) {
+            const errorResponse = error.response ? error.response.data.error : (error.message + ", more details in the console")
+            handleServerAppError(errorResponse, dispatch)
+            dispatch(setAppStatusAC('failed'))
+        }
     }
 }
 export const updateProfileAvatarTC = ({name, avatar}:updateProfileType) => {
-    return (dispatch:Dispatch) => {
+    return async (dispatch:Dispatch) => {
         dispatch(setAppStatusAC('loading'))
-        profileAPI.updateTitle({name, avatar})
-            .then((res) => {
-                dispatch(updateProfileAvatarAC({name, avatar}))
-                dispatch(setAppStatusAC('succeeded'))
-            })
-            .catch((error) => {
-                const errorResponse = error.response ? error.response.data.error : (error.message + ", more details in the console")
-                handleServerAppError(errorResponse, dispatch)
-                dispatch(setAppStatusAC('failed'))
-            })
+        try {
+            let res = await profileAPI.updateTitle({name, avatar})
+            dispatch(updateProfileAvatarAC({name, avatar}))
+            dispatch(setAppStatusAC('succeeded'))
+        } catch(error:any) {
+            const errorResponse = error.response ? error.response.data.error : (error.message + ", more details in the console")
+            handleServerAppError(errorResponse, dispatch)
+            dispatch(setAppStatusAC('failed'))
+        }
     }
 }
