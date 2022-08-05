@@ -19,7 +19,7 @@ const initialState = {
         maxCardsCount: 100,
         minCardsCount: 0,
         page: 1,
-        pageCount: 0
+        pageCount: 5
     },
     isFetching: false,
     options: {pageCount: 10, min: 0, max: 100} as PacksQueryParamsType
@@ -43,17 +43,6 @@ export const getPacksAC = (packsTableData: PackResponseType) => ({
 export const setOptionsAC = (options: PacksQueryParamsType) => ({type: 'CARDS-PACK/SET-OPTIONS', options} as const)
 
 //TS
-// export const getStartPacksTC = () => {
-//     return async (dispatch: Dispatch<ActionType>, getState: () => AppRootStateType) => {
-//         const packsOptions = getState().packs.options
-//         try {
-//             const res = await packsAPI.getPacks(packsOptions)
-//             dispatch(getPacksAC(res.data))
-//         } catch (err: any) {
-//             handleServerAppError(err.response.data.error, dispatch)
-//         }
-//     }
-// }
 
 export const getPacksTC = (options?: PacksQueryParamsType) => {
 

@@ -14,19 +14,20 @@ export const CardsPack = () => {
     const dispatch = useDispatch<ThunkDispatch<AppRootStateType, unknown, Action> & AppDispatch>()
     const min = useSelector<AppRootStateType, number | undefined>(state => state.cardsPack.options.min)
     const max = useSelector<AppRootStateType, number | undefined>(state => state.cardsPack.options.max)
-    const [packNameSearch,setPackNameSearch]=useState('')
+
 
     useEffect(() => {
-        dispatch(getPacksTC({packName:packNameSearch}))
+        dispatch(getPacksTC())
     }, [min, max])
 
+
     return (
-            <div className={style.blockTable}>
-                <ErrorSnackbar/>
-                <HeaderCardsPack/>
-                <TableList/>
-                <PaginationCardsPack/>
-            </div>
+        <div className={style.blockTable}>
+            <ErrorSnackbar/>
+            <HeaderCardsPack/>
+            <TableList/>
+            <PaginationCardsPack/>
+        </div>
     );
 }
 
