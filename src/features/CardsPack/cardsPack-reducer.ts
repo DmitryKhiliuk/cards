@@ -60,7 +60,6 @@ export const getPacksTC = (options?: PacksQueryParamsType) => {
         }
     }
 }
-
 export const addCardsPackTC = (addPackPayload: AddPackPayloadType): ThunkType => {
     return async (dispatch) => {
         try {
