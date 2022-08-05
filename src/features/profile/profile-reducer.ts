@@ -46,7 +46,7 @@ const initialState: ResponseProfileType = {
 
 
 
-export const profileReducer = (state: ResponseProfileType = initialState, action: setProfileACType | updateProfileTitleACType | updateProfileAvatarACType ):ResponseProfileType => {
+export const profileReducer = (state: ResponseProfileType = initialState, action: ActionProfileType ):ResponseProfileType => {
     switch (action.type){
         case 'PROFILE':
             return action.profile
@@ -126,3 +126,5 @@ export const updateProfileAvatarTC = ({name, avatar}:updateProfileType) => {
         }
     }
 }
+
+export type ActionProfileType = setProfileACType | updateProfileTitleACType | updateProfileAvatarACType

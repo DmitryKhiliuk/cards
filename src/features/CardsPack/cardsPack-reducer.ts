@@ -25,7 +25,7 @@ const initialState = {
     options: {pageCount: 10, min: 0, max: 100} as PacksQueryParamsType
 }
 
-export const packsReducer = (state: PacksInitialStateType = initialState, action: ActionType): PacksInitialStateType => {
+export const packsReducer = (state: PacksInitialStateType = initialState, action: ActionPacksType): PacksInitialStateType => {
     switch (action.type) {
         case 'CARDS-PACK/GET-PACKS':
             return {...state, packsTableData: action.packsTableData}
@@ -46,7 +46,7 @@ export const setOptionsAC = (options: PacksQueryParamsType) => ({type: 'CARDS-PA
 
 export const getPacksTC = (options?: PacksQueryParamsType) => {
 
-    return async (dispatch: Dispatch<ActionType>, getState: () => AppRootStateType) => {
+    return async (dispatch: Dispatch<ActionPacksType>, getState: () => AppRootStateType) => {
         if (options) {
             dispatch(setOptionsAC(options))
         }
@@ -99,9 +99,9 @@ export type PacksInitialStateType = {
     options: PacksQueryParamsType
 }
 
-export type ThunkType = ThunkAction<void, AppRootStateType, {}, ActionType>
+export type ThunkType = ThunkAction<void, AppRootStateType, {}, ActionPacksType>
 
-type ActionType = ReturnType<typeof getPacksAC>
+export type ActionPacksType = ReturnType<typeof getPacksAC>
     | ReturnType<typeof setOptionsAC>
     | ReturnType<typeof setProfileAC>
     | cardStatusACType

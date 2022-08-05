@@ -9,7 +9,7 @@ const initialState = {
 }
 type InitialStateType = typeof initialState
 
-export const resetPasswordReducer = (state: InitialStateType = initialState, action: ActionType): InitialStateType => {
+export const resetPasswordReducer = (state: InitialStateType = initialState, action: ActionNewPassType): InitialStateType => {
     switch (action.type) {
         case 'NEW_PASSWORD/SET_SUCCESS': {
             return {...state, newPassSucces: action.newPassSucces}
@@ -35,4 +35,4 @@ export const newPasswordTC = (password: string, resetPasswordToken: string | und
     }
 }
 
-type ActionType = ReturnType<typeof setNewPasswordSuccessAC>
+export type ActionNewPassType = ReturnType<typeof setNewPasswordSuccessAC>

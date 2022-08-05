@@ -8,7 +8,7 @@ const initialState = {
 }
 type InitialStateType = typeof initialState
 
-export const passwordRecoverReducer = (state: InitialStateType = initialState, action: ActionType): InitialStateType => {
+export const passwordRecoverReducer = (state: InitialStateType = initialState, action: ActionRecPassType): InitialStateType => {
     switch (action.type) {
         case 'RECOVERY_PASSWORD/SET_SUCCESS':
             return {...state, recoverPassSucces: action.recoverPassSucces}
@@ -35,4 +35,4 @@ export const recoverTC = (email: string) => async (dispatch: AppDispatch) => {
 
 }
 
-type ActionType = ReturnType<typeof setRecoveryPasswordSuccessAC>
+export type ActionRecPassType = ReturnType<typeof setRecoveryPasswordSuccessAC>

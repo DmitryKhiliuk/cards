@@ -67,7 +67,6 @@ export const cardStatusAC = (cardStatus: cardStatusType) => {
     } as const
 }
 
-export type ActionCardsType = setCardsACType | setOptionsCardsACType | cardStatusACType | ReturnType<typeof setOptionsAC>
 
 export const setCardsTC = (cardsPack_id: string, options?: PacksQueryParamsType) =>
      async (dispatch: Dispatch<ActionCardsType>, getState: () => AppRootStateType) => {
@@ -98,7 +97,6 @@ export const addCardTC = (newCard: newCardsType) => {
     return async (dispatch: TypedDispatch) => {
         try {
             const res = await cardsAPI.addCards(newCard)
-            // @ts-ignore
             dispatch(setCardsTC(res.data.newCard.cardsPack_id))
         } catch (error) {
 
@@ -116,3 +114,5 @@ export const deleteCardTC = (cardsPack_id: string): ThunkType => {
         }
     }
 }
+
+export type ActionCardsType = setCardsACType | setOptionsCardsACType | cardStatusACType | ReturnType<typeof setOptionsAC>
