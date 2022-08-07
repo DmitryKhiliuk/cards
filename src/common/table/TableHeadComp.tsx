@@ -6,7 +6,7 @@ import {ArrowDownward, ArrowUpward, Delete, KeyboardArrowDown} from "@mui/icons-
 
 type TableHeadCompType = {
     tableCell: string[],
-    callbackSort: (sort: string) => void
+    callbackSort: (sort: any) => void
 }
 
 export const TableHeadComp = (props: TableHeadCompType) => {
