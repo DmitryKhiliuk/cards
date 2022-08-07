@@ -8,6 +8,7 @@ import {AppDispatch, AppRootStateType} from "../../../../app/store";
 import {Action} from "redux";
 import style from '../../CardsPack.module.css'
 import {Slider} from "@material-ui/core";
+import {NewPackModal} from "../Table/NewPackModal";
 
 
 export const HeaderCardsPack = () => {
@@ -46,8 +47,9 @@ export const HeaderCardsPack = () => {
     return <div className={style.headerCardsPack}>
         <h2 className={style.titleHeaderCP}>Packs list</h2>
         <div className={style.blockBtnAddCP}>
-            <Button onClick={event => addPack('MaxTs')} variant="contained" className={style.btnAddCP}
-            >Add new pack</Button>
+            <Button variant="contained" className={style.btnAddCP}>
+                <NewPackModal addPack={addPack}/>
+            </Button>
         </div>
         <div className={style.searchCardsPack}>
             <h4>Search</h4>
