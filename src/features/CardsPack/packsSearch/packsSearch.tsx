@@ -6,7 +6,7 @@ import {useDispatch} from "react-redux";
 import {ThunkDispatch} from "redux-thunk";
 import {AppDispatch, AppRootStateType} from "../../../app/store";
 import {Action} from "redux";
-import {useDebounce} from "../../../common/hook-usedebounce/hookUseDebounce";
+import {useDebounce} from "../../../common/hooks/hooks";
 
 
 export const PacksSearch = () => {

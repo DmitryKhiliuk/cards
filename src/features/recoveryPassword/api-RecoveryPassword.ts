@@ -1,6 +1,5 @@
 import {instance} from "../../common/instance/instance";
 
-
 const from = "test-front-admin <ai73a@yandex.by>";
 const message = `<div style="background-color: lime; padding: 15px">
 password recovery link:  <a href='https://dmitrykhiliuk.github.io/cards/#/set-new-password/$token$'>link</a></div>`
