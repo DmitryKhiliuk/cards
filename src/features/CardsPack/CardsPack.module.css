@@ -2,7 +2,6 @@
     margin-top: 20px;
     height: 85vh;
     width: 70vw;
-    padding: 10px;
     display: flex;
     flex-direction: column;
     background-color: white;
@@ -11,6 +10,7 @@
 
 .headerCardsPack {
     width: 100%;
+    padding: 0px 10px;
     height: 130px;
     display: grid;
     grid-template-areas:

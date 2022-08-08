@@ -5,21 +5,22 @@ import {AppDispatch} from "../../app/store";
 
 const initialState = {
     recoverPassSucces: false,
-}
-type InitialStateType = typeof initialState
+};
+
+type InitialStateType = typeof initialState;
 
 export const passwordRecoverReducer = (state: InitialStateType = initialState, action: ActionRecPassType): InitialStateType => {
     switch (action.type) {
         case 'RECOVERY_PASSWORD/SET_SUCCESS':
-            return {...state, recoverPassSucces: action.recoverPassSucces}
+            return {...state, recoverPassSucces: action.recoverPassSuccess}
         default:
             return state
     }
-}
-export const setRecoveryPasswordSuccessAC = (recoverPassSucces: boolean) => ({
+};
+export const setRecoveryPasswordSuccessAC = (recoverPassSuccess: boolean) => ({
     type: 'RECOVERY_PASSWORD/SET_SUCCESS',
-    recoverPassSucces
-}) as const
+    recoverPassSuccess
+})as const;
 
 export const recoverTC = (email: string) => async (dispatch: AppDispatch) => {
     dispatch(setAppStatusAC('loading'))
@@ -32,7 +33,6 @@ export const recoverTC = (email: string) => async (dispatch: AppDispatch) => {
         handleServerAppError(errorResponse, dispatch)
         dispatch(setAppStatusAC('failed'))
     }
-
-}
+};
 
 export type ActionRecPassType = ReturnType<typeof setRecoveryPasswordSuccessAC>

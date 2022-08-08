@@ -1,25 +1,29 @@
-import React, {useEffect, useState} from 'react';
+import React, {useEffect} from 'react';
 import {TableList} from "./packsList/Table/tableList";
 import style from './CardsPack.module.css'
 import {HeaderCardsPack} from "./packsList/header/HeaderCardsPack";
 import {PaginationCardsPack} from "./packsList/footer/PaginationCardsPack";
 import {getPacksTC} from "./cardsPack-reducer";
-import {useDispatch, useSelector} from "react-redux";
-import {ThunkDispatch} from "redux-thunk";
-import {AppDispatch, AppRootStateType} from "../../app/store";
-import {Action} from "redux";
+import {AppRootStateType} from "../../app/store";
 import {ErrorSnackbar} from "../../utils/ErrorSnackbar/ErrorSnackbar";
+import {useAppDispatch, useAppSelector} from "../../common/hooks/hooks";
 
 export const CardsPack = () => {
-    const dispatch = useDispatch<ThunkDispatch<AppRootStateType, unknown, Action> & AppDispatch>()
-    const min = useSelector<AppRootStateType, number | undefined>(state => state.cardsPack.options.min)
-    const max = useSelector<AppRootStateType, number | undefined>(state => state.cardsPack.options.max)
+    const dispatch = useAppDispatch();
+    const min = useAppSelector((state:AppRootStateType) => state.packs.params.min);
+    const max = useAppSelector((state:AppRootStateType) => state.packs.params.max);
+    // const pageCount = useAppSelector((state:AppRootStateType) => state.packs.params.pageCount);
+    // const user_id = useAppSelector((state:AppRootStateType) => state.packs.params.user_id);
+    console.log(min);
+    console.log(max)
 
 
     useEffect(() => {
+        console.log(min)
+
         dispatch(getPacksTC())
     }, [min, max])
-
+    //page, sortPacks, user_id, pageCount
 
     return (
         <div className={style.blockTable}>
