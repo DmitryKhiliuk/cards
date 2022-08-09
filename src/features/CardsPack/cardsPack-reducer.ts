@@ -22,7 +22,7 @@ const initialState = {
         pageCount: 5,
 
     },
-    options: {pageCount: 10, min: 0, max: 100} as PacksQueryParamsType,
+    options: {pageCount: 10, min: 0, max: 100,packName:''} as PacksQueryParamsType,
 }
 
 
