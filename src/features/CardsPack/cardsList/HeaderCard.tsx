@@ -2,21 +2,13 @@ import React from 'react';
 import KeyboardBackspaceIcon from '@mui/icons-material/KeyboardBackspace';
 import Button from "@mui/material/Button";
 import style from "../CardsPack.module.css";
-import {PacksSearch} from "../packsSearch/packsSearch";
 import {CARDS} from "../../../common/routes/routes";
 import {useNavigate} from "react-router-dom";
-import {useDispatch, useSelector} from "react-redux";
-import {AppDispatch, AppRootStateType} from "../../../app/store";
-import {CardPacksType} from "../api-CardsPack";
-import {CardsType} from "./api-Cards";
-import {ThunkDispatch} from "redux-thunk";
-import {Action} from "redux";
+import {AppRootStateType} from "../../../app/store";
 import {addCardTC} from "./cards-reducer";
 import {useAppDispatch, useAppSelector} from "../../../common/hooks/hooks";
 import {CardsSearch} from "../cardsSearch/cardsSearch";
-import {addCardTC, cardStatusAC, setCardsTC} from "./cards-reducer";
-import {getPacksTC} from "../cardsPack-reducer";
-import {CardsSearch} from "../cardsSearch/cardsSearch";
+
 
 
 type HeaderCardType = {

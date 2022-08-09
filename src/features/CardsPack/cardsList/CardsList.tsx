@@ -4,9 +4,10 @@ import style from "../../../common/table/TableList.module.css";
 import {TableHeadComp} from "../../../common/table/TableHeadComp";
 import {TableBodyComp} from "../../../common/table/TableBody";
 import {AppRootStateType} from "../../../app/store";
-import {deleteCardTC} from "./cards-reducer";
+import {deleteCardTC, setParamsCardsAC} from "./cards-reducer";
 import {CardsType} from "./api-Cards";
 import {useAppDispatch, useAppSelector} from "../../../common/hooks/hooks";
+import {formatDate} from "../../../common/formatDate/formatDate";
 
 export const CardsList = () => {
     const dispatch = useAppDispatch();
@@ -22,7 +23,7 @@ export const CardsList = () => {
 
 
     const sortUpdate = (sort: any) => {
-        dispatch(setOptionsCardsAC({sortCards:sort}));
+        dispatch(setParamsCardsAC({sortCards:sort}));
     }
     return (
         <div>
