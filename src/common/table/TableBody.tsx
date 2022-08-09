@@ -9,7 +9,7 @@ import Edit from "@mui/icons-material/Edit";
 type TableBodyType = {
     myId: string | null,
     removeData: (id: string) => void,
-    editData?: (id: string) => void,
+    editData?: (id: string) => void
     callCards?: (id: string, cardsCount?: number, name?: string) => void,
     id: string,
     userId: string

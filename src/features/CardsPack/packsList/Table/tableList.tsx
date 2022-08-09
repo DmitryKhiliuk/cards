@@ -9,6 +9,11 @@ import {TableBodyComp} from "../../../../common/table/TableBody";
 import {useNavigate} from "react-router-dom";
 import {formatDate} from "../../../../common/formatDate/formatDate";
 import {useAppDispatch, useAppSelector} from "../../../../common/hooks/hooks";
+import {EditPackModal} from "./EditPackModal";
+import Modal from "@mui/material/Modal";
+import {NewPackModal} from "./NewPackModal";
+
+
 
 export const TableList = () => {
     const dispatch = useAppDispatch();
@@ -21,9 +26,17 @@ export const TableList = () => {
     const removePackCards = (idPack: string) => {
         dispatch(deleteCardsPackTC(idPack) as any)
     };
+
+
+
     const editPackCards = (idPack: string) => {
         dispatch(updateCardsPackTC({_id: idPack, name: 'MaxTsNew'}) as any)
     };
+
+    const editModalPackCards = () => {
+
+
+    }
 
     const callCards = (cardsPack_id:string, cardsCount: number | undefined) => {
         if(cardsCount) {
@@ -53,8 +66,9 @@ export const TableList = () => {
                                               itemFour={item.user_name}
                                               myId={myId}
                                               removeData={removePackCards}
-                                              editData={editPackCards}
+                                              editData={editModalPackCards}
                                               callCards={callCards}/>
+
                     })}
                 </Table>
             </TableContainer>
