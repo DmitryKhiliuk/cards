@@ -1,4 +1,4 @@
-import React, {useEffect} from 'react';
+import React, {useEffect, useState} from 'react';
 import {TableList} from "./packsList/Table/tableList";
 import style from './CardsPack.module.css'
 import {HeaderCardsPack} from "./packsList/header/HeaderCardsPack";

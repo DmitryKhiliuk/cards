@@ -19,8 +19,10 @@ export const CardsList = () => {
         dispatch(deleteCardTC(cardsPack_id) as any)
     };
 
-    const sortUpdate = () => {
 
+
+    const sortUpdate = (sort: any) => {
+        dispatch(setOptionsCardsAC({sortCards:sort}));
     }
     return (
         <div>
@@ -33,7 +35,7 @@ export const CardsList = () => {
                                               userId={item.user_id}
                                               itemOne={item.question}
                                               itemTwo={item.answer}
-                                              itemTree={item.updated}
+                                              itemTree={formatDate(item.updated)}
                                               itemFour={item.grade}
                                               myId={myId}
                                               removeData={removeCard}

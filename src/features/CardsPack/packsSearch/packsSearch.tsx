@@ -3,10 +3,13 @@ import Paper from '@mui/material/Paper';
 import InputBase from '@mui/material/InputBase';
 import {setParamsAC} from "../cardsPack-reducer";
 import {useDispatch, useSelector} from "react-redux";
+import {setOptionsAC} from "../cardsPack-reducer";
+import {useDispatch, useSelector} from "react-redux";
 import {ThunkDispatch} from "redux-thunk";
 import {AppDispatch, AppRootStateType} from "../../../app/store";
 import {Action} from "redux";
 import {useAppDispatch, useAppSelector} from "../../../common/hooks/hooks";
+
 
 
 

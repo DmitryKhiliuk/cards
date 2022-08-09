@@ -46,10 +46,12 @@ export const TableList = () => {
         // navigate(`/cards-for-packs/${cardsPack_id}`)
     };
 
-    const sortUpdate = (sort: string) => {
-        dispatch(getPacksTC({sortPacks: sort}))
-    };
-    const tableCell = ['Name', 'Cards', 'LastUpdated', 'Created by', 'Actions'];
+    const sortUpdate = (sort: string | undefined) => {
+        dispatch(getPacksTC({sortPacks: sort}) as any)
+    }
+    // const tableCell = ['Name', 'Cards', 'LastUpdated', 'Created by', 'Actions']
+    const tableCell = ['name', 'cardsCount', 'updated', 'user_name', 'Actions']
+
 
     return (
         <div>

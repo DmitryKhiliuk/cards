@@ -80,4 +80,4 @@ export const HeaderCardsPack = () => {
             />
         </div>
     </div>
-};
+}
