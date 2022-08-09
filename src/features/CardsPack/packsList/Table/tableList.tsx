@@ -35,15 +35,10 @@ export const TableList = () => {
 
     const editModalPackCards = () => {
 
-
     }
 
-    const callCards = (cardsPack_id:string, cardsCount: number | undefined) => {
-        if(cardsCount) {
+    const callCards = (cardsPack_id:string) => {
             navigate(`/cards-for-packs/${cardsPack_id}`)
-        }
-        /*dispatch(setCardsTC(cardsPack_id))*/
-        // navigate(`/cards-for-packs/${cardsPack_id}`)
     };
 
     const sortUpdate = (sort: string | undefined) => {
@@ -51,7 +46,6 @@ export const TableList = () => {
     }
     // const tableCell = ['Name', 'Cards', 'LastUpdated', 'Created by', 'Actions']
     const tableCell = ['name', 'cardsCount', 'updated', 'user_name', 'Actions']
-
 
     return (
         <div>
