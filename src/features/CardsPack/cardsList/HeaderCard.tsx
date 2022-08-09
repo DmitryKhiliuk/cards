@@ -21,7 +21,8 @@ export const HeaderCard = (props:HeaderCardType) => {
     const packs = useAppSelector((state: AppRootStateType) => state.packs.packsTableData.cardPacks);
     const cards=useAppSelector((state:AppRootStateType) => state.cards.cardsTableData.cards);
     const myId = useAppSelector((state: AppRootStateType) => state.profile._id);
-    const packUserId=useAppSelector((state:AppRootStateType) => state.cards.cardsTableData.packUserId);
+    const packUserId = useAppSelector((state: AppRootStateType) => state.cards.cardsTableData.packUserId);
+    const cardsCount = useAppSelector((state: AppRootStateType) => state.cards.cardsTableData.cardsTotalCount);
 
     const card = packs.find((el) => el._id === props.id);
 
@@ -36,18 +37,35 @@ export const HeaderCard = (props:HeaderCardType) => {
     };
 
     return (
-        <div className={style.headerCardsTable}>
-            <Button variant="contained" size={"small"} style={{width: '75px'}} startIcon={<KeyboardBackspaceIcon/>} onClick={onClickHandler}>
-                BACK
-            </Button>
-            <div style={{display: 'flex', justifyContent: 'space-between'}}>
-                <h2>{card && card.name}</h2>
-                {(myId === packUserId) && <Button variant="contained" onClick={addCardHandler}>Add new card</Button>}
-            </div>
-            <div className={style.searchCardsPack}>
-                <h3>Search question</h3>
-                <CardsSearch/>
-            </div>
+        <div>
+            {cardsCount === 0
+                ? <div className={style.headerCardsTable}>
+                    <Button variant="contained" size={"small"} style={{width: '75px'}}
+                            startIcon={<KeyboardBackspaceIcon/>} onClick={onClickHandler}>
+                        BACK
+                    </Button>
+                    <div style={{display: 'flex', justifyContent: 'space-between'}}>
+                        <h2>{card && card.name}</h2>
+                        {(myId === packUserId) &&
+                            <Button variant="contained" onClick={addCardHandler}>Add new card</Button>}
+                    </div>
+                </div>
+                : <div className={style.headerCardsTable}>
+                    <Button variant="contained" size={"small"} style={{width: '75px'}}
+                            startIcon={<KeyboardBackspaceIcon/>} onClick={onClickHandler}>
+                        BACK
+                    </Button>
+                    <div style={{display: 'flex', justifyContent: 'space-between'}}>
+                        <h2>{card && card.name}</h2>
+                        {(myId === packUserId) &&
+                            <Button variant="contained" onClick={addCardHandler}>Add new card</Button>}
+                    </div>
+                    <div className={style.searchCardsPack}>
+                        <h3>Search question</h3>
+                        <PacksSearch/>
+                    </div>
+                </div>
+            }
         </div>
     );
 };
