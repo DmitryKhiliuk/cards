@@ -20,8 +20,7 @@ const initialState = {
         packUserId: '',
         sortCards: '0updated',
     },
-    isFetching: false,
-    params: {pageCount: 10, page: 1, sortCards: '0updated'} as CardsQueryParamsType,
+    params: {pageCount: 10, page: 1, sortCards: '0updated',cardQuestion:''} as CardsQueryParamsType,
     cardsStatus: 'exp' as cardStatusType
 };
 
@@ -44,7 +43,7 @@ export const cardsReducer = (state: initialStateType = initialState, action: Act
 
 
 export const getCardsAC = (cardsTableData: CardsResponseType) => ({type: 'cards/GET-CARDS', cardsTableData} as const);
-export const setParamsCardsAC = (params: PacksQueryParamsType) => ({type: 'cards/SET-PARAMS', params} as const);
+export const setParamsCardsAC = (params: CardsQueryParamsType) => ({type: 'cards/SET-PARAMS', params} as const);
 export const cardStatusAC = (cardStatus: cardStatusType) => ({type: 'cards/CARD-STATUS', cardStatus} as const)
 
 type GetCardsActionType = ReturnType<typeof getCardsAC>;
@@ -52,12 +51,12 @@ type SetParamsCardsActionType = ReturnType<typeof setParamsCardsAC>;
 export type CardStatusActionType = ReturnType<typeof cardStatusAC>;
 
 
-export const getCardsTC = (cardsPack_id: string, params?: PacksQueryParamsType): AppThunk =>
+export const getCardsTC = (cardsPack_id: string, params?: CardsQueryParamsType): AppThunk =>
     async (dispatch, getState: () => AppRootStateType) => {
         if (params) {
             dispatch(setParamsCardsAC(params))
         }
-        const {sortCards, page, pageCount} = getState().cards.params;
+        const {sortCards, page, pageCount,cardQuestion} = getState().cards.params;
         dispatch(setAppStatusAC('loading'))
         try {
             const response = await cardsAPI.getCards({
@@ -65,6 +64,7 @@ export const getCardsTC = (cardsPack_id: string, params?: PacksQueryParamsType):
                 sortCards,
                 page,
                 pageCount,
+                cardQuestion,
             });
             dispatch(getCardsAC(response.data));
             if (response.data.cards.length) {

@@ -6,7 +6,7 @@ import {AppRootStateType} from "../../../app/store";
 import {useParams, useNavigate} from "react-router-dom";
 import style from "../CardsPack.module.css";
 import {CARDS, SING_IN} from "../../../common/routes/routes";
-import {useAppDispatch, useAppSelector} from "../../../common/hooks/hooks";
+import {useAppDispatch, useAppSelector, useDebounce} from "../../../common/hooks/hooks";
 import {getCardsTC} from "./cards-reducer";
 
 export const Cards = () => {
@@ -17,6 +17,9 @@ export const Cards = () => {
     const page = useAppSelector((state:AppRootStateType) => state.cards.params.page);
     const pageCount = useAppSelector((state:AppRootStateType) => state.cards.params.pageCount);
 
+    const cardQuestionSearch =useAppSelector((state:AppRootStateType) => state.cards.params.cardQuestion);
+    const debouncedSearchQuestion = useDebounce(cardQuestionSearch, 800);
+
     const {id} = useParams()
 
     useEffect(() => {
@@ -26,7 +29,7 @@ export const Cards = () => {
         if(!isLoggedIn) {
             navigate(SING_IN)
         }
-    }, [dispatch, sortCards, page, pageCount]);
+    }, [dispatch, sortCards, page, pageCount,debouncedSearchQuestion]);
 
     return (
         <div className={style.blockTable}>
