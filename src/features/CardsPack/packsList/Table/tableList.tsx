@@ -25,12 +25,9 @@ export const TableList = () => {
         dispatch(updateCardsPackTC({_id: idPack, name: 'MaxTsNew'}) as any)
     };
 
-    const callCards = (cardsPack_id:string, cardsCount: number | undefined) => {
-        if(cardsCount) {
-            navigate(`/cards-for-packs/${cardsPack_id}`)
-        }
+    const callCards = (cardsPack_id:string) => {
         /*dispatch(setCardsTC(cardsPack_id))*/
-        // navigate(`/cards-for-packs/${cardsPack_id}`)
+        navigate(`/cards-for-packs/${cardsPack_id}`)
     };
 
     const sortUpdate = (sort: string) => {

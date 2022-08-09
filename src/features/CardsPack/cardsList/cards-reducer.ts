@@ -16,12 +16,12 @@ const initialState = {
         maxGrade: 10,
         minGrade: 0,
         page: 1,
-        pageCount: 4,
+        pageCount: 5,
         packUserId: '',
         sortCards: '0updated',
     },
     isFetching: false,
-    params: {pageCount: 10, page: 1, sortCards: '0updated'} as CardsQueryParamsType,
+    params: {pageCount: 5, page: 1, sortCards: '0updated'} as CardsQueryParamsType,
     cardsStatus: 'exp' as cardStatusType
 };
 
