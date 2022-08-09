@@ -19,7 +19,7 @@ const initialState = {
         pageCount: 5
     },
     isFetching: false,
-    params: {pageCount: 10, min: 0, max: 100} as PacksQueryParamsType
+    params: {pageCount: 10, min: 0, max: 100,packName:''} as PacksQueryParamsType
 };
 
 export const packsReducer = (state: PacksInitialStateType = initialState, action: ActionPacksType): PacksInitialStateType => {

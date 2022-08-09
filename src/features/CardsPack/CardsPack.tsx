@@ -6,7 +6,7 @@ import {PaginationCardsPack} from "./packsList/footer/PaginationCardsPack";
 import {getPacksTC} from "./cardsPack-reducer";
 import {AppRootStateType} from "../../app/store";
 import {ErrorSnackbar} from "../../utils/ErrorSnackbar/ErrorSnackbar";
-import {useAppDispatch, useAppSelector} from "../../common/hooks/hooks";
+import {useAppDispatch, useAppSelector, useDebounce} from "../../common/hooks/hooks";
 
 export const CardsPack = () => {
     const dispatch = useAppDispatch();
@@ -17,12 +17,14 @@ export const CardsPack = () => {
     console.log(min);
     console.log(max)
 
+    const packNameSearch =useAppSelector((state:AppRootStateType) => state.packs.params.packName);
+    const debouncedSearchPaks = useDebounce(packNameSearch, 800);
 
     useEffect(() => {
         console.log(min)
 
         dispatch(getPacksTC())
-    }, [min, max])
+    }, [min, max,debouncedSearchPaks])
     //page, sortPacks, user_id, pageCount
 
     return (

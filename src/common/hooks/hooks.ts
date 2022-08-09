@@ -6,7 +6,7 @@ import {useEffect, useState} from "react";
 export const useAppDispatch: () => AppDispatch = useDispatch;
 export const useAppSelector: TypedUseSelectorHook<AppRootStateType> = useSelector;
 
-export const useDebounce = (value:string, delay:number) => {
+export const useDebounce = (value:string | undefined, delay:number) => {
     const [debouncedValue, setDebouncedValue] = useState(value);
 
     useEffect(() => {
