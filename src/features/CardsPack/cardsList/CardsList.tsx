@@ -4,8 +4,8 @@ import style from "../../../common/table/TableList.module.css";
 import {TableHeadComp} from "../../../common/table/TableHeadComp";
 import {TableBodyComp} from "../../../common/table/TableBody";
 import {AppRootStateType} from "../../../app/store";
-import {deleteCardTC, setParamsCardsAC} from "./cards-reducer";
-import {CardsType} from "./api-Cards";
+import {deleteCardTC, setParamsCardsAC} from "./cardsReducer";
+import {CardsType} from "./apiCards";
 import {useAppDispatch, useAppSelector} from "../../../common/hooks/hooks";
 import {formatDate} from "../../../common/formatDate/formatDate";
 

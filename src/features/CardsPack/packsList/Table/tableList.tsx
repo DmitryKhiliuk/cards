@@ -27,8 +27,6 @@ export const TableList = () => {
         dispatch(deleteCardsPackTC(idPack) as any)
     };
 
-
-
     const editPackCards = (idPack: string) => {
         dispatch(updateCardsPackTC({_id: idPack, name: 'MaxTsNew'}) as any)
     };
@@ -55,6 +53,7 @@ export const TableList = () => {
                     {packsTableData.map((item: CardPacksType) => {
                         return <TableBodyComp key={item._id}
                                               id={item._id}
+                                              pack={item}
                                               userId={item.user_id}
                                               itemOne={item.name}
                                               itemTwo={item.cardsCount}

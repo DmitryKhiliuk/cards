@@ -6,7 +6,7 @@ import {
 } from "../CardsPack/api-CardsPack";
 import {AppRootStateType, AppThunk} from "../../app/store";
 import {handleServerAppError} from "../../utils/error-utils";
-import {cardStatusAC} from "./cardsList/cards-reducer";
+import {cardStatusAC} from "./cardsList/cardsReducer";
 import {setAppStatusAC} from "../../app/app-reducer";
 
 const initialState = {

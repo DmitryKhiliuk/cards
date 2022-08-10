@@ -1,7 +1,7 @@
 import React from 'react'
 import {AppRootStateType} from "../../../app/store";
 import {useAppSelector} from "../../../common/hooks/hooks";
-import {setParamsCardsAC} from "../cardsList/cards-reducer";
+import {setParamsCardsAC} from "./cardsReducer";
 import {Pagination} from "../../../common/pagination/Pagination";
 
 export const PaginationCards = () => {

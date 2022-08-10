@@ -7,7 +7,7 @@ import {useParams, useNavigate} from "react-router-dom";
 import style from "../CardsPack.module.css";
 import {CARDS, SING_IN} from "../../../common/routes/routes";
 import {useAppDispatch, useAppSelector, useDebounce} from "../../../common/hooks/hooks";
-import {getCardsTC} from "./cards-reducer";
+import {getCardsTC} from "./cardsReducer";
 
 export const Cards = () => {
     const dispatch = useAppDispatch();

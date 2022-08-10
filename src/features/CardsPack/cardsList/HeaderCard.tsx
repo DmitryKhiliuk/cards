@@ -5,7 +5,7 @@ import style from "../CardsPack.module.css";
 import {CARDS} from "../../../common/routes/routes";
 import {useNavigate} from "react-router-dom";
 import {AppRootStateType} from "../../../app/store";
-import {addCardTC} from "./cards-reducer";
+import {addCardTC} from "./cardsReducer";
 import {useAppDispatch, useAppSelector} from "../../../common/hooks/hooks";
 import {CardsSearch} from "../cardsSearch/cardsSearch";
 
@@ -17,6 +17,7 @@ type HeaderCardType = {
 
 export const HeaderCard = (props:HeaderCardType) => {
     const dispatch = useAppDispatch();
+
     const navigate = useNavigate();
     const packs = useAppSelector((state: AppRootStateType) => state.packs.packsTableData.cardPacks);
     const cards=useAppSelector((state:AppRootStateType) => state.cards.cardsTableData.cards);

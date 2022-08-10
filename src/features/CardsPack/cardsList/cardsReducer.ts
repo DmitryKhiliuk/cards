@@ -4,7 +4,7 @@ import {
     CardsQueryParamsType,
     CardsResponseType,
     CardsType, newCardsType
-} from "./api-Cards";
+} from "./apiCards";
 import {AppRootStateType, AppThunk} from "../../../app/store";
 import {handleServerAppError} from "../../../utils/error-utils";
 import {setAppStatusAC} from "../../../app/app-reducer";
@@ -44,7 +44,9 @@ export const cardsReducer = (state: initialStateType = initialState, action: Act
 
 export const getCardsAC = (cardsTableData: CardsResponseType) => ({type: 'cards/GET-CARDS', cardsTableData} as const);
 export const setParamsCardsAC = (params: CardsQueryParamsType) => ({type: 'cards/SET-PARAMS', params} as const);
-export const cardStatusAC = (cardStatus: cardStatusType) => ({type: 'cards/CARD-STATUS', cardStatus} as const)
+export const cardStatusAC = (cardStatus: cardStatusType) => ({type: 'cards/CARD-STATUS', cardStatus} as const);
+export const updateGrade = ({ grade, card_id: card._id }) => ({type: 'cards/UPDATE-Grade', cardStatus} as const);
+
 
 type GetCardsActionType = ReturnType<typeof getCardsAC>;
 type SetParamsCardsActionType = ReturnType<typeof setParamsCardsAC>;

@@ -2,7 +2,7 @@ import React, {ChangeEvent} from 'react';
 import Paper from '@mui/material/Paper';
 import InputBase from '@mui/material/InputBase';
 import {AppRootStateType} from "../../../app/store";
-import {setParamsCardsAC} from "../cardsList/cards-reducer";
+import {setParamsCardsAC} from "../cardsList/cardsReducer";
 import {useAppDispatch, useAppSelector} from "../../../common/hooks/hooks";
 
 

@@ -21,7 +21,7 @@ export const CardsPack = () => {
     useEffect(() => {
         dispatch(getPacksTC())
     }, [min, max,debouncedSearchPaks, pageCount, page])
-    //page, sortPacks, user_id, pageCount
+    //sortPacks, user_id, pageCount
 
     return (
         <div className={style.blockTable}>

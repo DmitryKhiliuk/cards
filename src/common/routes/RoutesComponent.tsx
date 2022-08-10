@@ -4,7 +4,7 @@ import {
     CARDS,
     CARDSFORPACKS,
     CHECK_EMAIL,
-    ERROR,
+    ERROR, LEARN,
     LOG_OUT,
     NEW_PASSWORD,
     PROFILE,
@@ -23,6 +23,7 @@ import {ErrorPage} from "../../features/error/ErrorPage";
 import {CardsPack} from "../../features/CardsPack/CardsPack";
 import {Cards} from "../../features/CardsPack/cardsList/Cards";
 import s from '../../app/App.module.css'
+import {Learn} from "../Learn/Learn";
 
 export const RoutesComponent = () => {
     const routes = [
@@ -34,7 +35,7 @@ export const RoutesComponent = () => {
         {path: REC_PASSWORD, component: <RecoveryPassword/>},
         {path: NEW_PASSWORD, component: <NewPassword/>},
         {path: LOG_OUT, component: <LogOut/>},
-        {path: CHECK_EMAIL, component: <Profile/>},
+        {path: LEARN, component: <Learn/>},
         {path: CHECK_EMAIL, component: <CheckEmail/>},
         {path: ERROR, component: <ErrorPage/>}
     ];

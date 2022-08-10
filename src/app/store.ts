@@ -7,7 +7,7 @@ import {ActionNewPassType, resetPasswordReducer} from "../features/newPassword/n
 import {ActionRecPassType, passwordRecoverReducer} from "../features/recoveryPassword/recoveryPassword-reducer";
 import {ActionsAuthType, authReducer} from "../features/singIn/auth-reducer";
 import {ActionPacksType, packsReducer} from "../features/CardsPack/cardsPack-reducer";
-import {ActionCardsType, cardsReducer} from "../features/CardsPack/cardsList/cards-reducer";
+import {ActionCardsType, cardsReducer} from "../features/CardsPack/cardsList/cardsReducer";
 
 export const rootReducer = combineReducers({
     profile: profileReducer,
