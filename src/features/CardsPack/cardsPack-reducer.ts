@@ -23,6 +23,7 @@ const initialState = {
 };
 
 export const packsReducer = (state: PacksInitialStateType = initialState, action: ActionPacksType): PacksInitialStateType => {
+    console.log('вызов reducer')
     switch (action.type) {
         case 'CARDS-PACK/GET-PACKS':
             return {...state, packsTableData: action.packsTableData}
