@@ -9,6 +9,11 @@ import {TableBodyComp} from "../../../../common/table/TableBody";
 import {useNavigate} from "react-router-dom";
 import {formatDate} from "../../../../common/formatDate/formatDate";
 import {useAppDispatch, useAppSelector} from "../../../../common/hooks/hooks";
+import {EditPackModal} from "./EditPackModal";
+import Modal from "@mui/material/Modal";
+import {NewPackModal} from "./NewPackModal";
+
+
 
 export const TableList = () => {
     const dispatch = useAppDispatch();
@@ -21,22 +26,26 @@ export const TableList = () => {
     const removePackCards = (idPack: string) => {
         dispatch(deleteCardsPackTC(idPack) as any)
     };
+
+
+
     const editPackCards = (idPack: string) => {
         dispatch(updateCardsPackTC({_id: idPack, name: 'MaxTsNew'}) as any)
     };
 
-    const callCards = (cardsPack_id:string, cardsCount: number | undefined) => {
-        if(cardsCount) {
+    const editModalPackCards = () => {
+
+    }
+
+    const callCards = (cardsPack_id:string) => {
             navigate(`/cards-for-packs/${cardsPack_id}`)
-        }
-        /*dispatch(setCardsTC(cardsPack_id))*/
-        // navigate(`/cards-for-packs/${cardsPack_id}`)
     };
 
-    const sortUpdate = (sort: string) => {
-        dispatch(getPacksTC({sortPacks: sort}))
-    };
-    const tableCell = ['Name', 'Cards', 'LastUpdated', 'Created by', 'Actions'];
+    const sortUpdate = (sort: string | undefined) => {
+        dispatch(getPacksTC({sortPacks: sort}) as any)
+    }
+    // const tableCell = ['Name', 'Cards', 'LastUpdated', 'Created by', 'Actions']
+    const tableCell = ['name', 'cardsCount', 'updated', 'user_name', 'Actions']
 
     return (
         <div>
@@ -53,8 +62,9 @@ export const TableList = () => {
                                               itemFour={item.user_name}
                                               myId={myId}
                                               removeData={removePackCards}
-                                              editData={editPackCards}
+                                              editData={editModalPackCards}
                                               callCards={callCards}/>
+
                     })}
                 </Table>
             </TableContainer>

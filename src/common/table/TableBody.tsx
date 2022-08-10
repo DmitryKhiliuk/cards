@@ -10,7 +10,7 @@ type TableBodyType = {
     myId: string | null,
     removeData: (id: string) => void,
     editData?: (id: string) => void,
-    callCards?: (id: string, cardsCount?: number, name?: string) => void,
+    callCards?: (id: string, name?: string) => void,
     id: string,
     userId: string
     itemOne: any
@@ -22,7 +22,7 @@ type TableBodyType = {
 export const TableBodyComp = (props: TableBodyType) => {
 
     const onDoubleClickHandler = () => {
-        props.callCards && props.callCards(props.id, props.itemTwo)
+        props.callCards && props.callCards(props.id)
     };
     const onClickEditDataHandler = () => {
         props.editData && props.editData(props.id)
@@ -30,7 +30,6 @@ export const TableBodyComp = (props: TableBodyType) => {
 
     return (
             <TableBody style={{width: '100%'}}>
-
                 <TableRow hover key={props.id} onDoubleClick={onDoubleClickHandler} style={{height: "30px"}}>
                     {/*Name*/}
                     <TableCell>

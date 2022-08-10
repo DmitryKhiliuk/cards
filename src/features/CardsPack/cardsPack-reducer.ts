@@ -18,12 +18,10 @@ const initialState = {
         page: 1,
         pageCount: 5
     },
-    isFetching: false,
-    params: {pageCount: 10, min: 0, max: 100,packName:''} as PacksQueryParamsType
+      params: {pageCount: 5, min: 0, max: 100, page: 1, packName:''} as PacksQueryParamsType
 };
 
 export const packsReducer = (state: PacksInitialStateType = initialState, action: ActionPacksType): PacksInitialStateType => {
-    console.log('вызов reducer')
     switch (action.type) {
         case 'CARDS-PACK/GET-PACKS':
             return {...state, packsTableData: action.packsTableData}
@@ -104,7 +102,6 @@ export const updateCardsPackTC = (updatePackPayload: UpdatePackPayloadType): App
 
 export type PacksInitialStateType = {
     packsTableData: PackResponseType
-    isFetching: boolean
     params: PacksQueryParamsType
 };
 
