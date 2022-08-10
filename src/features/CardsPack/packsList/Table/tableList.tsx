@@ -10,6 +10,7 @@ import {useNavigate} from "react-router-dom";
 import {formatDate} from "../../../../common/formatDate/formatDate";
 import {useAppDispatch, useAppSelector} from "../../../../common/hooks/hooks";
 import {EditPackModal} from "./EditPackModal";
+import {DeletePackModal} from "./DeletePackModal";
 
 
 
@@ -23,7 +24,7 @@ export const TableList = () => {
     const myId = useAppSelector((state:AppRootStateType) => state.profile._id);
 
     const removePackCards = (idPack: string) => {
-        dispatch(deleteCardsPackTC(idPack) as any)
+        dispatch(deleteCardsPackTC(idPack))
     };
 
     const editPackCards = (id:string,  name: string, privatePack: boolean) => {
@@ -31,11 +32,17 @@ export const TableList = () => {
     };
 
     const [open, setOpen] = React.useState(false);
+    const [openDelete, setOpenDelete] = React.useState(false);
     const [id, setId] = useState('');
 
     const editModalPackCards = (idPack: string) => {
         setId(idPack)
         setOpen(true)
+    };
+
+    const deleteModalPackCards = (idPack: string) => {
+        setId(idPack)
+        setOpenDelete(true)
     };
 
     const callCards = (cardsPack_id:string) => {
@@ -62,7 +69,7 @@ export const TableList = () => {
                                               itemTree={formatDate(item.updated)}
                                               itemFour={item.user_name}
                                               myId={myId}
-                                              removeData={removePackCards}
+                                              removeData={deleteModalPackCards}
                                               editData={editModalPackCards}
                                               callCards={callCards}/>
 
@@ -70,6 +77,7 @@ export const TableList = () => {
                 </Table>
             </TableContainer>
             <EditPackModal setOpen={setOpen} open={open} editPackCards={editPackCards} id={id}/>
+            <DeletePackModal setOpen={setOpenDelete} open={openDelete} removePackCards={removePackCards} id={id}/>
         </div>
     );
 };

@@ -34,7 +34,7 @@ export const NewPackModal = (props: NewPackModalType) => {
 
         // <BasicModal name={'Add new pack'} open={props.activeModalAdd} setOpen={} onSave={addPackHandler}>
         <BasicModal name={'Add new pack'} open={props.activeModalAdd} setOpen={props.setActiveModalAdd}
-                    onSave={addPackHandler}>
+                    onSave={addPackHandler} nameButton={'Save'}>
             <TextField onChange={onChangeTextFieldHandler} id="standard-basic" label="Name Pack" variant="standard"/>
             <div>
                 <FormControlLabel control={<Checkbox

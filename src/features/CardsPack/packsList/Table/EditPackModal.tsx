@@ -40,7 +40,7 @@ export const EditPackModal = (props:EditPackModalType) =>  {
     }
 
     return (
-        <BasicModal name={'Edit name pack'} open={props.open} setOpen={props.setOpen} onSave={editPackHandler}>
+        <BasicModal name={'Edit name pack'} open={props.open} setOpen={props.setOpen} onSave={editPackHandler} nameButton={'Save'}>
             <TextField onChange={onChangeTextFieldHandler} defaultValue={initTitle} id="standard-basic" label="Name Pack" variant="standard" />
             <div >
                 <FormControlLabel  control={<Checkbox onChange={onChangeCheckboxHandler} defaultChecked={initCheck}/>} label="Private Pack" />
