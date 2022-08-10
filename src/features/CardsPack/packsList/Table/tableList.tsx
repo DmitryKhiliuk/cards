@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState} from 'react';
 import {AppRootStateType} from "../../../../app/store";
 import {CardPacksType} from "../../api-CardsPack";
 import {deleteCardsPackTC, getPacksTC, updateCardsPackTC} from "../../cardsPack-reducer";
@@ -10,8 +10,7 @@ import {useNavigate} from "react-router-dom";
 import {formatDate} from "../../../../common/formatDate/formatDate";
 import {useAppDispatch, useAppSelector} from "../../../../common/hooks/hooks";
 import {EditPackModal} from "./EditPackModal";
-import Modal from "@mui/material/Modal";
-import {NewPackModal} from "./NewPackModal";
+
 
 
 
@@ -27,15 +26,17 @@ export const TableList = () => {
         dispatch(deleteCardsPackTC(idPack) as any)
     };
 
-
-
-    const editPackCards = (idPack: string) => {
-        dispatch(updateCardsPackTC({_id: idPack, name: 'MaxTsNew'}) as any)
+    const editPackCards = (id:string,  name: string, privatePack: boolean) => {
+        dispatch(updateCardsPackTC({_id:id, name: name, private: privatePack}))
     };
 
-    const editModalPackCards = () => {
+    const [open, setOpen] = React.useState(false);
+    const [id, setId] = useState('');
 
-    }
+    const editModalPackCards = (idPack: string) => {
+        setId(idPack)
+        setOpen(true)
+    };
 
     const callCards = (cardsPack_id:string) => {
             navigate(`/cards-for-packs/${cardsPack_id}`)
@@ -44,7 +45,7 @@ export const TableList = () => {
     const sortUpdate = (sort: string | undefined) => {
         dispatch(getPacksTC({sortPacks: sort}) as any)
     }
-    // const tableCell = ['Name', 'Cards', 'LastUpdated', 'Created by', 'Actions']
+
     const tableCell = ['name', 'cardsCount', 'updated', 'user_name', 'Actions']
 
     return (
@@ -68,6 +69,7 @@ export const TableList = () => {
                     })}
                 </Table>
             </TableContainer>
+            <EditPackModal setOpen={setOpen} open={open} editPackCards={editPackCards} id={id}/>
         </div>
     );
 };

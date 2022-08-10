@@ -6,6 +6,7 @@ import {ReactNode} from "react";
 import Typography from "@mui/material/Typography";
 import IconButton from "@mui/material/IconButton";
 import CloseIcon from "@mui/icons-material/Close";
+import {useAppDispatch} from "../hooks/hooks";
 
 const style = {
     position: 'absolute' as 'absolute',
@@ -22,13 +23,14 @@ const style = {
 type PropsType = {
     children: ReactNode
     name: string
-    open:boolean
+    open: boolean
     setOpen: (value:boolean) => void
     onSave: () => void
 
 }
 
 export const BasicModal = (props:PropsType) =>  {
+
 
     const handleOpen = () => props.setOpen(true);
     const handleClose = () => props.setOpen(false);
