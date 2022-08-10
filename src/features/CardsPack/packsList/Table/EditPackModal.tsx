@@ -3,6 +3,9 @@ import {BasicModal} from "../../../../common/modal/modal";
 import TextField from "@mui/material/TextField";
 import Checkbox from "@mui/material/Checkbox";
 import FormControlLabel from "@mui/material/FormControlLabel";
+import {useAppSelector} from "../../../../common/hooks/hooks";
+import {AppRootStateType} from "../../../../app/store";
+import {CardPacksType} from "../../api-CardsPack";
 
 type EditPackModalType = {
     setOpen: (value: boolean) => void
@@ -14,7 +17,12 @@ type EditPackModalType = {
 
 export const EditPackModal = (props:EditPackModalType) =>  {
 
-    const [title, setTitle] = useState('')
+    const packs = useAppSelector((state: AppRootStateType): CardPacksType[] => state.packs.packsTableData.cardPacks);
+    const pack = packs.find((pack) => pack._id === props.id)
+    const initTitle = (pack && pack.name)
+    const initCheck = (pack && pack.private)
+
+    const [title, setTitle] = useState<string>('')
     const [checked, setChecked] = useState(false)
 
     const onChangeCheckboxHandler = (e:ChangeEvent<HTMLInputElement>) => {
@@ -32,11 +40,10 @@ export const EditPackModal = (props:EditPackModalType) =>  {
     }
 
     return (
-        <BasicModal name={''} open={props.open} setOpen={props.setOpen} onSave={editPackHandler}>
-            <TextField onChange={onChangeTextFieldHandler} id="standard-basic" label="Name Pack" variant="standard" />
+        <BasicModal name={'Edit name pack'} open={props.open} setOpen={props.setOpen} onSave={editPackHandler}>
+            <TextField onChange={onChangeTextFieldHandler} defaultValue={initTitle} id="standard-basic" label="Name Pack" variant="standard" />
             <div >
-                <FormControlLabel  control={<Checkbox
-                    onChange={onChangeCheckboxHandler}/>} label="Private Pack" />
+                <FormControlLabel  control={<Checkbox onChange={onChangeCheckboxHandler} defaultChecked={initCheck}/>} label="Private Pack" />
             </div>
         </BasicModal>
     );

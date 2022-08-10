@@ -6,7 +6,7 @@ import {ReactNode} from "react";
 import Typography from "@mui/material/Typography";
 import IconButton from "@mui/material/IconButton";
 import CloseIcon from "@mui/icons-material/Close";
-import {useAppDispatch} from "../hooks/hooks";
+
 
 const style = {
     position: 'absolute' as 'absolute',
@@ -32,7 +32,7 @@ type PropsType = {
 export const BasicModal = (props:PropsType) =>  {
 
 
-    const handleOpen = () => props.setOpen(true);
+    //const handleOpen = () => props.setOpen(true);
     const handleClose = () => props.setOpen(false);
     const onClickSaveHandler = () => {
         props.onSave()
@@ -40,7 +40,7 @@ export const BasicModal = (props:PropsType) =>  {
 
     return (
         <div>
-            <Button onClick={handleOpen} style={{color: 'white'}}>{props.name}</Button>
+            {/*<Button onClick={handleOpen} style={{color: 'black'}}>{props.name}</Button>*/}
             <Modal
                 open={props.open}
                 onClose={handleClose}
