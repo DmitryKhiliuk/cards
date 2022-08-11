@@ -6,9 +6,9 @@ import {AppRootStateType} from "../../../../app/store";
 import style from '../../CardsPack.module.css'
 import {Slider} from "@material-ui/core";
 import {NewPackModal} from "../Table/NewPackModal";
-
+import { ThemeProvider } from '@material-ui/styles';
+import {customTheme} from "../../../../app/App"
 import {useAppDispatch, useAppSelector} from "../../../../common/hooks/hooks";
-import {CardPacksType} from "../../api-CardsPack";
 
 export const HeaderCardsPack = () => {
     const dispatch = useAppDispatch();
@@ -83,14 +83,14 @@ export const HeaderCardsPack = () => {
         </div>
         <div className={style.sliderCardsPack}>
             <h4 className={style.titleSliderCardsPack}>Number of cards</h4>
+            <ThemeProvider theme={customTheme}>
             <Slider
                 value={value}
                 onChange={onChangeCallback}
                 onChangeCommitted={handleChangeCommitted}
                 valueLabelDisplay="on"
-                style={{color: '#311B92'}}
-
             />
+            </ThemeProvider>
         </div>
 
         <NewPackModal addPack={addPack} activeModalAdd={activeModalAdd} setActiveModalAdd={setActiveModalAdd} />
