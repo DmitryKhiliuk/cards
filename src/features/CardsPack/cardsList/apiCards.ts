@@ -15,7 +15,7 @@ export const cardsAPI = {
     updateCards(updateCard: updateCardsType) {
         return instance.put('cards/card', {cardsPack: updateCard})
     }
-}
+};
 
 export type CardsType = {
     _id: string,
@@ -29,7 +29,7 @@ export type CardsType = {
     type: string,
     rating: number,
     more_id: string,
-    created: Date,
+    created: string,
     updated: string,
     __v: number,
     answerImg: string,
@@ -62,16 +62,15 @@ export type CardsQueryParamsType = {
 }
 
 export type newCardsType = {
-
-        cardsPack_id: string
-        question?: string
-        answer?: string
-        grade?: number
-        shots?: number
-        answerImg?: string
-        questionImg?: string
-        questionVideo?: string
-        answerVideo?: string
+    cardsPack_id: string
+    question?: string
+    answer?: string
+    grade?: number
+    shots?: number
+    answerImg?: string
+    questionImg?: string
+    questionVideo?: string
+    answerVideo?: string
 
 }
 

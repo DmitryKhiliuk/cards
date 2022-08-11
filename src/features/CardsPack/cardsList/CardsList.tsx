@@ -20,8 +20,6 @@ export const CardsList = () => {
         dispatch(deleteCardTC(cardsPack_id) as any)
     };
 
-
-
     const sortUpdate = (sort: any) => {
         dispatch(setParamsCardsAC({sortCards:sort}));
     }

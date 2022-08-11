@@ -34,6 +34,7 @@ export const TableBodyComp = (props: TableBodyType) => {
         props.editData && props.editData(props.id)
     };
     const onClickLearnHandler = () => {
+        console.log(props.pack)
         props.pack && navigate(`${LEARN}?cardsPack_id=${props.pack._id}&pageCount=${props.pack.cardsCount}`)
     };
 
@@ -79,6 +80,11 @@ export const TableBodyComp = (props: TableBodyType) => {
                 <TableCell>
                     <Box sx={{alignItems: 'center', display: 'flex'}}>
                         <Typography color="textPrimary" variant="body1">
+                            <IconButton onClick={onClickLearnHandler}
+                                        disabled={props.pack && props.pack.cardsCount === 0}
+                            >
+                                <SchoolIcon/>
+                            </IconButton>
                             {props.myId === props.userId &&
                                 <>
                                     <IconButton onClick={() => props.removeData(props.id)}>
@@ -87,12 +93,6 @@ export const TableBodyComp = (props: TableBodyType) => {
 
                                     <IconButton onClick={onClickEditDataHandler}>
                                         <Edit/>
-                                    </IconButton>
-
-                                    <IconButton onClick={onClickLearnHandler}
-                                                disabled={props.pack && props.pack.cardsCount === 0}
-                                    >
-                                        <SchoolIcon/>
                                     </IconButton>
                                 </>
                             }

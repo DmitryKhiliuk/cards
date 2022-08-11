@@ -5,7 +5,7 @@ import {FormControlLabel, FormLabel, RadioGroup} from "@mui/material";
 import Radio from '@mui/material/Radio';
 
 type GradesPropsType = {
-    setGrade: () => void
+    setGrade: (grade: number) => void
 };
 
 const grades = [
@@ -16,7 +16,7 @@ const grades = [
     { id: v1(), value: 5, label: 'Knew the answer' },
 ];
 
-export const Grades = ({setGrade}) => {
+export const Grades = ({setGrade}: GradesPropsType) => {
     const onChangeRadioHandle = (event: ChangeEvent<HTMLInputElement>) => {
         setGrade(+event.target.value)
     }

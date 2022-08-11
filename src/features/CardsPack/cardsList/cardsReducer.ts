@@ -8,6 +8,7 @@ import {
 import {AppRootStateType, AppThunk} from "../../../app/store";
 import {handleServerAppError} from "../../../utils/error-utils";
 import {setAppStatusAC} from "../../../app/app-reducer";
+import {gradeAPI, UpdatedGradeValueType} from "../../../common/Learn/grades/apiGreade";
 
 const initialState = {
     cardsTableData: {
@@ -20,7 +21,7 @@ const initialState = {
         packUserId: '',
         sortCards: '0updated',
     },
-    params: {pageCount: 5, page: 1, sortCards: '0updated',cardQuestion:''} as CardsQueryParamsType,
+    params: {pageCount: 5, page: 1, sortCards: '0updated', cardQuestion: '', grade: 0} as CardsQueryParamsType,
     cardsStatus: 'exp' as cardStatusType
 };
 
@@ -39,18 +40,19 @@ export const cardsReducer = (state: initialStateType = initialState, action: Act
         default:
             return state
     }
-}
+};
 
 
 export const getCardsAC = (cardsTableData: CardsResponseType) => ({type: 'cards/GET-CARDS', cardsTableData} as const);
 export const setParamsCardsAC = (params: CardsQueryParamsType) => ({type: 'cards/SET-PARAMS', params} as const);
 export const cardStatusAC = (cardStatus: cardStatusType) => ({type: 'cards/CARD-STATUS', cardStatus} as const);
-export const updateGrade = ({ grade, card_id: card._id }) => ({type: 'cards/UPDATE-Grade', cardStatus} as const);
+export const updateGradeAC = (data: UpdatedGradeValueType) => ({type: 'cards/UPDATE-GRADE', data} as const);
 
 
 type GetCardsActionType = ReturnType<typeof getCardsAC>;
 type SetParamsCardsActionType = ReturnType<typeof setParamsCardsAC>;
 export type CardStatusActionType = ReturnType<typeof cardStatusAC>;
+export type UpdateGradeActionType = ReturnType<typeof updateGradeAC>;
 
 
 export const getCardsTC = (cardsPack_id: string, params?: CardsQueryParamsType): AppThunk =>
@@ -58,7 +60,7 @@ export const getCardsTC = (cardsPack_id: string, params?: CardsQueryParamsType):
         if (params) {
             dispatch(setParamsCardsAC(params))
         }
-        const {sortCards, page, pageCount,cardQuestion} = getState().cards.params;
+        const {sortCards, page, pageCount, cardQuestion} = getState().cards.params;
         dispatch(setAppStatusAC('loading'))
         try {
             const response = await cardsAPI.getCards({
@@ -73,12 +75,12 @@ export const getCardsTC = (cardsPack_id: string, params?: CardsQueryParamsType):
                 dispatch(cardStatusAC('cards'));
             } else {
                 dispatch(cardStatusAC('none'));
-            };
+            }
+            ;
             dispatch(setAppStatusAC('succeeded'));
         } catch (error: any) {
             const errorResponse = error.response ? error.response.data.error : (error.message + ", more details in the console")
             handleServerAppError(errorResponse, dispatch);
-            dispatch(setAppStatusAC('failed'));
         }
     };
 
@@ -91,7 +93,6 @@ export const addCardTC = (newCard: newCardsType): AppThunk => async dispatch => 
     } catch (error: any) {
         const errorResponse = error.response ? error.response.data.error : (error.message + ", more details in the console");
         handleServerAppError(errorResponse, dispatch);
-        dispatch(setAppStatusAC('failed'));
     }
 };
 
@@ -103,10 +104,21 @@ export const deleteCardTC = (cardsPack_id: string): AppThunk => async dispatch =
         dispatch(setAppStatusAC('succeeded'));
     } catch (error: any) {
         handleServerAppError(error.response.data.error, dispatch);
-        dispatch(setAppStatusAC('failed'));
+    }
+};
+
+export const updateGradeTC = (data: UpdatedGradeValueType): AppThunk => async dispatch => {
+    dispatch(setAppStatusAC('loading'));
+    try {
+        const res = await gradeAPI.updateGrade(data);
+        dispatch(getCardsTC(res.data.updatedGrade.cardsPack_id));
+        dispatch(setAppStatusAC('succeeded'));
+    } catch (error: any) {
+        handleServerAppError(error.response.data.error, dispatch);
     }
 };
 
 export type ActionCardsType = GetCardsActionType
     | SetParamsCardsActionType
     | CardStatusActionType
+    | UpdateGradeActionType
