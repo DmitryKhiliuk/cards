@@ -21,16 +21,15 @@ export const CardsList = () => {
     };
 
 
-
     const sortUpdate = (sort: any) => {
-        dispatch(setParamsCardsAC({sortCards:sort}));
+        dispatch(setParamsCardsAC({sortCards: sort}));
     }
     return (
         <div>
             <TableContainer className={style.table}>
                 <Table>
                     <TableHeadComp tableCell={tableCell} callbackSort={sortUpdate}/>
-                    {cardsTableData.map((item:CardsType) => {
+                    {cardsTableData.map((item: CardsType) => {
                         return <TableBodyComp key={item._id}
                                               id={item._id}
                                               userId={item.user_id}
@@ -40,9 +39,10 @@ export const CardsList = () => {
                                               itemFour={item.grade}
                                               myId={myId}
                                               removeData={removeCard}
-                                              // editData={editPackCards}
-                                              // callCards={callCards}
-                                              />
+                            // editData={editPackCards}
+                            // callCards={callCards}
+                                              owner={'cards'}
+                        />
                     })}
                 </Table>
             </TableContainer>

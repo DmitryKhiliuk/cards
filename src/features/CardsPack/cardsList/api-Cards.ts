@@ -14,7 +14,10 @@ export const cardsAPI = {
     },
     updateCards(updateCard: updateCardsType) {
         return instance.put('cards/card', {cardsPack: updateCard})
-    }
+    },
+    rate(grade: number, cardID: string){
+        return instance.put('cards/grade', {grade: grade, card_id: cardID} )
+    },
 }
 
 export type CardsType = {
@@ -29,7 +32,7 @@ export type CardsType = {
     type: string,
     rating: number,
     more_id: string,
-    created: Date,
+    created: string,
     updated: string,
     __v: number,
     answerImg: string,

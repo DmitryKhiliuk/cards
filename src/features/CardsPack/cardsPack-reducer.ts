@@ -18,7 +18,8 @@ const initialState = {
         page: 1,
         pageCount: 5
     },
-      params: {pageCount: 5, min: 0, max: 100, page: 1, packName:''} as PacksQueryParamsType
+    isFetching: false,
+    params: {pageCount: 5, min: 0, max: 100, page: 1, packName:''} as PacksQueryParamsType
 };
 
 export const packsReducer = (state: PacksInitialStateType = initialState, action: ActionPacksType): PacksInitialStateType => {
@@ -102,6 +103,7 @@ export const updateCardsPackTC = (updatePackPayload: UpdatePackPayloadType): App
 
 export type PacksInitialStateType = {
     packsTableData: PackResponseType
+    isFetching: boolean
     params: PacksQueryParamsType
 };
 

@@ -12,21 +12,20 @@ import {useAppDispatch, useAppSelector} from "../../../../common/hooks/hooks";
 import {EditPackModal} from "./EditPackModal";
 import Modal from "@mui/material/Modal";
 import {NewPackModal} from "./NewPackModal";
-
+import {LEARNPACK, SING_UP} from "../../../../common/routes/routes";
 
 
 export const TableList = () => {
     const dispatch = useAppDispatch();
     const navigate = useNavigate();
     const packsTableData = useAppSelector((state: AppRootStateType) => state.packs.packsTableData.cardPacks);
-    const cardsStatus = useAppSelector((state:AppRootStateType) => state.cards.cardsStatus);
+    const cardsStatus = useAppSelector((state: AppRootStateType) => state.cards.cardsStatus);
 
-    const myId = useAppSelector((state:AppRootStateType) => state.profile._id);
+    const myId = useAppSelector((state: AppRootStateType) => state.profile._id);
 
     const removePackCards = (idPack: string) => {
         dispatch(deleteCardsPackTC(idPack) as any)
     };
-
 
 
     const editPackCards = (idPack: string) => {
@@ -37,13 +36,17 @@ export const TableList = () => {
 
     }
 
-    const callCards = (cardsPack_id:string) => {
-            navigate(`/cards-for-packs/${cardsPack_id}`)
+    const callCards = (cardsPack_id: string) => {
+        navigate(`/cards-for-packs/${cardsPack_id}`)
     };
 
     const sortUpdate = (sort: string | undefined) => {
         dispatch(getPacksTC({sortPacks: sort}) as any)
     }
+    const callLearnPack = (cardsPack_id: string) => {
+        navigate(`/learn-pack/${cardsPack_id}`)
+    }
+
     // const tableCell = ['Name', 'Cards', 'LastUpdated', 'Created by', 'Actions']
     const tableCell = ['name', 'cardsCount', 'updated', 'user_name', 'Actions']
 
@@ -63,8 +66,9 @@ export const TableList = () => {
                                               myId={myId}
                                               removeData={removePackCards}
                                               editData={editModalPackCards}
-                                              callCards={callCards}/>
-
+                                              callCards={callCards}
+                                              learnPack={callLearnPack}
+                                              owner={'packs'}/>
                     })}
                 </Table>
             </TableContainer>
