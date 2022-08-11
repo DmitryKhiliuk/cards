@@ -4,8 +4,6 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-    background: no-repeat url(/src/assets/img/palet.jpg);
-    background-size: cover;
 }
 .block {
 margin: auto;

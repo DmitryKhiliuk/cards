@@ -49,7 +49,7 @@ export const Header = () => {
     };
 
     return (
-        <AppBar position="static">
+        <AppBar position="fixed">
             <Container maxWidth="xl">
                 <Toolbar disableGutters sx={{position: 'relative'}}>
                     <>
