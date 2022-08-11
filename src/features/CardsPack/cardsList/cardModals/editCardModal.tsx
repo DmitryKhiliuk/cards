@@ -4,6 +4,9 @@ import TextField from "@mui/material/TextField";
 import FormControl from "@mui/material/FormControl";
 import {InputLabel, Select} from "@mui/material";
 import MenuItem from "@mui/material/MenuItem";
+import {useAppSelector} from "../../../../common/hooks/hooks";
+import {AppRootStateType} from "../../../../app/store";
+import {CardsType} from "../api-Cards";
 
 type EditCardModalType = {
     setOpen: (value: boolean) => void
@@ -14,6 +17,10 @@ type EditCardModalType = {
 }
 
 export const EditCardModal = (props:EditCardModalType) =>  {
+    const cards = useAppSelector((state: AppRootStateType): CardsType[] => state.cards.cardsTableData.cards);
+    const card = cards.find((card) => card._id === props._id)
+    const initQuestion = (card && card.question)
+    const initAnswer = (card && card.answer)
 
     const [questionTitle, setQuestionTitle] = useState<string>('')
     const [answerTitle, setAnswerTitle] = useState<string>('')
@@ -44,12 +51,12 @@ export const EditCardModal = (props:EditCardModalType) =>  {
                     //onChange={handleChange}
                     label="Age"
                 >
-                    <MenuItem value={20}>Text</MenuItem>
-                    <MenuItem value={30}>Picture</MenuItem>
+                    <MenuItem >Text</MenuItem>
+                    <MenuItem >Picture</MenuItem>
                 </Select>
             </FormControl>
-            <TextField onChange={onChangeTextFieldQuestionHandler} id="standard-basic" label="Question" variant="standard" sx={{ width: '100%'}}/>
-            <TextField onChange={onChangeTextFieldAnswerHandler} id="standard-basic" label="Answer" variant="standard" sx={{ width: '100%'}}/>
+            <TextField onChange={onChangeTextFieldQuestionHandler} defaultValue={initQuestion} id="standard-basic" label="Question" variant="standard" sx={{ width: '100%'}}/>
+            <TextField onChange={onChangeTextFieldAnswerHandler} defaultValue={initAnswer} id="standard-basic" label="Answer" variant="standard" sx={{ width: '100%'}}/>
         </BasicModal>
     );
 }

@@ -44,8 +44,8 @@ export const NewCardModal = (props:NewCardModalType) =>  {
                     //onChange={handleChange}
                     label="Age"
                 >
-                    <MenuItem value={20}>Text</MenuItem>
-                    <MenuItem value={30}>Picture</MenuItem>
+                    <MenuItem >Text</MenuItem>
+                    <MenuItem >Picture</MenuItem>
                 </Select>
             </FormControl>
             <TextField onChange={onChangeTextFieldQuestionHandler} id="standard-basic" label="Question" variant="standard" sx={{ width: '100%'}}/>

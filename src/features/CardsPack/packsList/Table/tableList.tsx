@@ -12,19 +12,15 @@ import {useAppDispatch, useAppSelector} from "../../../../common/hooks/hooks";
 import {EditPackModal} from "./EditPackModal";
 import {DeletePackModal} from "./DeletePackModal";
 
-
-
-
 export const TableList = () => {
     const dispatch = useAppDispatch();
     const navigate = useNavigate();
     const packsTableData = useAppSelector((state: AppRootStateType) => state.packs.packsTableData.cardPacks);
-    const cardsStatus = useAppSelector((state:AppRootStateType) => state.cards.cardsStatus);
 
     const myId = useAppSelector((state:AppRootStateType) => state.profile._id);
 
-    const removePackCards = (idPack: string) => {
-        dispatch(deleteCardsPackTC(idPack))
+    const removePackCards = (pack_id: string) => {
+        dispatch(deleteCardsPackTC(pack_id))
     };
 
     const editPackCards = (id:string,  name: string, privatePack: boolean) => {
@@ -35,13 +31,13 @@ export const TableList = () => {
     const [openDelete, setOpenDelete] = React.useState(false);
     const [id, setId] = useState('');
 
-    const editModalPackCards = (idPack: string) => {
-        setId(idPack)
+    const editModalPackCards = (pack_id: string) => {
+        setId(pack_id)
         setOpen(true)
     };
 
-    const deleteModalPackCards = (idPack: string) => {
-        setId(idPack)
+    const deleteModalPackCards = (pack_id: string) => {
+        setId(pack_id)
         setOpenDelete(true)
     };
 
