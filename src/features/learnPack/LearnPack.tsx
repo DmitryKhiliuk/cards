@@ -9,8 +9,7 @@ import {FormControlLabel, FormLabel, Grid, Radio, RadioGroup} from "@mui/materia
 import Box from "@mui/material/Box";
 import FormControl from "@mui/material/FormControl";
 import KeyboardBackspaceIcon from "@mui/icons-material/KeyboardBackspace";
-import {CARDS} from "../../common/routes/routes";
-
+import {getCard} from "../../utils/getCard";
 
 export const LearnPack = () => {
     const dispatch = useAppDispatch();
@@ -32,21 +31,21 @@ export const LearnPack = () => {
             dispatch(getCardsTC(id, {pageCount: 100}))
         }
         if (cardsData.length > 0) {
-            setCurrentCard(cardsData[Math.floor(Math.random() * (cardsData.length))])
+            setCurrentCard(getCard(cardsData))
         }
 
     }, [dispatch, id])
 
     useEffect(() => {
         if (cardsData.length > 0) {
-            setCurrentCard(cardsData[Math.floor(Math.random() * (cardsData.length))])
+            setCurrentCard(getCard(cardsData))
         }
 
     }, [cardsData])
 
     const hendlerNextQuestion = () => {
         curentCard &&
-        setCurrentCard({...curentCard, question:'', shots:0} )
+        setCurrentCard({...curentCard, question: '', shots: 0})
         curentCard &&
         dispatch(rateCardTC(+valueRate, curentCard._id))
         setShowAnswer(false)
@@ -63,7 +62,7 @@ export const LearnPack = () => {
     return (
         <Grid container spacing={0} direction="column" alignItems="center" justifyItems="center"
               style={{minHeight: '100vh'}}>
-            <Button variant="contained" size={"small"} style={{width: '75px', marginTop:'3%'}}
+            <Button variant="contained" size={"small"} style={{width: '75px', marginTop: '3%'}}
                     startIcon={<KeyboardBackspaceIcon/>} onClick={onClickHandler}>
                 BACK
             </Button>
