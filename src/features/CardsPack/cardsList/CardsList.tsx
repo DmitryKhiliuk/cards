@@ -60,6 +60,7 @@ export const CardsList = () => {
                                               removeData={deleteModalCards}
                                               editData={editModalCards}
                                               // callCards={callCards}
+                                              owner={'cards'}
                                               />
                     })}
                 </Table>
