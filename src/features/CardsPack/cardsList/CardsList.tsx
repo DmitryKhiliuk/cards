@@ -16,7 +16,8 @@ export const CardsList = () => {
     const cardsTableData = useAppSelector((state: AppRootStateType) => state.cards.cardsTableData.cards);
     const myId = useAppSelector((state: AppRootStateType) => state.profile._id);
 
-    const tableCell = ['question', 'answer', 'LastUpdated', 'grade', 'Actions'];
+    const tableCell = ['question', 'answer', 'updated', 'grade', 'Actions'];
+    const tableName = ['Question', 'Answer', 'Updated', 'Score', 'Actions']
 
     const [open, setOpen] = React.useState(false);
     const [openDelete, setOpenDelete] = React.useState(false);
@@ -47,15 +48,13 @@ export const CardsList = () => {
         <div>
             <TableContainer className={style.table}>
                 <Table>
-                    <TableHeadComp tableCell={tableCell} callbackSort={sortUpdate}/>
+                    <TableHeadComp tableCell={tableCell} tableName={tableName} callbackSort={sortUpdate}/>
                     {cardsTableData.map((item:CardsType) => {
+                        const items = [item.question, item.answer, formatDate(item.updated), item.grade]
                         return <TableBodyComp key={item._id}
                                               id={item._id}
                                               userId={item.user_id}
-                                              itemOne={item.question}
-                                              itemTwo={item.answer}
-                                              itemTree={formatDate(item.updated)}
-                                              itemFour={item.grade}
+                                              items={items}
                                               myId={myId}
                                               removeData={deleteModalCards}
                                               editData={editModalCards}

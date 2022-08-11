@@ -16,10 +16,7 @@ type TableBodyType = {
     learnPack?: (id: string) => void,
     id: string,
     userId: string
-    itemOne: any
-    itemTwo: any
-    itemTree: any
-    itemFour: any
+    items: any[]
     owner: string
 };
 
@@ -36,43 +33,18 @@ export const TableBodyComp = (props: TableBodyType) => {
         props.learnPack && props.learnPack(id)
     };
 
-
     return (
         <TableBody style={{width: '100%'}}>
             <TableRow hover key={props.id} onDoubleClick={onDoubleClickHandler} style={{height: "30px"}}>
-                {/*Name*/}
-                <TableCell>
-                    <Box sx={{alignItems: 'center', display: 'flex'}}>
-                        <Typography color="textPrimary" variant="body1">
-                            {props.itemOne}
-                        </Typography>
-                    </Box>
-                </TableCell>
-                {/*CardsCount*/}
-                <TableCell>
-                    <Box sx={{alignItems: 'center', display: 'flex'}}>
-                        <Typography color="textPrimary" variant="body1">
-                            {props.itemTwo}
-                        </Typography>
-                    </Box>
-                </TableCell>
-                {/*updated*/}
-                <TableCell>
-                    <Box sx={{alignItems: 'center', display: 'flex'}}>
-                        <Typography color="textPrimary" variant="body1">
-                            {props.itemTree}
-                        </Typography>
-                    </Box>
-                </TableCell>
-                {/*user_name*/}
-                <TableCell>
-                    <Box sx={{alignItems: 'center', display: 'flex'}}>
-                        <Typography color="textPrimary" variant="body1">
-                            {props.itemFour}
-                        </Typography>
-                    </Box>
-                </TableCell>
-                {/*Action*/}
+                {props.items.map((item) => {
+                    return <TableCell>
+                        <Box sx={{alignItems: 'center', display: 'flex'}}>
+                            <Typography color="textPrimary" variant="body1">
+                                {item}
+                            </Typography>
+                        </Box>
+                    </TableCell>
+                })}
                 <TableCell>
                     <Box sx={{alignItems: 'center', display: 'flex'}}>
                         <Typography color="textPrimary" variant="body1">

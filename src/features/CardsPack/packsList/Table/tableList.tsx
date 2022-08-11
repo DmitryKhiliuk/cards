@@ -3,7 +3,7 @@ import {AppRootStateType} from "../../../../app/store";
 import {CardPacksType} from "../../api-CardsPack";
 import {deleteCardsPackTC, getPacksTC, updateCardsPackTC} from "../../cardsPack-reducer";
 import style from "../../../../common/table/TableList.module.css";
-import {Table, TableContainer} from "@mui/material";
+import {listItemSecondaryActionClasses, Table, TableContainer} from "@mui/material";
 import {TableHeadComp} from "../../../../common/table/TableHeadComp";
 import {TableBodyComp} from "../../../../common/table/TableBody";
 import {useNavigate} from "react-router-dom";
@@ -47,29 +47,27 @@ export const TableList = () => {
     };
 
     const sortUpdate = (sort: string | undefined) => {
-        dispatch(getPacksTC({sortPacks: sort}) as any)
+        dispatch(getPacksTC({sortPacks: sort}))
     }
 
     const callLearnPack = (cardsPack_id: string) => {
         navigate(`/learn-pack/${cardsPack_id}`)
     }
 
-    // const tableCell = ['Name', 'Cards', 'LastUpdated', 'Created by', 'Actions']
     const tableCell = ['name', 'cardsCount', 'updated', 'user_name', 'Actions']
+    const tableName = ['Name', 'Total Cards', 'Updated', 'Created by', 'Actions']
 
     return (
         <div>
             <TableContainer className={style.table}>
                 <Table>
-                    <TableHeadComp tableCell={tableCell} callbackSort={sortUpdate}/>
+                    <TableHeadComp tableCell={tableCell} tableName={tableName} callbackSort={sortUpdate}/>
                     {packsTableData.map((item: CardPacksType) => {
+                        const items = [item.name, item.cardsCount, formatDate(item.updated), item.user_name]
                         return <TableBodyComp key={item._id}
                                               id={item._id}
                                               userId={item.user_id}
-                                              itemOne={item.name}
-                                              itemTwo={item.cardsCount}
-                                              itemTree={formatDate(item.updated)}
-                                              itemFour={item.user_name}
+                                              items={items}
                                               myId={myId}
                                               removeData={deleteModalPackCards}
                                               editData={editModalPackCards}
