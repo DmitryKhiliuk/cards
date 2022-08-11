@@ -2,7 +2,7 @@ import {
     cardsAPI,
     CardsQueryParamsType,
     CardsResponseType,
-    CardsType, newCardsType
+    CardsType, newCardsType, updateCardsType
 } from "./api-Cards";
 import {AppRootStateType, AppThunk} from "../../../app/store";
 import {handleServerAppError} from "../../../utils/error-utils";
@@ -88,6 +88,20 @@ export const addCardTC = (newCard: newCardsType): AppThunk => async dispatch => 
     } catch (error: any) {
         const errorResponse = error.response ? error.response.data.error : (error.message + ", more details in the console");
         handleServerAppError(errorResponse, dispatch);
+        dispatch(setAppStatusAC('failed'));
+    }
+};
+
+export const updateCardTC = (updatedCard:updateCardsType): AppThunk => async dispatch => {
+    dispatch(setAppStatusAC('loading'));
+    try {
+        const res = await cardsAPI.updateCards(updatedCard);
+        console.log('ok')
+        dispatch(getCardsTC(res.data.updatedCard.cardsPack_id));
+        dispatch(setAppStatusAC('succeeded'));
+    } catch (error: any) {
+        console.log('no ok')
+        handleServerAppError(error.response.data.error, dispatch);
         dispatch(setAppStatusAC('failed'));
     }
 };

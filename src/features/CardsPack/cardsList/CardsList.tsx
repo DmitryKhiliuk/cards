@@ -4,11 +4,12 @@ import style from "../../../common/table/TableList.module.css";
 import {TableHeadComp} from "../../../common/table/TableHeadComp";
 import {TableBodyComp} from "../../../common/table/TableBody";
 import {AppRootStateType} from "../../../app/store";
-import {deleteCardTC, setParamsCardsAC} from "./cards-reducer";
+import {deleteCardTC, setParamsCardsAC, updateCardTC} from "./cards-reducer";
 import {CardsType} from "./api-Cards";
 import {useAppDispatch, useAppSelector} from "../../../common/hooks/hooks";
 import {formatDate} from "../../../common/formatDate/formatDate";
 import {DeleteCardModal} from "./cardModals/DeleteCardModal";
+import {EditCardModal} from "./cardModals/editCardModal";
 
 export const CardsList = () => {
     const dispatch = useAppDispatch();
@@ -21,10 +22,19 @@ export const CardsList = () => {
     const [openDelete, setOpenDelete] = React.useState(false);
     const [_id, set_Id] = useState('');
 
+    const editModalCards = (_id: string) => {
+        set_Id(_id)
+        setOpen(true)
+    }
+
     const deleteModalCards = (_id: string) => {
         set_Id(_id)
         setOpenDelete(true)
     };
+
+    const updateCard = (id:string,  question: string, answer: string) => {
+        dispatch(updateCardTC({_id: id, question, answer}))
+    }
 
     const removeCard = (_id: string) => {
         dispatch(deleteCardTC(_id))
@@ -48,12 +58,13 @@ export const CardsList = () => {
                                               itemFour={item.grade}
                                               myId={myId}
                                               removeData={deleteModalCards}
-                                              // editData={editPackCards}
+                                              editData={editModalCards}
                                               // callCards={callCards}
                                               />
                     })}
                 </Table>
             </TableContainer>
+            <EditCardModal setOpen={setOpen} open={open} updateCard={updateCard} _id={_id}/>
             <DeleteCardModal setOpen={setOpenDelete} open={openDelete} removeCard={removeCard} _id={_id}/>
         </div>
     );

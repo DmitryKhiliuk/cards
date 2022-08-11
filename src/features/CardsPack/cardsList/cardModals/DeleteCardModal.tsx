@@ -10,11 +10,7 @@ type DeleteCardModalType = {
     _id: string
 
 }
-
 export const DeleteCardModal = (props: DeleteCardModalType) => {
-
-
-
 
     const deletePackHandler = () => {
         props.removeCard(props._id)

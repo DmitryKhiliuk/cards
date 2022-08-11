@@ -13,7 +13,7 @@ export const cardsAPI = {
         return instance.delete(`cards/card?id=${_id}`)
     },
     updateCards(updateCard: updateCardsType) {
-        return instance.put('cards/card', {cardsPack: updateCard})
+        return instance.put('cards/card', {card: updateCard})
     }
 }
 
@@ -76,10 +76,8 @@ export type newCardsType = {
 }
 
 export type updateCardsType = {
-    card: {
         _id: string
         question?: string
         answer?: string
-        comments?: string
-    }
+
 }
