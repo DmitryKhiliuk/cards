@@ -11,9 +11,6 @@ import {formatDate} from "../../../../common/formatDate/formatDate";
 import {useAppDispatch, useAppSelector} from "../../../../common/hooks/hooks";
 import {EditPackModal} from "./EditPackModal";
 import {DeletePackModal} from "./DeletePackModal";
-import Modal from "@mui/material/Modal";
-import {NewPackModal} from "./NewPackModal";
-import {LEARNPACK, SING_UP} from "../../../../common/routes/routes";
 
 
 export const TableList = () => {

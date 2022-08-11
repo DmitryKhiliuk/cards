@@ -5,7 +5,8 @@ import Typography from "@mui/material/Typography";
 import IconButton from "@mui/material/IconButton";
 import Delete from "@mui/icons-material/Delete";
 import Edit from "@mui/icons-material/Edit";
-import {School} from "@material-ui/icons";
+import {School} from "@mui/icons-material";
+
 
 type TableBodyType = {
     myId: string | null,
@@ -31,7 +32,7 @@ export const TableBodyComp = (props: TableBodyType) => {
         props.editData && props.editData(props.id)
     };
 
-    const onClickLearnPackHandler = (id:string) => {
+    const onClickLearnPackHandler = (id: string) => {
         props.learnPack && props.learnPack(id)
     };
 
@@ -77,7 +78,7 @@ export const TableBodyComp = (props: TableBodyType) => {
                         <Typography color="textPrimary" variant="body1">
                             {props.owner === 'packs' &&
                                 <>
-                                    <IconButton onClick={()=>onClickLearnPackHandler(props.id)}>
+                                    <IconButton onClick={() => onClickLearnPackHandler(props.id)}>
                                         <School/>
                                     </IconButton>
                                 </>
@@ -85,20 +86,20 @@ export const TableBodyComp = (props: TableBodyType) => {
 
                             {props.myId === props.userId &&
                                 <>
-                                <IconButton onClick={() => props.removeData(props.id)}>
-                                <Delete/>
-                                </IconButton>
+                                    <IconButton onClick={() => props.removeData(props.id)}>
+                                        <Delete/>
+                                    </IconButton>
 
-                                <IconButton onClick={onClickEditDataHandler}>
-                                <Edit/>
-                                </IconButton>
+                                    <IconButton onClick={onClickEditDataHandler}>
+                                        <Edit/>
+                                    </IconButton>
                                 </>
                             }
-                                </Typography>
-                                </Box>
-                                </TableCell>
-                                </TableRow>
-                                </TableBody>
-                                );
-                            };
+                        </Typography>
+                    </Box>
+                </TableCell>
+            </TableRow>
+        </TableBody>
+    );
+};
 
