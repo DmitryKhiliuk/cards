@@ -38,7 +38,7 @@ export const BasicModal = (props:PropsType) =>  {
     const onClickSaveHandler = () => {
         props.onSave()
     }
-    const color = props.nameButton === 'Delete' ? 'secondary' : 'primary'
+    const color = props.nameButton === 'Delete' ? 'error' : 'primary'
 
     return (
         <div>

@@ -88,7 +88,7 @@ export const HeaderCardsPack = () => {
                 onChange={onChangeCallback}
                 onChangeCommitted={handleChangeCommitted}
                 valueLabelDisplay="on"
-                color={'primary'}
+                style={{color: '#311B92'}}
             />
         </div>
 

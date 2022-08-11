@@ -7,7 +7,7 @@ import CircularProgress from "@mui/material/CircularProgress";
 import {RoutesComponent} from "../common/routes/RoutesComponent";
 import {useAppDispatch, useAppSelector} from "../common/hooks/hooks";
 import {createTheme, ThemeProvider} from "@mui/material/styles";
-import {deepPurple, red} from "@mui/material/colors";
+import {deepPurple, green, red} from "@mui/material/colors";
 
 const customTheme = createTheme({
     palette: {
@@ -16,7 +16,7 @@ const customTheme = createTheme({
         },
         secondary: {
             main: red[900],
-        },
+        }
     },
 })
 
