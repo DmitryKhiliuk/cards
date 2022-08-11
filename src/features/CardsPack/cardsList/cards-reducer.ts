@@ -1,4 +1,3 @@
-import {packsAPI, PacksQueryParamsType} from "../api-CardsPack";
 import {
     cardsAPI,
     CardsQueryParamsType,
@@ -93,10 +92,10 @@ export const addCardTC = (newCard: newCardsType): AppThunk => async dispatch => 
     }
 };
 
-export const deleteCardTC = (cardsPack_id: string): AppThunk => async dispatch => {
+export const deleteCardTC = (_id: string): AppThunk => async dispatch => {
     dispatch(setAppStatusAC('loading'));
     try {
-        const res = await cardsAPI.deleteCards(cardsPack_id);
+        const res = await cardsAPI.deleteCards(_id);
         dispatch(getCardsTC(res.data.deletedCard.cardsPack_id));
         dispatch(setAppStatusAC('succeeded'));
     } catch (error: any) {

@@ -9,8 +9,8 @@ export const cardsAPI = {
     addCards(newCard: newCardsType) {
         return instance.post('cards/card', {card: newCard})
     },
-    deleteCards(cardsPack_id: string) {
-        return instance.delete(`cards/card?id=${cardsPack_id}`)
+    deleteCards(_id: string) {
+        return instance.delete(`cards/card?id=${_id}`)
     },
     updateCards(updateCard: updateCardsType) {
         return instance.put('cards/card', {cardsPack: updateCard})

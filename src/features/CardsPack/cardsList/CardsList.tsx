@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState} from 'react';
 import {Table, TableContainer} from "@mui/material";
 import style from "../../../common/table/TableList.module.css";
 import {TableHeadComp} from "../../../common/table/TableHeadComp";
@@ -8,6 +8,7 @@ import {deleteCardTC, setParamsCardsAC} from "./cards-reducer";
 import {CardsType} from "./api-Cards";
 import {useAppDispatch, useAppSelector} from "../../../common/hooks/hooks";
 import {formatDate} from "../../../common/formatDate/formatDate";
+import {DeleteCardModal} from "./cardModals/DeleteCardModal";
 
 export const CardsList = () => {
     const dispatch = useAppDispatch();
@@ -16,11 +17,18 @@ export const CardsList = () => {
 
     const tableCell = ['question', 'answer', 'LastUpdated', 'grade', 'Actions'];
 
-    const removeCard = (cardsPack_id: string) => {
-        dispatch(deleteCardTC(cardsPack_id) as any)
+    const [open, setOpen] = React.useState(false);
+    const [openDelete, setOpenDelete] = React.useState(false);
+    const [_id, set_Id] = useState('');
+
+    const deleteModalCards = (_id: string) => {
+        set_Id(_id)
+        setOpenDelete(true)
     };
 
-
+    const removeCard = (_id: string) => {
+        dispatch(deleteCardTC(_id))
+    };
 
     const sortUpdate = (sort: any) => {
         dispatch(setParamsCardsAC({sortCards:sort}));
@@ -39,13 +47,14 @@ export const CardsList = () => {
                                               itemTree={formatDate(item.updated)}
                                               itemFour={item.grade}
                                               myId={myId}
-                                              removeData={removeCard}
+                                              removeData={deleteModalCards}
                                               // editData={editPackCards}
                                               // callCards={callCards}
                                               />
                     })}
                 </Table>
             </TableContainer>
+            <DeleteCardModal setOpen={setOpenDelete} open={openDelete} removeCard={removeCard} _id={_id}/>
         </div>
     );
 };
