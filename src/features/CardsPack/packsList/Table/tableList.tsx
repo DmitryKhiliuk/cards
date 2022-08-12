@@ -11,11 +11,13 @@ import {formatDate} from "../../../../common/formatDate/formatDate";
 import {useAppDispatch, useAppSelector} from "../../../../common/hooks/hooks";
 import {EditPackModal} from "./EditPackModal";
 import {DeletePackModal} from "./DeletePackModal";
+import {SING_IN} from "../../../../common/routes/routes";
 
 
 export const TableList = () => {
     const dispatch = useAppDispatch();
     const navigate = useNavigate();
+    const isLoggedIn = useAppSelector((state: AppRootStateType) => state.auth.isLoggedIn);
     const packsTableData = useAppSelector((state: AppRootStateType) => state.packs.packsTableData.cardPacks);
 
     const myId = useAppSelector((state:AppRootStateType) => state.profile._id);
@@ -52,6 +54,10 @@ export const TableList = () => {
 
     const callLearnPack = (cardsPack_id: string) => {
         navigate(`/learn-pack/${cardsPack_id}`)
+    }
+
+    if(!isLoggedIn) {
+        navigate(SING_IN)
     }
 
     const tableCell = ['name', 'cardsCount', 'updated', 'user_name', 'Actions']

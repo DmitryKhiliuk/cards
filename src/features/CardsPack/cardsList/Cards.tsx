@@ -8,6 +8,7 @@ import style from "../CardsPack.module.css";
 import {CARDS, SING_IN} from "../../../common/routes/routes";
 import {useAppDispatch, useAppSelector, useDebounce} from "../../../common/hooks/hooks";
 import {getCardsTC} from "./cards-reducer";
+import Paper from "@mui/material/Paper";
 
 export const Cards = () => {
     const dispatch = useAppDispatch();
@@ -34,13 +35,15 @@ export const Cards = () => {
 
     return (
         <div className={style.blockTable}>
-            <HeaderCard id={id}/>
-            {cardsCount
-                ? <div>
-                    <CardsList/>
-                    <PaginationCards/>
-                </div>
-                : <p className={style.titleEmptyCards}>This pack is empty</p>}
+            <Paper elevation={5}>
+                <HeaderCard id={id}/>
+                {cardsCount
+                    ? <div>
+                        <CardsList/>
+                        <PaginationCards/>
+                    </div>
+                    : <p className={style.titleEmptyCards}>This pack is empty</p>}
+            </Paper>
         </div>
     );
 };

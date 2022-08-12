@@ -7,6 +7,7 @@ import {getPacksTC} from "./cardsPack-reducer";
 import {AppRootStateType} from "../../app/store";
 import {ErrorSnackbar} from "../../utils/ErrorSnackbar/ErrorSnackbar";
 import {useAppDispatch, useAppSelector, useDebounce} from "../../common/hooks/hooks";
+import Paper from "@mui/material/Paper";
 
 export const CardsPack = () => {
     const dispatch = useAppDispatch();
@@ -25,10 +26,12 @@ export const CardsPack = () => {
 
     return (
         <div className={style.blockTable}>
-            <ErrorSnackbar/>
-            <HeaderCardsPack/>
-            <TableList/>
-            <PaginationCardsPack/>
+            <Paper elevation={5}>
+                <ErrorSnackbar/>
+                <HeaderCardsPack/>
+                <TableList/>
+                <PaginationCardsPack/>
+            </Paper>
         </div>
     );
 };
