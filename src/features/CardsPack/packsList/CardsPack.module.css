@@ -10,7 +10,7 @@
 
 .headerCardsPack {
     width: 100%;
-    padding: 0px 10px;
+    padding: 0 10px;
     height: 130px;
     display: grid;
     grid-template-areas:
@@ -40,7 +40,7 @@
 }
 
 .btnAddCP {
-    with: 100px;
+    width: 100px;
     height: 30px;
 }
 
@@ -106,7 +106,7 @@
         padding: 20px 0 0 30px;
     }
     .changeCardsPack {
-        padding-left: 0px;
+        padding-left: 0;
         padding-top: 5px;
     }
     .titleSliderCardsPack {
