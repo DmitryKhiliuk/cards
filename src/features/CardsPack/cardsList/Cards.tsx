@@ -18,6 +18,7 @@ export const Cards = () => {
     const page = useAppSelector((state: AppRootStateType) => state.cards.params.page);
     const cardsCount = useAppSelector((state: AppRootStateType) => state.cards.cardsTableData.cardsTotalCount);
     const pageCount = useAppSelector((state: AppRootStateType) => state.cards.params.pageCount);
+    const status = useAppSelector((state: AppRootStateType) => state.app.status);
 
     const cardQuestionSearch =useAppSelector((state:AppRootStateType) => state.cards.params.cardQuestion);
     const debouncedSearchQuestion = useDebounce(cardQuestionSearch, 800);
@@ -37,12 +38,12 @@ export const Cards = () => {
         <div className={style.blockTable}>
             <Paper elevation={5}>
                 <HeaderCard id={id}/>
-                {cardsCount
+                {status !== 'loading' &&( cardsCount
                     ? <div>
                         <CardsList/>
                         <PaginationCards/>
                     </div>
-                    : <p className={style.titleEmptyCards}>This pack is empty</p>}
+                    : <p className={style.titleEmptyCards}>This pack is empty</p>)}
             </Paper>
         </div>
     );

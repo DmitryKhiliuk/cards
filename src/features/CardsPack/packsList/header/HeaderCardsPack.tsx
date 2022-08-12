@@ -13,8 +13,8 @@ import {useAppDispatch, useAppSelector} from "../../../../common/hooks/hooks";
 export const HeaderCardsPack = () => {
     const dispatch = useAppDispatch();
     const userId = useAppSelector((state: AppRootStateType) => state.profile._id);
-    const max = useAppSelector((state: AppRootStateType) => state.cards.params.max);
-    const min = useAppSelector((state: AppRootStateType) => state.cards.params.min);
+    const max = useAppSelector((state: AppRootStateType) => state.packs.params.max);
+    const min = useAppSelector((state: AppRootStateType) => state.packs.params.min);
 
     const [value, setValue] = useState([min || 0, max || 100]);
 
