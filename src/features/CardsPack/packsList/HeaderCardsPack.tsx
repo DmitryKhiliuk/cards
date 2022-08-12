@@ -1,14 +1,14 @@
 import React, {ChangeEvent, useState} from 'react'
-import {PacksSearch} from "../../packsSearch/packsSearch";
+import {PacksSearch} from "./packsSearch/packsSearch";
 import Button from "@mui/material/Button";
-import {addCardsPackTC, getPacksTC, setParamsAC} from "../../cardsPack-reducer";
-import {AppRootStateType} from "../../../../app/store";
-import style from '../../CardsPack.module.css'
+import {addCardsPackTC, getPacksTC, setParamsAC} from "./cardsPack-reducer";
+import {AppRootStateType} from "../../../app/store";
+import style from './CardsPack.module.css'
 import {Slider} from "@material-ui/core";
-import {NewPackModal} from "../Table/NewPackModal";
+import {NewPackModal} from "./packModals/NewPackModal";
 import { ThemeProvider } from '@material-ui/styles';
-import {customTheme} from "../../../../app/App"
-import {useAppDispatch, useAppSelector} from "../../../../common/hooks/hooks";
+import {customTheme} from "../../../app/App"
+import {useAppDispatch, useAppSelector} from "../../../common/hooks/hooks";
 
 export const HeaderCardsPack = () => {
     const dispatch = useAppDispatch();

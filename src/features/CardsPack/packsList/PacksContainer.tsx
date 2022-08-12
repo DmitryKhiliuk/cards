@@ -1,15 +1,16 @@
 import React, {useEffect} from 'react';
-import {TableList} from "./packsList/Table/tableList";
-import style from './CardsPack.module.css'
-import {HeaderCardsPack} from "./packsList/header/HeaderCardsPack";
-import {PaginationCardsPack} from "./packsList/footer/PaginationCardsPack";
-import {getPacksTC} from "./cardsPack-reducer";
-import {AppRootStateType} from "../../app/store";
-import {ErrorSnackbar} from "../../utils/ErrorSnackbar/ErrorSnackbar";
-import {useAppDispatch, useAppSelector, useDebounce} from "../../common/hooks/hooks";
-import Paper from "@mui/material/Paper";
 
-export const CardsPack = () => {
+import style from './CardsPack.module.css'
+import {HeaderCardsPack} from "./HeaderCardsPack";
+import {PaginationCardsPack} from "./PaginationCardsPack";
+import {getPacksTC} from "./cardsPack-reducer";
+import {AppRootStateType} from "../../../app/store";
+import {ErrorSnackbar} from "../../../utils/ErrorSnackbar/ErrorSnackbar";
+import {useAppDispatch, useAppSelector, useDebounce} from "../../../common/hooks/hooks";
+import Paper from "@mui/material/Paper";
+import {PacksList} from "./packsList";
+
+export const PacksContainer = () => {
     const dispatch = useAppDispatch();
     const min = useAppSelector((state: AppRootStateType) => state.packs.params.min);
     const max = useAppSelector((state: AppRootStateType) => state.packs.params.max);
@@ -29,7 +30,7 @@ export const CardsPack = () => {
             <Paper elevation={5}>
                 <ErrorSnackbar/>
                 <HeaderCardsPack/>
-                <TableList/>
+                <PacksList/>
                 <PaginationCardsPack/>
             </Paper>
         </div>
