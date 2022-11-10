@@ -1,5 +1,5 @@
 import {AxiosResponse} from "axios";
-import {instance} from "../../common/instance/instance";
+import {instance} from "../../../common/instance/instance";
 
 export const packsAPI = {
     getPacks(packQueryParams: PacksQueryParamsType) {
@@ -69,4 +69,5 @@ export type AddPackPayloadType = {
 export type UpdatePackPayloadType = {
     _id: string
     name?: string
+    private?: boolean
 };
